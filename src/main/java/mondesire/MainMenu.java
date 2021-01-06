@@ -1,8 +1,8 @@
 package mondesire;
 /*
 Aidan Mason-Mondesire
-
-
+January 6th 2020
+Main Menu for the exam project game
  */
 
 import java.net.URL;
@@ -17,13 +17,10 @@ public class MainMenu implements Initializable {
     @FXML
     private Label lblOut;
     
-    @FXML
-    private void btnClickAction(ActionEvent event) {
-        lblOut.setText("Hello World!");
-    }
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
     }    
 }
