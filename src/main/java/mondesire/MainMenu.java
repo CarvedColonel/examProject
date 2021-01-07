@@ -24,8 +24,8 @@ public class MainMenu implements Initializable {
     
     @FXML
     private void btnClickAction(ActionEvent event)throws IOException {
-        lblOut.setText("cunt");
-        MainApp.setRoot("Gameplay");
+
+MainApp.setRoot("Gameplay");
     }
 
     @Override

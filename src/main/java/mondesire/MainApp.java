@@ -18,6 +18,7 @@ public class MainApp extends Application {
     public void start(@SuppressWarnings("exports") Stage s) throws IOException {
         stage=s;
         setRoot("MainMenu","");
+
     }
 
     static void setRoot(String fxml) throws IOException {
@@ -29,6 +30,7 @@ public class MainApp extends Application {
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
+        scene.getRoot().requestFocus();
         stage.centerOnScreen();
         stage.setResizable(false);
     }
