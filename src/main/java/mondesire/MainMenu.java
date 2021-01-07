@@ -12,7 +12,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
@@ -20,6 +22,39 @@ public class MainMenu implements Initializable {
 
     @FXML
     private ImageView imgPlay;
+
+    @FXML
+    private ImageView imgSound;
+
+    @FXML
+    private ImageView imgUser;
+
+    @FXML
+    private TextField txtUser;
+
+    @FXML
+    private Button btnConfirm;
+
+    @FXML
+    private Label lblSound;
+
+    @FXML
+    private ImageView imgHelp;
+
+    @FXML
+    private ImageView imgSettings;
+
+    @FXML
+    private ImageView imgMenu;
+
+    @FXML
+    private Label lblError;
+
+    @FXML
+    private Label lblUsername;
+
+    boolean sound = MainApp.sound;
+
 
     @FXML
     void clickPlay(MouseEvent event) throws IOException {
@@ -41,10 +76,53 @@ public class MainMenu implements Initializable {
 
     @FXML
     void clickSettings(MouseEvent event) {
+        toggle(false,true);
+    }
 
+    @FXML
+    void clickConfirm(ActionEvent event){
+        if (txtUser.getText().trim() == "") {
+            lblError.setText("Please fill out ALL fields.");
+        } else if (txtUser.getText().length() > 10) {
+            lblError.setText("Username must be 10 characters or less");
+        }else {
+            MainApp.user = txtUser.getText();
+            txtUser.setEditable(false);
+            btnConfirm.setVisible(false);
+            lblUsername.setText("" + MainApp.user);
+        }
+    }
+
+    @FXML
+    void clickMenu(MouseEvent event){
+        toggle(true,false);
+    }
+
+    @FXML
+    void clickSound(MouseEvent event) {
+        if (sound == true) {
+            MainApp.sound = false;
+            lblSound.setText("OFF");
+        } else if (sound == false) {
+            MainApp.sound = true;
+            lblSound.setText("ON");
+        }
     }
 
 
+    void toggle(boolean menu , boolean settings ){
+        //toggles the menu things either on or off
+        imgPlay.setVisible(menu);
+        imgHelp.setVisible(menu);
+        imgSettings.setVisible(menu);
+        //toggles the things on the settings page on or off
+        imgUser.setVisible(settings);
+        imgSound.setVisible(settings);
+        lblSound.setVisible(settings);
+        btnConfirm.setVisible(settings);
+        txtUser.setVisible(settings);
+        imgMenu.setVisible(settings);
+    }
 
 
     @FXML
