@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" onKeyPressed="#keyPressed" onKeyReleased="#keyReleased" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-size: auto;" styleClass="bgImage" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.Gameplay">
+<AnchorPane id="AnchorPane" onKeyPressed="#keyPressed" onKeyReleased="#keyReleased" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-size: auto;" styleClass="bgImage2" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.Gameplay">
    <children>
       <Pane fx:id="panPriest" layoutX="1230.0" layoutY="562.0" prefHeight="37.0" prefWidth="33.0">
          <children>
