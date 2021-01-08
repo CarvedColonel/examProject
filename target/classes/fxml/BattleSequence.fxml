@@ -28,7 +28,7 @@
          </font>
       </Label>
       <Button layoutX="102.0" layoutY="633.0" mnemonicParsing="false" onAction="#clickBack" text="back" />
-      <Label layoutX="381.0" layoutY="73.0" prefHeight="350.0" prefWidth="350.0" style="-fx-background-color: black;" />
+      <Label layoutX="337.0" layoutY="34.0" prefHeight="423.0" prefWidth="440.0" style="-fx-background-color: black;" />
       <Polygon fx:id="plgBorder" fill="#6187ab00" layoutX="439.0" layoutY="149.0" points="-50.0, 266.0, -41.0, 266.0, 282.0, 266.0, 282.0, 257.0, 282.0, -67.0, 275.0, -67.0, -41.0, -67.0, -41.0, -61.0, 275.0, -61.0, 275.0, 257.0, -41.0, 257.0, -41.0, -67.0, -50.0, -67.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
       <Pane fx:id="panPlayer" layoutX="536.0" layoutY="220.0" prefHeight="40.0" prefWidth="41.0">
          <children>
@@ -40,5 +40,24 @@
             <Polygon fx:id="plgPlayer" fill="#1f93ff00" points="2.5, 26.5, 6.25, 33.5, 12.5, 37.25, 23.5, 40.0, 33.25, 35.75, 38.25, 26.5, 40.0, 17.75, 35.75, 8.5, 29.0, 2.75, 20.75, 0.75, 9.0, 4.25, 2.5, 13.0" stroke="TRANSPARENT" strokeType="INSIDE" />
          </children>
       </Pane>
+      <Label fx:id="lblCoverLeft" layoutX="337.0" layoutY="34.0" prefHeight="423.0" prefWidth="55.0" style="-fx-background-color: black;" />
+      <Label fx:id="lblCoverRight" layoutX="721.0" layoutY="34.0" prefHeight="423.0" prefWidth="61.0" style="-fx-background-color: black;" />
+      <Label fx:id="lblCoverBottom" layoutX="337.0" layoutY="410.0" prefHeight="47.0" prefWidth="445.0" style="-fx-background-color: black;" />
+      <Label fx:id="lblCoverTop" layoutX="337.0" layoutY="34.0" prefHeight="47.0" prefWidth="445.0" style="-fx-background-color: black;" />
+      <Label fx:id="lblMessage" layoutX="326.0" layoutY="526.0" prefHeight="35.0" prefWidth="458.0" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="392.0" layoutY="594.0" prefHeight="35.0" prefWidth="83.0" text="FIGHT" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="638.0" layoutY="594.0" prefHeight="35.0" prefWidth="83.0" text="BLESS" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

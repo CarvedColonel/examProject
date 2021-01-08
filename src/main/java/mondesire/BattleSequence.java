@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
@@ -53,6 +54,17 @@ public class BattleSequence implements Initializable {
     @FXML
     private Label lblCoverTop;
 
+    @FXML
+    private Label lblMessage;
+
+    @FXML
+    private Label lblMove1;
+
+    @FXML
+    private Label lblMove2;
+
+    @FXML
+    private Label lblMove3;
 
     Image wolf = new Image(getClass().getResource("/WOLF.png").toString());
     Image skeleton = new Image(getClass().getResource("/SKELETON.png").toString());
@@ -64,6 +76,10 @@ public class BattleSequence implements Initializable {
     Timeline movement = new Timeline(new KeyFrame(Duration.millis(5), ae -> move()));
 
     int x = 0; int y = 0;
+    int pray = 2;
+    int lives = 3;
+    boolean fight;
+    boolean bless;
 
     @FXML
     void clickBack(ActionEvent event) throws IOException {
@@ -103,6 +119,42 @@ public class BattleSequence implements Initializable {
         }
     }
 
+    @FXML
+    void clickFight(MouseEvent event) {
+        boolean fight = true;
+        lblMove1.setText("SMITE");//base dmg: 9-12
+        lblMove2.setText("HOLY SPEAR");//base dmg: 6-15
+        lblMove3.setText("PRAY(2/2)");//heals one of three lives
+    }
+
+
+    @FXML
+    void clickBless(MouseEvent event) {
+        boolean bless = true;
+        lblMove1.setText("JOKE");
+        lblMove2.setText("LAY TO REST");
+        lblMove3.setText("[LOCKED]");
+    }
+
+    @FXML
+    void clickMove1(MouseEvent event) {
+        if(fight == true){
+
+        }else if(bless = true){
+
+        }
+    }
+
+    @FXML
+    void clickMove2(MouseEvent event) {
+
+    }
+
+    @FXML
+    void clickMove3(MouseEvent event) {
+
+    }
+
     void move(){
         panPlayer.setTranslateX(panPlayer.getTranslateX() + x);
         panPlayer.setTranslateY(panPlayer.getTranslateY() + y);
@@ -135,21 +187,27 @@ public class BattleSequence implements Initializable {
         if (MainApp.battleStage == 1) {
             imgEnemy.setImage(zombie);
             imageSize(238,146, 1011, 305);
+            lblMessage.setText("A Zombie has appeared! You will...");
         } else if (MainApp.battleStage == 2) {
             imgEnemy.setImage(skeleton);
             imageSize(238,146, 1011, 305);
+            lblMessage.setText("A Skeleton has appeared! You will...");
         } else if (MainApp.battleStage == 3) {
             imgEnemy.setImage(ghost);
             imageSize(238,146, 1011, 305);
+            lblMessage.setText("A Ghost has appeared! You will...");
         } else if (MainApp.battleStage == 4) {
             imgEnemy.setImage(wolf);
             imageSize(143,142, 1011, 420);
+            lblMessage.setText("A Wolf has appeared! You will...");
         } else if (MainApp.battleStage == 5) {
             imgEnemy.setImage(wizard);
             imageSize(161,124, 1011, 420);
+            lblMessage.setText("A Wizard has appeared! You will...");
         } else if (MainApp.battleStage == 6) {
             imgEnemy.setImage(orc);
             imageSize(386,343,856,195);
+            lblMessage.setText("The High Orc has appeared! You will...");
         }
     }
 }
