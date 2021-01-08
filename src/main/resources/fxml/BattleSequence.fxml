@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1214.0" styleClass="bgImage3" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.BattleSequence" />
+<AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1214.0" styleClass="bgImage3" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.BattleSequence">
+   <children>
+      <ImageView fx:id="imgPlayer" fitHeight="236.0" fitWidth="248.0" layoutX="27.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../priestCharacter.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgEnemy" fitHeight="236.0" fitWidth="248.0" layoutX="900.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
