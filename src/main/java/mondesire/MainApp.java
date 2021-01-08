@@ -30,6 +30,7 @@ public class MainApp extends Application {
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
+        scene.getRoot().requestFocus();
     }
 
     private static Parent loadFXML(String fxml) throws IOException {

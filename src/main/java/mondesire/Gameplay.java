@@ -68,7 +68,6 @@ public class Gameplay implements Initializable {
     void clickBattle6(ActionEvent event) throws IOException {
         MainApp.battleStage = 6;
         MainApp.setRoot("BattleSequence", "Priest's Conquest");
-
         System.out.println(MainApp.battleStage);
     }
 

@@ -5,11 +5,13 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="717.0" prefWidth="1217.0" styleClass="bgImage3" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.BattleSequence">
+<AnchorPane id="AnchorPane" onKeyPressed="#keyPressed" onKeyReleased="#keyReleased" prefHeight="717.0" prefWidth="1218.0" styleClass="bgImage3" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.BattleSequence">
    <children>
-      <ImageView fitHeight="203.0" fitWidth="600.0" layoutX="258.0" layoutY="488.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="203.0" fitWidth="600.0" layoutX="256.0" layoutY="492.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../textbox.png" />
          </image>
@@ -26,5 +28,17 @@
          </font>
       </Label>
       <Button layoutX="102.0" layoutY="633.0" mnemonicParsing="false" onAction="#clickBack" text="back" />
+      <Label layoutX="381.0" layoutY="73.0" prefHeight="350.0" prefWidth="350.0" style="-fx-background-color: black;" />
+      <Polygon fx:id="plgBorder" fill="#6187ab00" layoutX="439.0" layoutY="149.0" points="-50.0, 266.0, -41.0, 266.0, 282.0, 266.0, 282.0, 257.0, 282.0, -67.0, 275.0, -67.0, -41.0, -67.0, -41.0, -61.0, 275.0, -61.0, 275.0, 257.0, -41.0, 257.0, -41.0, -67.0, -50.0, -67.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
+      <Pane fx:id="panPlayer" layoutX="536.0" layoutY="220.0" prefHeight="40.0" prefWidth="41.0">
+         <children>
+            <ImageView fitHeight="39.0" fitWidth="41.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../playerBall.png" />
+               </image>
+            </ImageView>
+            <Polygon fx:id="plgPlayer" fill="#1f93ff00" points="2.5, 26.5, 6.25, 33.5, 12.5, 37.25, 23.5, 40.0, 33.25, 35.75, 38.25, 26.5, 40.0, 17.75, 35.75, 8.5, 29.0, 2.75, 20.75, 0.75, 9.0, 4.25, 2.5, 13.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
