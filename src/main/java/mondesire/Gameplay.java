@@ -26,38 +26,50 @@ public class Gameplay implements Initializable {
 
     @FXML
     void clickBattle1(ActionEvent event) throws IOException {
-        MainApp.setRoot("BattleSequence", "Priest's Conquest");
         MainApp.battleStage = 1;
+        MainApp.setRoot("BattleSequence", "Priest's Conquest");
+
+        System.out.println(MainApp.battleStage);
     }
 
     @FXML
     void clickBattle2(ActionEvent event) throws IOException {
-        MainApp.setRoot("BattleSequence", "Priest's Conquest");
         MainApp.battleStage = 2;
+        MainApp.setRoot("BattleSequence", "Priest's Conquest");
+
+        System.out.println(MainApp.battleStage);
     }
 
     @FXML
     void clickBattle3(ActionEvent event) throws IOException {
-        MainApp.setRoot("BattleSequence", "Priest's Conquest");
         MainApp.battleStage = 3;
+        MainApp.setRoot("BattleSequence", "Priest's Conquest");
+
+        System.out.println(MainApp.battleStage);
     }
 
     @FXML
     void clickBattle4(ActionEvent event) throws IOException {
-        MainApp.setRoot("BattleSequence", "Priest's Conquest");
         MainApp.battleStage = 4;
+        MainApp.setRoot("BattleSequence", "Priest's Conquest");
+
+        System.out.println(MainApp.battleStage);
     }
 
     @FXML
     void clickBattle5(ActionEvent event) throws IOException {
-        MainApp.setRoot("BattleSequence", "Priest's Conquest");
         MainApp.battleStage = 5;
+        MainApp.setRoot("BattleSequence", "Priest's Conquest");
+
+        System.out.println(MainApp.battleStage);
     }
 
     @FXML
     void clickBattle6(ActionEvent event) throws IOException {
-        MainApp.setRoot("BattleSequence", "Priest's Conquest");
         MainApp.battleStage = 6;
+        MainApp.setRoot("BattleSequence", "Priest's Conquest");
+
+        System.out.println(MainApp.battleStage);
     }
 
 
