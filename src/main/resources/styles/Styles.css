@@ -200,6 +200,17 @@ http://fxexperience.com/2011/12/styling-fx-buttons-with-css/
 
 }
 
+.bevel-gold {
+    -fx-background-color:
+        linear-gradient(#ffd700, #daa520),
+        linear-gradient(#f0e68c 0%, #ffd700 20%, #eee8aa 100%),
+        linear-gradient(#d4af37 0%, #fafad2 50%);
+    -fx-background-radius: 8,7,6;
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
 .bgImage {
 
 -fx-background-image:  url('file:C:/Users/Aidan/Desktop/menubackground.jpg');
@@ -209,5 +220,11 @@ http://fxexperience.com/2011/12/styling-fx-buttons-with-css/
 .bgImage2 {
 
 -fx-background-image:  url('file:C:/Users/Aidan/Desktop/dusk.jpg');
+
+}
+
+.bgImage3 {
+
+-fx-background-image:  url('file:C:/Users/Aidan/Desktop/battlebackground.jpg');
 
 }

@@ -50,7 +50,10 @@
             <Image url="@../sound.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnConfirm" layoutX="742.0" layoutY="324.0" mnemonicParsing="false" onAction="#clickConfirm" text="Confirm" visible="false" />
+      <Button fx:id="btnConfirm" layoutX="730.0" layoutY="317.0" mnemonicParsing="false" onAction="#clickConfirm" styleClass="bevel-gold" text="Confirm" visible="false">
+         <font>
+            <Font name="Century Gothic Bold" size="15.0" />
+         </font></Button>
       <Label fx:id="lblSound" layoutX="453.0" layoutY="393.0" text="ON" textFill="#00ff1e" visible="false">
          <font>
             <Font name="Century Gothic Bold" size="32.0" />
@@ -71,5 +74,10 @@
             <Font name="Century Gothic Bold" size="32.0" />
          </font>
       </Label>
+      <Button fx:id="btnClear" disable="true" layoutX="811.0" layoutY="317.0" mnemonicParsing="false" onAction="#clickClear" styleClass="bevel-gold" text="Clear" visible="false">
+         <font>
+            <Font name="Century Gothic Bold" size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

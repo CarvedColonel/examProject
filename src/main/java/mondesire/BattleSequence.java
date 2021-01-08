@@ -14,14 +14,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class BattleSequence implements Initializable {
-    
-    @FXML
-    private Label lblOut;
-    
-    @FXML
-    private void btnClickAction(ActionEvent event) {
-        lblOut.setText("Hello World!");
-    }
+
+
+
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
