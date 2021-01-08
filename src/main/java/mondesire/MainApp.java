@@ -13,7 +13,9 @@ import java.io.IOException;
 
 public class MainApp extends Application {
     private static Stage stage;
-
+    public static boolean sound = true;
+    public static String user = "";
+    public static int battleStage;
     @Override
     public void start(@SuppressWarnings("exports") Stage s) throws IOException {
         stage=s;
