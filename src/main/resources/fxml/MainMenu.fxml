@@ -1,11 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal" fx:controller="mondesire.MainMenu">
-    <children>
-        <Button layoutX="128.0" layoutY="107.0" onAction="#btnClickAction" text="Click Me!" />
-        <Label fx:id="lblOut" layoutX="53.0" layoutY="30.0" minHeight="16" minWidth="69" prefHeight="52.0" prefWidth="215.0" />
-    </children>
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.MainMenu">
+   <children>
+      <TextField fx:id="txtUser" layoutX="460.0" layoutY="327.0" prefHeight="39.0" prefWidth="278.0" promptText="name here" visible="false">
+         <font>
+            <Font name="Century Gothic Bold" size="20.0" />
+         </font>
+      </TextField>
+      <ImageView fitHeight="263.0" fitWidth="660.0" layoutX="342.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../title.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgPlay" fitHeight="150.0" fitWidth="200.0" layoutX="519.0" layoutY="287.0" onMouseClicked="#clickPlay" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../play.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgHelp" fitHeight="150.0" fitWidth="200.0" layoutX="521.0" layoutY="405.0" onMouseClicked="#clickHelp" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Help.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgSettings" fitHeight="104.0" fitWidth="315.0" layoutX="463.0" layoutY="529.0" onMouseClicked="#clickSettings" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Settings.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="64.0" fitWidth="136.0" layoutX="33.0" layoutY="650.0" onMouseClicked="#clickExit" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Exit.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgUser" fitHeight="64.0" fitWidth="346.0" layoutX="135.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../username.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgSound" fitHeight="64.0" fitWidth="346.0" layoutX="135.0" layoutY="391.0" onMouseClicked="#clickSound" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../sound.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnConfirm" layoutX="740.0" layoutY="327.0" mnemonicParsing="false" onAction="#clickConfirm" styleClass="bevel-gold" text="Confirm" visible="false">
+         <font>
+            <Font name="Century Gothic Bold" size="15.0" />
+         </font>
+      </Button>
+      <Label fx:id="lblSound" layoutX="463.0" layoutY="403.0" text="ON" textFill="#00ff1e" visible="false">
+         <font>
+            <Font name="Century Gothic Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblUsername" layoutX="1077.0" layoutY="701.0" prefHeight="25.0" prefWidth="136.0" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic Bold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imgMenu" fitHeight="64.0" fitWidth="346.0" layoutX="436.0" layoutY="618.0" onMouseClicked="#clickMenu" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../menu.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblError" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="477.0" prefHeight="41.0" prefWidth="824.0" textFill="#ab0000">
+         <font>
+            <Font name="Century Gothic Bold" size="32.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnClear" disable="true" layoutX="821.0" layoutY="327.0" mnemonicParsing="false" onAction="#clickClear" styleClass="bevel-gold" text="Clear" visible="false">
+         <font>
+            <Font name="Century Gothic Bold" size="15.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>
