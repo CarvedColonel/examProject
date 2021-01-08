@@ -102,7 +102,7 @@ public class MainMenu implements Initializable {
             txtUser.setEditable(false);
             btnConfirm.setDisable(true);
             btnClear.setDisable(false);
-            lblUsername.setText("" + MainApp.user);
+            lblUsername.setText("Milan" + MainApp.user);
         }
     }
 

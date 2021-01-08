@@ -45,7 +45,23 @@ public class Gameplay implements Initializable {
 
     @FXML
     private Polygon plgWall3;
+    @FXML
+    private Polygon plgGrave;
 
+    @FXML
+    private Polygon plgGrave2;
+
+    @FXML
+    private Polygon plgGrave3;
+
+    @FXML
+    private Polygon plgGrave4;
+
+    @FXML
+    private Polygon plgGrave5;
+
+    @FXML
+    private Polygon plgGrave6;
     int dx;
     int dy;
 
@@ -88,7 +104,7 @@ public class Gameplay implements Initializable {
         //Basic movement for all characters
         panPriest.setTranslateX(panPriest.getTranslateX() + dx);
         panPriest.setTranslateY(panPriest.getTranslateY() + dy);
-        if (collision(plgPriest, plgWall) || collision(plgPriest, plgWall2) || collision(plgPriest, plgWell) || collision(plgPriest, plgInn) || collision(plgPriest, plgWall3)) {
+        if (collision(plgPriest, plgWall) || collision(plgPriest, plgWall2) || collision(plgPriest, plgWell) || collision(plgPriest, plgInn) || collision(plgPriest, plgWall3) ||collision(plgPriest, plgGrave) || collision(plgPriest, plgGrave2) || collision(plgPriest, plgGrave3) || collision(plgPriest, plgGrave4) || collision(plgPriest, plgGrave5) || collision(plgPriest, plgGrave6) ) {
             panPriest.setTranslateX(panPriest.getTranslateX() - dx);
             panPriest.setTranslateY(panPriest.getTranslateY() - dy);
             dx = 0;
