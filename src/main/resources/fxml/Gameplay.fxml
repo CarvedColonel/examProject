@@ -40,11 +40,6 @@
             <Image url="@../tree.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="75.0" fitWidth="51.0" layoutX="937.0" layoutY="582.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../tree.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="75.0" fitWidth="51.0" layoutX="912.0" layoutY="604.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../tree.png" />
@@ -135,14 +130,6 @@
             <Image url="@../tree.png" />
          </image>
       </ImageView>
-      <Polygon fx:id="plgWall" fill="TRANSPARENT" layoutX="840.0" layoutY="494.0" points="354.0, 104.0, 336.0, 25.0, 468.0, -158.0, 564.0, -158.0, 575.0, -131.0, 653.0, -131.0, 653.0, 25.0, 551.0, 84.0, 525.0, 126.0, 441.0, 183.0, 272.0, 177.0, 241.0, 177.0, 162.0, 170.0, -13.0, 81.0, -117.0, 25.0, -189.0, -22.0, -311.0, -67.0, -350.0, -53.0, -380.0, -22.0, -380.0, 68.0, -283.0, 68.0, -283.0, 183.0, -189.0, 206.0, -95.0, 206.0, -95.0, 92.0, 55.0, 78.0, 148.0, 177.0, 264.0, 198.0, 387.0, 170.0, 431.0, 170.0, 468.0, 150.0, 485.0, 78.0, 525.0, 126.0, 485.0, 78.0, 551.0, 84.0, 575.0, 46.0, 672.0, 39.5, 653.0, -29.0, 672.0, -158.0, 564.0, -158.0, 515.0, -170.0, 468.0, -158.0, 461.0, -76.0, 461.0, 16.0, 387.0, 16.0, 336.0, 16.0, 336.0, 84.0, 183.0, -2.0, 65.0, -22.0, 241.0, -44.0, 230.0, -186.0, 203.0, -317.0, 212.0, -215.0, 203.0, -158.0, 162.0, -131.0, 134.0, -117.0, 77.0, -109.0, 43.0, -88.0, 43.0, -44.0, 24.0, -44.0, 24.0, -22.0, 77.0, 0.0, 116.0, 4.0, 134.0, 16.0, 170.0, 10.0, 196.0, 52.0, 252.0, 98.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" />
-      <Polygon fx:id="plgWall2" fill="#1f93ff00" layoutX="674.0" layoutY="349.0" points="136.0, 72.0, 144.0, 48.0, 162.0, -6.0, 208.0, -45.0, 234.0, -101.0, 401.0, -248.0, 73.0, -172.0, -214.0, -172.0, -214.0, -116.0, -180.0, -72.0, -130.0, -60.0, -214.0, 0.0, -303.0, 0.0, -349.0, -60.0, -347.0, -89.0, -373.0, -108.0, -394.0, -89.0, -394.0, -101.0, -541.0, -116.0, -436.375, -53.0, -486.0, -72.0, -553.0, -72.0, -599.0, 48.0, -360.0, 114.0, -311.0, 114.0, -436.0, 23.0, -553.0, 23.0, -553.0, -72.0, -461.0, -108.0, -347.0, -108.0, -197.0, -116.0, -204.0, -165.0, -58.6875, -165.0, -58.6875, -153.0, 87.0, -153.0, 152.0, -172.0, 373.0, -128.0, 293.0, -128.0, 260.0, -116.0, 128.0, -45.0, 118.0, -72.0, 59.0, -95.0, 7.0, -79.0, -22.0, -89.0, -46.0, -72.0, -80.0, -45.0, -80.0, 36.0, -58.6875, 36.0, -58.6875, 51.0, 0.0, 48.0, 7.0, 66.0, 19.0, 48.0, 59.0, 48.0, 59.0, 72.0" stroke="BLACK" strokeType="INSIDE" />
-      <Polygon fx:id="plgWell" fill="#1f93ff00" layoutX="949.0" layoutY="309.0" points="-42.0, 5.0, 16.0, -2.0, 16.0, -26.0, -17.0, -32.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label fx:id="lblUsername" layoutX="14.0" layoutY="858.0" prefHeight="28.0" prefWidth="81.0" text="Label" textFill="WHITE">
-         <font>
-            <Font name="Century Gothic Bold" size="20.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="349.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../tree.png" />
@@ -164,6 +151,236 @@
          </image>
       </ImageView>
       <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="187.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="375.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="428.0" layoutY="607.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="455.0" layoutY="651.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="215.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="51.0" layoutX="1121.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="84.0" layoutY="513.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="641.0" layoutY="607.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="590.0" layoutY="628.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="269.0" layoutY="762.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="670.0" layoutY="762.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="641.0" layoutY="783.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="590.0" layoutY="783.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="106.0" fitWidth="240.0" layoutX="160.0" layoutY="561.0" pickOnBounds="true">
+         <image>
+            <Image url="@../housetop5.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="137.0" fitWidth="221.0" layoutX="583.0" layoutY="228.0" pickOnBounds="true">
+         <image>
+            <Image url="@../housetop6.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="214.0" layoutX="426.0" layoutY="810.0" pickOnBounds="true">
+         <image>
+            <Image url="@../gate.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="135.0" layoutY="562.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="109.0" layoutY="582.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="43.0" fitWidth="93.0" layoutX="644.0" layoutY="661.0" pickOnBounds="true">
+         <image>
+            <Image url="@../clothesline.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="27.0" layoutX="400.0" layoutY="697.0" pickOnBounds="true">
+         <image>
+            <Image url="@../inn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="724.0" layoutY="783.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="854.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="802.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="804.0" layoutY="741.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="749.0" layoutY="762.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="748.0" layoutY="807.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="773.0" layoutY="789.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="804.0" layoutY="816.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="829.0" layoutY="825.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="773.0" layoutY="824.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="720.0" layoutY="823.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="1121.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="508.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="483.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="322.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="319.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <Polygon fx:id="plgWall" fill="TRANSPARENT" layoutX="840.0" layoutY="494.0" points="349.0, 104.0, 336.0, 84.0, 306.3125, 77.5, 286.0, 25.0, 468.0, -158.0, 564.0, -158.0, 575.0, -131.0, 653.0, -131.0, 653.0, 25.0, 551.0, 84.0, 525.0, 126.0, 441.0, 183.0, 272.0, 177.0, 241.0, 177.0, 162.0, 170.0, -13.0, 81.0, -117.0, 25.0, -189.0, -22.0, -240.0, -22.0, -311.0, -67.0, -350.0, -53.0, -380.0, -22.0, -380.0, 68.0, -283.0, 68.0, -268.0, 52.0, -157.0, 52.0, -157.0, 143.0, -214.0, 143.0, -274.0, 143.0, -283.0, 183.0, -189.0, 206.0, -105.0, 206.0, -13.0, 206.0, -13.0, 245.0, 30.0, 256.0, 65.0, 245.0, 65.0, 126.0, -95.0, 92.0, 55.0, 78.0, 148.0, 177.0, 264.0, 198.0, 375.0, 183.0, 431.0, 170.0, 468.0, 150.0, 485.0, 78.0, 525.0, 126.0, 485.0, 78.0, 551.0, 84.0, 575.0, 46.0, 672.0, 39.5, 653.0, -29.0, 672.0, -158.0, 564.0, -158.0, 515.0, -170.0, 468.0, -158.0, 461.0, -76.0, 461.0, 16.0, 387.0, 16.0, 345.0, 16.0, 336.0, -13.0, 280.0, 16.0, 241.0, 10.0, 183.0, -2.0, 65.0, -22.0, 241.0, -44.0, 345.0, -141.0, 742.0, -194.0, 569.0, -303.0, 557.0, -340.0, 252.0, -410.0, 196.0, -271.0, 196.0, -340.0, 235.0, -318.0, 264.0, -340.0, 375.0, -340.0, 468.0, -340.0, 525.0, -340.0, 537.0, -311.0, 564.0, -311.0, 564.0, -248.0, 564.0, -170.0, 336.0, -170.0, 235.0, -170.0, 219.0, -158.0, 196.0, -109.0, 162.0, -131.0, 134.0, -117.0, 77.0, -109.0, 43.0, -88.0, 43.0, -44.0, 24.0, -44.0, 24.0, -22.0, 77.0, -2.0, 109.0, -2.0, 141.0, -2.0, 183.0, 10.0, 196.0, 52.0, 252.0, 98.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" />
+      <Polygon fx:id="plgWall2" fill="#1f93ff00" layoutX="674.0" layoutY="349.0" points="-206.0, -23.0, -303.0, 0.0, -326.0, -60.0, -258.0, -128.0, -277.0, -211.0, -366.0, -203.0, -394.0, -89.0, -394.0, -101.0, -541.0, -116.0, -436.375, -53.0, -486.0, -72.0, -553.0, -72.0, -599.0, 48.0, -560.0, 191.0, -486.0, 166.0, -455.0, 166.0, -455.0, 191.0, -425.0, 191.0, -354.0, 180.0, -311.0, 114.0, -436.0, 23.0, -553.0, 23.0, -553.0, -72.0, -436.0, -72.0, -461.0, -108.0, -372.0, -116.0, -366.0, -220.0, -237.0, -293.0, -137.0, -273.0, -137.0, -172.0, -57.0, -172.0, -48.0, -153.0, 67.0, -153.0, 73.0, -172.0, 144.0, -172.0, 178.0, -188.0, 178.0, -273.0, 215.0, -287.0, 293.0, -287.0, 321.0, -249.0, 321.0, -220.0, 310.0, -211.0, 293.0, -211.0, 293.0, -172.0, 260.0, -116.0, 192.0, -60.0, 162.0, -38.0, 128.0, -45.0, 118.0, -53.0, 128.0, -23.0, 137.0, 6.0, 137.0, 66.0, 67.0, 54.0, 24.0, 54.0, -58.6875, 51.0, -82.0, -6.0, -82.0, -45.0, -26.0, -60.0, 15.0, -60.0, 118.0, -60.0, 144.0, -38.0, 204.0, -60.0, 293.0, -128.0, 366.0, -128.0, 321.0, -273.0, 243.0, -321.0, -237.0, -273.0, -237.0, -188.0, -214.0, -128.0, -188.0, -72.0, -129.0, -38.0, -167.0, -6.0" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fx:id="plgWell" fill="#1f93ff00" layoutX="949.0" layoutY="309.0" points="-42.0, 5.0, 16.0, -2.0, 16.0, -26.0, -17.0, -32.0" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fx:id="plgInn" fill="#1f93ff00" layoutX="349.0" layoutY="695.0" points="-155.0, 46.0, 50.0, 46.0, 50.0, -83.0, -24.0, -83.0, -186.0, -56.0, -239.0, -56.0, -186.0, -44.0, -186.0, 23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fx:id="plgWall3" fill="#1f93ff00" layoutX="699.0" layoutY="846.0" points="20.0, 24.0, 125.0, -69.0, 237.0, -90.0, 237.0, -149.0, 212.0, -156.0, 248.0, -133.0, 228.0, -82.0, 86.0, -41.0, -10.0, 11.0, -81.0, -2.0, -273.0, -1.5, -286.0, -34.0, -433.0, -34.0, -511.375, -17.0, -659.0, -41.0, -601.0, -337.0, -589.0, -90.0, -563.0, -50.0, -503.0, -57.0, -496.0, -34.0, -462.0, -34.0, -253.0, 11.0, -50.0, 24.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label fx:id="lblUsername" layoutX="14.0" layoutY="858.0" prefHeight="28.0" prefWidth="81.0" text="Label" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic Bold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="137.0" layoutY="762.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="137.0" layoutY="807.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="109.0" layoutY="783.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="84.0" layoutY="807.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="109.0" layoutY="825.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="84.0" layoutY="713.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="244.0" layoutY="786.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="215.0" layoutY="807.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="240.0" layoutY="821.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../tree.png" />
          </image>

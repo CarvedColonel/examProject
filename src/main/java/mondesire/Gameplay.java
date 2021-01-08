@@ -39,6 +39,13 @@ public class Gameplay implements Initializable {
 
     @FXML
     private Polygon plgWell;
+
+    @FXML
+    private Polygon plgInn;
+
+    @FXML
+    private Polygon plgWall3;
+
     int dx;
     int dy;
 
@@ -81,7 +88,7 @@ public class Gameplay implements Initializable {
         //Basic movement for all characters
         panPriest.setTranslateX(panPriest.getTranslateX() + dx);
         panPriest.setTranslateY(panPriest.getTranslateY() + dy);
-        if (collision(plgPriest, plgWall) || collision(plgPriest, plgWall2) || collision(plgPriest, plgWell)) {
+        if (collision(plgPriest, plgWall) || collision(plgPriest, plgWall2) || collision(plgPriest, plgWell) || collision(plgPriest, plgInn) || collision(plgPriest, plgWall3)) {
             panPriest.setTranslateX(panPriest.getTranslateX() - dx);
             panPriest.setTranslateY(panPriest.getTranslateY() - dy);
             dx = 0;
