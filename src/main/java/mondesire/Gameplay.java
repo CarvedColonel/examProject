@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -25,7 +26,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class Gameplay implements Initializable {
-    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), ae -> move()));
+
 
     @FXML
     private Polygon plgWall;
@@ -46,26 +47,33 @@ public class Gameplay implements Initializable {
     @FXML
     private Polygon plgWall3;
     @FXML
-    private Polygon plgGrave;
+    private Polygon plgEnemy1;
 
     @FXML
-    private Polygon plgGrave2;
+    private Polygon plgEnemy2;
 
     @FXML
-    private Polygon plgGrave3;
+    private Polygon plgEnemy3;
 
     @FXML
-    private Polygon plgGrave4;
+    private Polygon plgEnemy4;
 
     @FXML
-    private Polygon plgGrave5;
+    private Polygon plgEnemy5;
 
     @FXML
-    private Polygon plgGrave6;
+    private Polygon plgEnemy6;
+
+    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), ae -> {
+        try {
+            move();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }));
     int dx;
     int dy;
 
-    Label walls[] = new Label[22];
 
     @FXML
     public void keyPressed(KeyEvent event) {
@@ -100,16 +108,18 @@ public class Gameplay implements Initializable {
         }
     }
 
-    private void move() {
+    private void move() throws IOException {
         //Basic movement for all characters
         panPriest.setTranslateX(panPriest.getTranslateX() + dx);
         panPriest.setTranslateY(panPriest.getTranslateY() + dy);
-        if (collision(plgPriest, plgWall) || collision(plgPriest, plgWall2) || collision(plgPriest, plgWell) || collision(plgPriest, plgInn) || collision(plgPriest, plgWall3) ||collision(plgPriest, plgGrave) || collision(plgPriest, plgGrave2) || collision(plgPriest, plgGrave3) || collision(plgPriest, plgGrave4) || collision(plgPriest, plgGrave5) || collision(plgPriest, plgGrave6) ) {
+        if (collision(plgPriest, plgWall) || collision(plgPriest, plgWall2) || collision(plgPriest, plgWell) || collision(plgPriest, plgInn) || collision(plgPriest, plgWall3))  {
             panPriest.setTranslateX(panPriest.getTranslateX() - dx);
             panPriest.setTranslateY(panPriest.getTranslateY() - dy);
             dx = 0;
             dy = 0;
 
+        } else if (collision(plgPriest,plgEnemy1) || collision(plgPriest,plgEnemy2) || collision(plgPriest,plgEnemy3)) {
+        MainApp.setRoot("BattleSequence");
         }
     }
 

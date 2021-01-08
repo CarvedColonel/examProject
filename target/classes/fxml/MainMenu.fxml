@@ -10,6 +10,11 @@
 
 <AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.MainMenu">
    <children>
+      <ImageView fitHeight="726.0" fitWidth="1226.0" layoutX="-12.0" pickOnBounds="true">
+         <image>
+            <Image url="@../menuImage.jpg" />
+         </image>
+      </ImageView>
       <TextField fx:id="txtUser" layoutX="460.0" layoutY="327.0" prefHeight="39.0" prefWidth="278.0" promptText="name here" visible="false">
          <font>
             <Font name="Century Gothic Bold" size="20.0" />
@@ -27,17 +32,17 @@
       </ImageView>
       <ImageView fx:id="imgHelp" fitHeight="150.0" fitWidth="200.0" layoutX="521.0" layoutY="405.0" onMouseClicked="#clickHelp" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Help.png" />
+            <Image url="@../help.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imgSettings" fitHeight="104.0" fitWidth="315.0" layoutX="463.0" layoutY="529.0" onMouseClicked="#clickSettings" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Settings.png" />
+            <Image url="@../settings.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="64.0" fitWidth="136.0" layoutX="33.0" layoutY="650.0" onMouseClicked="#clickExit" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Exit.png" />
+            <Image url="@../exit.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imgUser" fitHeight="64.0" fitWidth="346.0" layoutX="135.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" visible="false">
