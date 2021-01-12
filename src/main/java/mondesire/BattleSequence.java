@@ -94,6 +94,7 @@ public class BattleSequence implements Initializable {
     Image orc = new Image(getClass().getResource("/HIGHORC.png").toString());
 
     Timeline movement = new Timeline(new KeyFrame(Duration.millis(20), ae -> move()));
+    Timeline battle1 = new Timeline(new KeyFrame(Duration.millis(20), ae -> battle1()));
     Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
 
     int x = 0;
@@ -205,6 +206,11 @@ public class BattleSequence implements Initializable {
             movement.play();
         }
     }
+
+    void battle1(){
+
+    }
+
 
 
     void move() {
