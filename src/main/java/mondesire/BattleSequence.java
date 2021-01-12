@@ -7,6 +7,7 @@ Put header here
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,6 +25,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class BattleSequence implements Initializable {
 
@@ -34,13 +36,13 @@ public class BattleSequence implements Initializable {
     private ImageView imgEnemy;
 
     @FXML
-    private Polygon plgPlayer;
-
-    @FXML
     private Polygon plgBorder;
 
     @FXML
     private Pane panPlayer;
+
+    @FXML
+    private Polygon plgPlayer;
 
     @FXML
     private Label lblCoverLeft;
@@ -66,6 +68,24 @@ public class BattleSequence implements Initializable {
     @FXML
     private Label lblMove3;
 
+    @FXML
+    private Label lblInfo;
+
+    @FXML
+    private Label lblInfo2;
+
+    @FXML
+    private Label lblInfo3;
+
+    @FXML
+    private Label lblBInfo;
+
+    @FXML
+    private Label lblBInfo2;
+
+    @FXML
+    private Label lblBInfo3;
+
     Image wolf = new Image(getClass().getResource("/WOLF.png").toString());
     Image skeleton = new Image(getClass().getResource("/SKELETON.png").toString());
     Image zombie = new Image(getClass().getResource("/ZOMBIE.png").toString());
@@ -73,13 +93,19 @@ public class BattleSequence implements Initializable {
     Image ghost = new Image(getClass().getResource("/GHOST.png").toString());
     Image orc = new Image(getClass().getResource("/HIGHORC.png").toString());
 
-    Timeline movement = new Timeline(new KeyFrame(Duration.millis(5), ae -> move()));
+    Timeline movement = new Timeline(new KeyFrame(Duration.millis(20), ae -> move()));
+    Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
 
-    int x = 0; int y = 0;
-    int pray = 2;
+    int x = 0;
+    int y = 0;
     int lives = 3;
     boolean fight;
     boolean bless;
+
+    int smiteDmg;
+    int spearDmg;
+    int pray = 2;
+
 
     @FXML
     void clickBack(ActionEvent event) throws IOException {
@@ -121,7 +147,11 @@ public class BattleSequence implements Initializable {
 
     @FXML
     void clickFight(MouseEvent event) {
-        boolean fight = true;
+        fight = true;
+        bless = false;
+        lblMove1.setVisible(true);
+        lblMove2.setVisible(true);
+        lblMove3.setVisible(true);
         lblMove1.setText("SMITE");//base dmg: 9-12
         lblMove2.setText("HOLY SPEAR");//base dmg: 6-15
         lblMove3.setText("PRAY(2/2)");//heals one of three lives
@@ -130,7 +160,11 @@ public class BattleSequence implements Initializable {
 
     @FXML
     void clickBless(MouseEvent event) {
-        boolean bless = true;
+        bless = true;
+        fight = false;
+        lblMove1.setVisible(true);
+        lblMove2.setVisible(true);
+        lblMove3.setVisible(true);
         lblMove1.setText("JOKE");
         lblMove2.setText("LAY TO REST");
         lblMove3.setText("[LOCKED]");
@@ -138,35 +172,84 @@ public class BattleSequence implements Initializable {
 
     @FXML
     void clickMove1(MouseEvent event) {
-        if(fight == true){
-
-        }else if(bless = true){
-
+        if (fight == true) {
+            smiteDmg = ThreadLocalRandom.current().nextInt(9, 12 + 1);
+            movement.play();
+        } else if (bless = true) {
+            movement.play();
         }
     }
 
     @FXML
     void clickMove2(MouseEvent event) {
-
+        if (fight == true) {
+            spearDmg = ThreadLocalRandom.current().nextInt(6, 15 + 1);
+            movement.play();
+        } else if (bless = true) {
+            movement.play();
+        }
     }
 
     @FXML
     void clickMove3(MouseEvent event) {
+        if (fight == true) {
+            if ((pray > 0) || ((lives < 3))) {
+                pray--;
+                lives++;
+                movement.play();
+            } else {
+                lblMessage.setText("Can't perform that action");
+            }
 
-    }
-
-    void move(){
-        panPlayer.setTranslateX(panPlayer.getTranslateX() + x);
-        panPlayer.setTranslateY(panPlayer.getTranslateY() + y);
-
-        if(collision(plgPlayer, plgBorder)){
-            panPlayer.setTranslateX(panPlayer.getTranslateX() - x);
-            panPlayer.setTranslateY(panPlayer.getTranslateY() - y);
+        } else if (bless = true) {
+            movement.play();
         }
     }
 
 
-    void imageSize(double height, double width, double x, double y){
+    void move() {
+        //timer for movement and battle sequence
+        panPlayer.setTranslateX(panPlayer.getTranslateX() + x);
+        panPlayer.setTranslateY(panPlayer.getTranslateY() + y);
+
+        if (collision(plgPlayer, plgBorder)) {
+            panPlayer.setTranslateX(panPlayer.getTranslateX() - x);
+            panPlayer.setTranslateY(panPlayer.getTranslateY() - y);
+        }
+
+    }
+
+    void changePrompt(boolean fight, boolean bless) {
+        //changes the state of the two groups of labels
+        lblInfo.setVisible(fight);
+        lblInfo2.setVisible(fight);
+        lblInfo3.setVisible(fight);
+        lblBInfo.setVisible(bless);
+        lblBInfo2.setVisible(bless);
+        lblBInfo3.setVisible(bless);
+    }
+
+    void ui() {
+        //timer for the Interface stuff
+        if (fight == true) {
+            changePrompt(true, false);
+            lblInfo.textProperty().bind(Bindings.when(lblMove1.hoverProperty()).then("9-12dmg").otherwise(""));
+            lblInfo2.textProperty().bind(Bindings.when(lblMove2.hoverProperty()).then("6-15dmg").otherwise(""));
+            lblInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("Heal 1 Health " + "\n" + " (Uses Turn)").otherwise(""));
+        } else if (fight == false) {
+            changePrompt(false, true);
+            lblBInfo.textProperty().bind(Bindings.when(lblMove1.hoverProperty()).then("Tell a joke, maybe they'll like it").otherwise(""));
+            lblBInfo2.textProperty().bind(Bindings.when(lblMove2.hoverProperty()).then("Some enemies may be susceptible to an exorcism").otherwise(""));
+            if (MainApp.holyWater == true) {
+                lblBInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("Automatically Exorcises 1 enemy " + "\n" + "(excludes boss types)").otherwise(""));
+            } else {
+                lblBInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("[LOCKED]").otherwise(""));
+
+            }
+        }
+    }
+
+    void imageSize(double height, double width, double x, double y) {
         imgEnemy.setFitHeight(height);
         imgEnemy.setFitWidth(width);
 
@@ -183,30 +266,31 @@ public class BattleSequence implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         movement.setCycleCount(Timeline.INDEFINITE);
-        movement.play();
+        UI.setCycleCount(Timeline.INDEFINITE);
+        UI.play();
         if (MainApp.battleStage == 1) {
             imgEnemy.setImage(zombie);
-            imageSize(238,146, 1011, 305);
+            imageSize(238, 146, 1011, 305);
             lblMessage.setText("A Zombie has appeared! You will...");
         } else if (MainApp.battleStage == 2) {
             imgEnemy.setImage(skeleton);
-            imageSize(238,146, 1011, 305);
+            imageSize(238, 146, 1011, 305);
             lblMessage.setText("A Skeleton has appeared! You will...");
         } else if (MainApp.battleStage == 3) {
             imgEnemy.setImage(ghost);
-            imageSize(238,146, 1011, 305);
+            imageSize(238, 146, 1011, 305);
             lblMessage.setText("A Ghost has appeared! You will...");
         } else if (MainApp.battleStage == 4) {
             imgEnemy.setImage(wolf);
-            imageSize(143,142, 1011, 420);
+            imageSize(143, 142, 1011, 420);
             lblMessage.setText("A Wolf has appeared! You will...");
         } else if (MainApp.battleStage == 5) {
             imgEnemy.setImage(wizard);
-            imageSize(161,124, 1011, 420);
+            imageSize(161, 124, 1011, 420);
             lblMessage.setText("A Wizard has appeared! You will...");
         } else if (MainApp.battleStage == 6) {
             imgEnemy.setImage(orc);
-            imageSize(386,343,856,195);
+            imageSize(386, 343, 856, 195);
             lblMessage.setText("The High Orc has appeared! You will...");
         }
     }

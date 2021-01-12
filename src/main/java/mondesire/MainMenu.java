@@ -53,9 +53,6 @@ public class MainMenu implements Initializable {
     @FXML
     private Label lblUsername;
 
-    @FXML
-    private Button btnClear;
-
     boolean sound = MainApp.sound;
 
 
@@ -90,12 +87,13 @@ public class MainMenu implements Initializable {
 
     @FXML
     void clickSettings(MouseEvent event) {
-
         toggle(false,true);
-
-        if(MainApp.user != ""){
-            btnConfirm.setDisable(true);
-            btnClear.setDisable(false);
+        if(MainApp.user == ""){
+            imgUser.setVisible(false);
+            txtUser.setVisible(false);
+            btnConfirm.setVisible(false);
+        }else{
+            //btnConfirm.setVisible(false);
         }
     }
 
@@ -108,24 +106,27 @@ public class MainMenu implements Initializable {
         }else {
             MainApp.user = txtUser.getText();
             txtUser.setEditable(false);
-            btnConfirm.setDisable(true);
-            btnClear.setDisable(false);
+            txtUser.setVisible(false);
+            btnConfirm.setVisible(false);
+            imgPlay.setVisible(true);
+            imgUser.setVisible(false);
             lblUsername.setText("" + MainApp.user);
         }
     }
 
     @FXML
-    void clickClear(ActionEvent event){
-        lblUsername.setText("");
-        btnConfirm.setDisable(false);
-        txtUser.setEditable(true);
-        MainApp.user = "";
-        btnClear.setDisable(true);
-    }
-
-    @FXML
     void clickMenu(MouseEvent event){
         toggle(true,false);
+        if (MainApp.user == ""){
+            imgPlay.setVisible(false);
+            imgUser.setVisible(true);
+            txtUser.setVisible(true);
+            btnConfirm.setVisible(true);
+        }else{
+            imgUser.setVisible(false);
+            btnConfirm.setVisible(false);
+            txtUser.setVisible(false);
+        }
     }
 
     @FXML
@@ -146,14 +147,9 @@ public class MainMenu implements Initializable {
         imgHelp.setVisible(menu);
         imgSettings.setVisible(menu);
         //toggles the things on the settings page on or off
-        imgUser.setVisible(settings);
         imgSound.setVisible(settings);
         lblSound.setVisible(settings);
-        btnConfirm.setVisible(settings);
-        txtUser.setVisible(settings);
         imgMenu.setVisible(settings);
-        btnConfirm.setVisible(settings);
-        btnClear.setVisible(settings);
     }
 
 

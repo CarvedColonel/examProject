@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="728.0" prefWidth="1217.0" style="-fx-background-size: 1300;" styleClass="bgImage" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.MainMenu">
    <children>
-      <TextField fx:id="txtUser" layoutX="450.0" layoutY="317.0" prefHeight="39.0" prefWidth="278.0" promptText="name here" visible="false">
+      <TextField fx:id="txtUser" layoutX="450.0" layoutY="317.0" prefHeight="39.0" prefWidth="278.0" promptText="name here">
          <font>
             <Font name="Century Gothic Bold" size="20.0" />
          </font>
@@ -20,7 +20,7 @@
             <Image url="@../title.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgPlay" fitHeight="150.0" fitWidth="200.0" layoutX="509.0" layoutY="277.0" onMouseClicked="#clickPlay" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgPlay" fitHeight="150.0" fitWidth="200.0" layoutX="509.0" layoutY="277.0" onMouseClicked="#clickPlay" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../play.png" />
          </image>
@@ -40,7 +40,7 @@
             <Image url="@../Exit.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgUser" fitHeight="64.0" fitWidth="346.0" layoutX="125.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="imgUser" fitHeight="64.0" fitWidth="346.0" layoutX="125.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../username.png" />
          </image>
@@ -50,7 +50,7 @@
             <Image url="@../sound.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnConfirm" layoutX="730.0" layoutY="317.0" mnemonicParsing="false" onAction="#clickConfirm" styleClass="bevel-gold" text="Confirm" visible="false">
+      <Button fx:id="btnConfirm" layoutX="730.0" layoutY="317.0" mnemonicParsing="false" onAction="#clickConfirm" styleClass="bevel-gold" text="Confirm">
          <font>
             <Font name="Century Gothic Bold" size="15.0" />
          </font></Button>
@@ -74,10 +74,5 @@
             <Font name="Century Gothic Bold" size="32.0" />
          </font>
       </Label>
-      <Button fx:id="btnClear" disable="true" layoutX="811.0" layoutY="317.0" mnemonicParsing="false" onAction="#clickClear" styleClass="bevel-gold" text="Clear" visible="false">
-         <font>
-            <Font name="Century Gothic Bold" size="15.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>
