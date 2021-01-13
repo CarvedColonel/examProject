@@ -5,8 +5,10 @@ Put header here
 
  */
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.Transition;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +21,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
@@ -86,6 +89,31 @@ public class BattleSequence implements Initializable {
     @FXML
     private Label lblBInfo3;
 
+    @FXML
+    private Pane panArm1;
+
+    @FXML
+    private Pane panArm2;
+
+    @FXML
+    private Pane panArm3;
+
+    @FXML
+    private Pane panArm4;
+
+    @FXML
+    private Polyline plgArm1;
+
+    @FXML
+    private Polyline plgArm2;
+
+    @FXML
+    private Polyline plgArm3;
+
+    @FXML
+    private Polyline plgArm4;
+
+
     Image wolf = new Image(getClass().getResource("/WOLF.png").toString());
     Image skeleton = new Image(getClass().getResource("/SKELETON.png").toString());
     Image zombie = new Image(getClass().getResource("/ZOMBIE.png").toString());
@@ -94,7 +122,7 @@ public class BattleSequence implements Initializable {
     Image orc = new Image(getClass().getResource("/HIGHORC.png").toString());
 
     Timeline movement = new Timeline(new KeyFrame(Duration.millis(20), ae -> move()));
-    Timeline battle1 = new Timeline(new KeyFrame(Duration.millis(20), ae -> battle1()));
+
     Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
 
     int x = 0;
@@ -106,6 +134,9 @@ public class BattleSequence implements Initializable {
     int smiteDmg;
     int spearDmg;
     int pray = 2;
+
+
+    Shape projectile[] = new Shape[6];
 
 
     @FXML
@@ -177,7 +208,7 @@ public class BattleSequence implements Initializable {
             smiteDmg = ThreadLocalRandom.current().nextInt(9, 12 + 1);
             movement.play();
         } else if (bless = true) {
-            movement.play();
+
         }
     }
 
@@ -187,7 +218,7 @@ public class BattleSequence implements Initializable {
             spearDmg = ThreadLocalRandom.current().nextInt(6, 15 + 1);
             movement.play();
         } else if (bless = true) {
-            movement.play();
+
         }
     }
 
@@ -203,14 +234,48 @@ public class BattleSequence implements Initializable {
             }
 
         } else if (bless = true) {
-            movement.play();
+
         }
     }
 
-    void battle1(){
+    void resetArms(int arm) {
+        if (arm == 1) {
+            int armspeed1 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
+            panArm1.setTranslateX(panArm1.getTranslateX() - armspeed1);
+            panArm1.setTranslateX(704);
+            panArm1.setTranslateY(301);
+        } else if (arm == 2) {
+            int armspeed2 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
+            panArm2.setTranslateX(panArm2.getTranslateX() - armspeed2);
+            panArm2.setTranslateX(704);
+            panArm2.setTranslateY(301);
+        } else if (arm == 3) {
+            int armspeed3 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
+            panArm3.setTranslateX(panArm3.getTranslateX() + armspeed3);
+            panArm3.setTranslateX(317);
+            panArm3.setTranslateY(81);
+        } else if (arm == 4) {
+            int armspeed4 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
+            panArm4.setTranslateX(panArm4.getTranslateX() + armspeed4);
+            panArm4.setTranslateX(317);
+            panArm4.setTranslateY(81);
+        }
+
 
     }
 
+    void moveArm() {
+        int armspeed1 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
+        int armspeed2 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
+        int armspeed3 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
+        int armspeed4 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
+
+        panArm1.setTranslateX(panArm2.getTranslateX() - armspeed1);
+        panArm2.setTranslateX(panArm2.getTranslateX() - armspeed2);
+        panArm3.setTranslateX(panArm3.getTranslateX() + armspeed3);
+        panArm4.setTranslateX(panArm4.getTranslateX() + armspeed4);
+
+    }
 
 
     void move() {
@@ -218,10 +283,35 @@ public class BattleSequence implements Initializable {
         panPlayer.setTranslateX(panPlayer.getTranslateX() + x);
         panPlayer.setTranslateY(panPlayer.getTranslateY() + y);
 
+        moveArm();
+
         if (collision(plgPlayer, plgBorder)) {
             panPlayer.setTranslateX(panPlayer.getTranslateX() - x);
             panPlayer.setTranslateY(panPlayer.getTranslateY() - y);
         }
+
+        if ((collision(plgPlayer, plgArm1)) || (collision(plgPlayer, plgArm2)) || (collision(plgPlayer, plgArm3)) || (collision(plgPlayer, plgArm4))) {
+
+            movement.stop();
+
+            resetArms(1);resetArms(2);resetArms(3);resetArms(4);
+
+            AnimateText(lblMessage, "YOU'VE LOST A LIFE, WHAT WILL YOU DO?");
+
+            panPlayer.setTranslateX(panPlayer.getTranslateX() - x);
+            panPlayer.setTranslateY(panPlayer.getTranslateY() - y);
+        }
+
+        if(panArm1.getLayoutX() == -387){
+            resetArms(1);
+        }else if(panArm2.getLayoutX() == -387){
+            resetArms(2);
+        }else if(panArm2.getLayoutX() == 387){
+            resetArms(3);
+        }else if(panArm2.getLayoutX() == 387){
+            resetArms(4);
+        }
+
 
     }
 
@@ -233,6 +323,23 @@ public class BattleSequence implements Initializable {
         lblBInfo.setVisible(bless);
         lblBInfo2.setVisible(bless);
         lblBInfo3.setVisible(bless);
+    }
+
+    public void AnimateText(Label lbl, String descImp) {
+        String content = descImp;
+        final Animation animation = new Transition() {
+            {
+                setCycleDuration(Duration.millis(2000));
+            }
+
+            protected void interpolate(double frac) {
+                final int length = content.length();
+                final int n = Math.round(length * (float) frac);
+                lbl.setText(content.substring(0, n));
+            }
+        };
+        animation.play();
+
     }
 
     void ui() {
@@ -271,33 +378,40 @@ public class BattleSequence implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        movement.setCycleCount(Timeline.INDEFINITE);
         UI.setCycleCount(Timeline.INDEFINITE);
         UI.play();
+        movement.setCycleCount(Timeline.INDEFINITE);
+
+        projectile[0] = plgArm1;
+        projectile[1] = plgArm2;
+        projectile[2] = plgArm3;
+        projectile[3] = plgArm4;
+
+
         if (MainApp.battleStage == 1) {
             imgEnemy.setImage(zombie);
             imageSize(238, 146, 1011, 305);
-            lblMessage.setText("A Zombie has appeared! You will...");
+            AnimateText(lblMessage, "A Zombie has appeared! You will...");
         } else if (MainApp.battleStage == 2) {
             imgEnemy.setImage(skeleton);
             imageSize(238, 146, 1011, 305);
-            lblMessage.setText("A Skeleton has appeared! You will...");
+            AnimateText(lblMessage, "A Skeleton has appeared! You will...");
         } else if (MainApp.battleStage == 3) {
             imgEnemy.setImage(ghost);
             imageSize(238, 146, 1011, 305);
-            lblMessage.setText("A Ghost has appeared! You will...");
+            AnimateText(lblMessage, "A Ghost has appeared! You will...");
         } else if (MainApp.battleStage == 4) {
             imgEnemy.setImage(wolf);
             imageSize(143, 142, 1011, 420);
-            lblMessage.setText("A Wolf has appeared! You will...");
+            AnimateText(lblMessage, "A Wolf has appeared! You will...");
         } else if (MainApp.battleStage == 5) {
             imgEnemy.setImage(wizard);
             imageSize(161, 124, 1011, 420);
-            lblMessage.setText("A Wizard has appeared! You will...");
+            AnimateText(lblMessage, "A Wizard has appeared! You will...");
         } else if (MainApp.battleStage == 6) {
             imgEnemy.setImage(orc);
             imageSize(386, 343, 856, 195);
-            lblMessage.setText("The High Orc has appeared! You will...");
+            AnimateText(lblMessage, "The High Orc has appeared! You will...");
         }
     }
 }
