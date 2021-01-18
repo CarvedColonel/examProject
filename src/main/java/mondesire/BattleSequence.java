@@ -13,6 +13,8 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,26 +40,6 @@ public class BattleSequence implements Initializable {
     @FXML
     private ImageView imgEnemy;
 
-    @FXML
-    private Polygon plgBorder;
-
-    @FXML
-    private Pane panPlayer;
-
-    @FXML
-    private Polygon plgPlayer;
-
-    @FXML
-    private Label lblCoverLeft;
-
-    @FXML
-    private Label lblCoverRight;
-
-    @FXML
-    private Label lblCoverBottom;
-
-    @FXML
-    private Label lblCoverTop;
 
     @FXML
     private Label lblMessage;
@@ -90,28 +72,19 @@ public class BattleSequence implements Initializable {
     private Label lblBInfo3;
 
     @FXML
-    private Pane panArm1;
+    private Label lblPlayerHealth;
 
     @FXML
-    private Pane panArm2;
+    private Label lblEnemyHealth;
 
     @FXML
-    private Pane panArm3;
+    private Label lblFight;
 
     @FXML
-    private Pane panArm4;
+    private Label lblBless;
 
     @FXML
-    private Polyline plgArm1;
-
-    @FXML
-    private Polyline plgArm2;
-
-    @FXML
-    private Polyline plgArm3;
-
-    @FXML
-    private Polyline plgArm4;
+    private Button btnBack;
 
 
     Image wolf = new Image(getClass().getResource("/WOLF.png").toString());
@@ -121,13 +94,13 @@ public class BattleSequence implements Initializable {
     Image ghost = new Image(getClass().getResource("/GHOST.png").toString());
     Image orc = new Image(getClass().getResource("/HIGHORC.png").toString());
 
-    Timeline movement = new Timeline(new KeyFrame(Duration.millis(20), ae -> move()));
 
     Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
+    Timeline pause = new Timeline(new KeyFrame(Duration.millis(1000), ae -> pauseVoid()));
 
-    int x = 0;
-    int y = 0;
-    int lives = 3;
+    int health = 100;
+    int zombieHealth = 50;
+
     boolean fight;
     boolean bless;
 
@@ -135,8 +108,9 @@ public class BattleSequence implements Initializable {
     int spearDmg;
     int pray = 2;
 
+    int pauseTimer = 0;
 
-    Shape projectile[] = new Shape[6];
+    int zombieAttack;
 
 
     @FXML
@@ -144,38 +118,6 @@ public class BattleSequence implements Initializable {
         MainApp.setRoot("Gameplay", "Priest's Conquest");
     }
 
-    @FXML
-    public void keyPressed(KeyEvent event) {
-        if ((event.getCode() == KeyCode.D)) {
-            x = 5;
-
-        } else if ((event.getCode() == KeyCode.A)) {
-            x = -5;
-
-        } else if ((event.getCode() == KeyCode.W)) {
-            y = -5;
-
-        } else if ((event.getCode() == KeyCode.S)) {
-            y = 5;
-        }
-    }
-
-    @FXML
-    public void keyReleased(KeyEvent event) {
-        if ((event.getCode() == KeyCode.D)) {
-            x = 0;
-            y = 0;
-        } else if ((event.getCode() == KeyCode.A)) {
-            x = 0;
-            y = 0;
-        } else if ((event.getCode() == KeyCode.W)) {
-            x = 0;
-            y = 0;
-        } else if ((event.getCode() == KeyCode.S)) {
-            x = 0;
-            y = 0;
-        }
-    }
 
     @FXML
     void clickFight(MouseEvent event) {
@@ -186,7 +128,7 @@ public class BattleSequence implements Initializable {
         lblMove3.setVisible(true);
         lblMove1.setText("SMITE");//base dmg: 9-12
         lblMove2.setText("HOLY SPEAR");//base dmg: 6-15
-        lblMove3.setText("PRAY(2/2)");//heals one of three lives
+        lblMove3.setText("PRAY("+pray+"/2)");//heals 25 health (Can be used twice per fight)
     }
 
 
@@ -198,122 +140,140 @@ public class BattleSequence implements Initializable {
         lblMove2.setVisible(true);
         lblMove3.setVisible(true);
         lblMove1.setText("JOKE");
-        lblMove2.setText("LAY TO REST");
+        lblMove2.setText("EXORCISE");
         lblMove3.setText("[LOCKED]");
     }
 
+    void pauseVoid() {
+        pauseTimer++;
+        if (MainApp.battleStage == 1) {
+            if (pauseTimer == 3) {
+                zombieAttack();
+                pauseTimer = 0;
+                pause.stop();
+            }
+        }
+    }
+
+    void zombieAttack() {
+        zombieAttack = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+        if (zombieAttack == 1) {
+            AnimateText(lblMessage, "The Zombie used Scratch!");
+            int scratch = ThreadLocalRandom.current().nextInt(10, 15 + 1);
+            health = health - scratch;
+            lblPlayerHealth.setText("" + health);
+            toggleOptions(true, false);
+        } else if (zombieAttack == 2) {
+            AnimateText(lblMessage, "The Zombie used Bite!");
+            int bite = ThreadLocalRandom.current().nextInt(15, 20 + 1);
+            health = health - bite;
+            lblPlayerHealth.setText("" + health);
+            toggleOptions(true, false);
+        } else if (zombieAttack == 3) {
+            AnimateText(lblMessage, "The Zombie used Lunge!");
+            int lunge = ThreadLocalRandom.current().nextInt(5, 20 + 1);
+            health = health - lunge;
+            lblPlayerHealth.setText("" + health);
+            toggleOptions(true, false);
+        }
+    }
+
+    void toggleOptions(boolean tf, boolean all) {
+
+        lblMove1.setVisible(all);
+        lblMove2.setVisible(all);
+        lblMove3.setVisible(all);
+        lblFight.setVisible(tf);
+        lblBless.setVisible(tf);
+
+    }
+
+
     @FXML
     void clickMove1(MouseEvent event) {
-        if (fight == true) {
-            smiteDmg = ThreadLocalRandom.current().nextInt(9, 12 + 1);
-            movement.play();
-        } else if (bless = true) {
 
+        if (fight == true) {
+            smiteDmg = ThreadLocalRandom.current().nextInt(10, 14 + 1);
+            zombieHealth = zombieHealth - smiteDmg;
+            if (zombieHealth < 0) {
+                zombieHealth = 0;
+                lblEnemyHealth.setText("" + zombieHealth);
+                AnimateText(lblMessage, "You defeated the Zombie!");
+                toggleOptions(false, false);
+                btnBack.setVisible(true);
+            } else {
+                lblEnemyHealth.setText("" + zombieHealth);
+                AnimateText(lblMessage, "You did " + smiteDmg + " damage to the Zombie!");
+                pause.play();
+                toggleOptions(false, false);
+            }
+
+        } else if (bless = true) {
+            AnimateText(lblMessage, "The Zombie didn't understand the joke...");
+            toggleOptions(true, false);
         }
     }
 
     @FXML
     void clickMove2(MouseEvent event) {
         if (fight == true) {
-            spearDmg = ThreadLocalRandom.current().nextInt(6, 15 + 1);
-            movement.play();
-        } else if (bless = true) {
+            spearDmg = ThreadLocalRandom.current().nextInt(6, 20 + 1);
+            zombieHealth = zombieHealth - spearDmg;
+            if(zombieHealth < 0) {
+                zombieHealth = 0;
+                lblEnemyHealth.setText("" + zombieHealth);
+                AnimateText(lblMessage, "You defeated the Zombie!");
+                toggleOptions(false, false);
+                btnBack.setVisible(true);
+            }else{
+                lblEnemyHealth.setText("" + zombieHealth);
+                AnimateText(lblMessage, "You did " + spearDmg + " damage to the Zombie!");
+                pause.play();
+                toggleOptions(false, false);
+            }
 
+        } else if (bless = true) {
+            AnimateText(lblMessage, "Zombies can't be exorcised...");
+            toggleOptions(true, false);
         }
     }
 
     @FXML
     void clickMove3(MouseEvent event) {
+
         if (fight == true) {
-            if ((pray > 0) || ((lives < 3))) {
+            if ((pray > 0) || ((health < 100))) {
                 pray--;
-                lives++;
-                movement.play();
+                health = health + 25;
+                lblPlayerHealth.setText("" + health);
+                AnimateText(lblMessage, "You healed 25 health!");
+                pause.play();
+                toggleOptions(false, false);
             } else {
                 lblMessage.setText("Can't perform that action");
             }
 
         } else if (bless = true) {
+            if(lblMove3.getText() == "[LOCKED]"){
 
+            }else{
+                if(zombieHealth < 0){
+                    zombieHealth = 0;
+                    lblEnemyHealth.setText("" + zombieHealth);
+                    AnimateText(lblMessage, "You defeated the Zombie!");
+                    toggleOptions(false, false);
+                    btnBack.setVisible(true);
+                }else{
+                    zombieHealth = zombieHealth - 50;
+                    lblEnemyHealth.setText("" + zombieHealth);
+                    AnimateText(lblMessage, "You did 50 damage to the Zombie!");
+                    pause.play();
+                    toggleOptions(false, false);
+                }
+            }
         }
     }
 
-    void resetArms(int arm) {
-        if (arm == 1) {
-            int armspeed1 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
-            panArm1.setTranslateX(panArm1.getTranslateX() - armspeed1);
-            panArm1.setTranslateX(704);
-            panArm1.setTranslateY(301);
-        } else if (arm == 2) {
-            int armspeed2 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
-            panArm2.setTranslateX(panArm2.getTranslateX() - armspeed2);
-            panArm2.setTranslateX(704);
-            panArm2.setTranslateY(301);
-        } else if (arm == 3) {
-            int armspeed3 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
-            panArm3.setTranslateX(panArm3.getTranslateX() + armspeed3);
-            panArm3.setTranslateX(317);
-            panArm3.setTranslateY(81);
-        } else if (arm == 4) {
-            int armspeed4 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
-            panArm4.setTranslateX(panArm4.getTranslateX() + armspeed4);
-            panArm4.setTranslateX(317);
-            panArm4.setTranslateY(81);
-        }
-
-
-    }
-
-    void moveArm() {
-        int armspeed1 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
-        int armspeed2 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
-        int armspeed3 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
-        int armspeed4 = ThreadLocalRandom.current().nextInt(1, 10 + 1);
-
-        panArm1.setTranslateX(panArm2.getTranslateX() - armspeed1);
-        panArm2.setTranslateX(panArm2.getTranslateX() - armspeed2);
-        panArm3.setTranslateX(panArm3.getTranslateX() + armspeed3);
-        panArm4.setTranslateX(panArm4.getTranslateX() + armspeed4);
-
-    }
-
-
-    void move() {
-        //timer for movement and battle sequence
-        panPlayer.setTranslateX(panPlayer.getTranslateX() + x);
-        panPlayer.setTranslateY(panPlayer.getTranslateY() + y);
-
-        moveArm();
-
-        if (collision(plgPlayer, plgBorder)) {
-            panPlayer.setTranslateX(panPlayer.getTranslateX() - x);
-            panPlayer.setTranslateY(panPlayer.getTranslateY() - y);
-        }
-
-        if ((collision(plgPlayer, plgArm1)) || (collision(plgPlayer, plgArm2)) || (collision(plgPlayer, plgArm3)) || (collision(plgPlayer, plgArm4))) {
-
-            movement.stop();
-
-            resetArms(1);resetArms(2);resetArms(3);resetArms(4);
-
-            AnimateText(lblMessage, "YOU'VE LOST A LIFE, WHAT WILL YOU DO?");
-
-            panPlayer.setTranslateX(panPlayer.getTranslateX() - x);
-            panPlayer.setTranslateY(panPlayer.getTranslateY() - y);
-        }
-
-        if(panArm1.getLayoutX() == -387){
-            resetArms(1);
-        }else if(panArm2.getLayoutX() == -387){
-            resetArms(2);
-        }else if(panArm2.getLayoutX() == 387){
-            resetArms(3);
-        }else if(panArm2.getLayoutX() == 387){
-            resetArms(4);
-        }
-
-
-    }
 
     void changePrompt(boolean fight, boolean bless) {
         //changes the state of the two groups of labels
@@ -370,23 +330,12 @@ public class BattleSequence implements Initializable {
         imgEnemy.setTranslateY(y);
     }
 
-    public boolean collision(Shape block1, Shape block2) {
-//If the objects can be changed to shapes just see if they intersect
-        Shape a = Shape.intersect(block1, block2);
-        return a.getBoundsInLocal().getWidth() != -1;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         UI.setCycleCount(Timeline.INDEFINITE);
+        pause.setCycleCount(Timeline.INDEFINITE);
         UI.play();
-        movement.setCycleCount(Timeline.INDEFINITE);
-
-        projectile[0] = plgArm1;
-        projectile[1] = plgArm2;
-        projectile[2] = plgArm3;
-        projectile[3] = plgArm4;
-
 
         if (MainApp.battleStage == 1) {
             imgEnemy.setImage(zombie);
