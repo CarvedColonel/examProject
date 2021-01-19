@@ -108,8 +108,20 @@
             <Font name="Comic Sans MS Bold" size="30.0" />
          </font>
       </Label>
-      <ImageView fx:id="imgStaff" fitHeight="110.0" fitWidth="95.0" layoutX="428.0" layoutY="14.0" pickOnBounds="true" />
-      <ImageView fx:id="imgHoly" fitHeight="110.0" fitWidth="95.0" layoutX="530.0" layoutY="14.0" pickOnBounds="true" />
-      <ImageView fx:id="imgHealth" fitHeight="110.0" fitWidth="95.0" layoutX="634.0" layoutY="14.0" pickOnBounds="true" />
+      <ImageView fx:id="imgStaff" fitHeight="110.0" fitWidth="95.0" layoutX="471.0" layoutY="14.0" pickOnBounds="true">
+         <image>
+            <Image url="@../staffBuff.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgHoly" fitHeight="110.0" fitWidth="190.0" layoutX="572.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../holyWater%20-%20Copy.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgHealth" fitHeight="110.0" fitWidth="95.0" layoutX="669.0" layoutY="14.0" pickOnBounds="true">
+         <image>
+            <Image url="@../healthScroll.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
