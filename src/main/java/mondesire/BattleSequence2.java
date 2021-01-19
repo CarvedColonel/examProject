@@ -236,6 +236,7 @@ public class BattleSequence2 implements Initializable {
                 AnimateText(lblMessage, "You defeated the Skeleton!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
+                MainApp.winCount = 2;
             } else {
                 lblEnemyHealth.setText("" + skeletonHealth);
                 AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the Skeleton!");
@@ -263,6 +264,7 @@ public class BattleSequence2 implements Initializable {
                 AnimateText(lblMessage, "You defeated the Skeleton!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
+                MainApp.winCount = 2;
             } else {
                 lblEnemyHealth.setText("" + skeletonHealth);
                 AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the Skeleton!");
@@ -318,6 +320,7 @@ public class BattleSequence2 implements Initializable {
                     AnimateText(lblMessage, "You defeated the Skeleton!");
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
+                    MainApp.winCount = 2;
                 } else {
                     //skeletonHealth = skeletonHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + skeletonHealth);

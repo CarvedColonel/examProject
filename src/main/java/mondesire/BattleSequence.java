@@ -210,11 +210,13 @@ public class BattleSequence implements Initializable {
                 AnimateText(lblMessage, "You defeated the Zombie!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
+                MainApp.winCount = 1;
             } else {
                 lblEnemyHealth.setText("" + zombieHealth);
                 AnimateText(lblMessage, "You did " + smiteDmg + " damage to the Zombie!");
                 pause.play();
                 toggleOptions(false, false);
+
             }
 
         } else if (bless = true) {
@@ -235,6 +237,7 @@ public class BattleSequence implements Initializable {
                 AnimateText(lblMessage, "You defeated the Zombie!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
+                MainApp.winCount = 1;
             }else{
                 lblEnemyHealth.setText("" + zombieHealth);
                 AnimateText(lblMessage, "You did " + spearDmg + " damage to the Zombie!");
@@ -275,6 +278,7 @@ public class BattleSequence implements Initializable {
                     zombieHealth = 0;
                     lblEnemyHealth.setText("" + zombieHealth);
                     AnimateText(lblMessage, "You defeated the Zombie!");
+                    MainApp.winCount = 1;
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
                 }else{
