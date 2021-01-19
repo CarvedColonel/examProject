@@ -165,14 +165,11 @@ public class BattleSequence3 implements Initializable {
     void delay(){
         //timer to add comedic effect and pauses for the ghost joke code
         pauseTimer++;
-        if(pauseTimer == 8){
-            AnimateText(lblMessage, "...");
-        }
-        if(pauseTimer == 13){
-            AnimateText(lblMessage, "The ghost canceled the gallery"+"\n"+"showing of his skull-ptures because"+"\n"+"his heart wasn't in it!");
+        if(pauseTimer == 1){
+            AnimateText(lblMessage, "The ghost smiled as you exorcised him."+"\n"+"Happy that you've freed him from" +"\n"+ "this realm. He thanks you.");
             toggleOptions(false, false);
         }
-        if(pauseTimer == 18){
+        if(pauseTimer == 10){
             btnBack.setVisible(true);
             delay.stop();
             pauseTimer = 0;
@@ -249,7 +246,7 @@ public class BattleSequence3 implements Initializable {
             }
 
         } else if (bless = true) {
-            animateLength = 5000;
+            animateLength = 2000;
             toggleOptions(false, false);
             delay.play();
         }
@@ -276,7 +273,7 @@ public class BattleSequence3 implements Initializable {
             }
 
         } else if (bless = true) {
-            animateLength = 2000;
+            animateLength = 10000;
             toggleOptions(false, false);
             delay.play();
         }

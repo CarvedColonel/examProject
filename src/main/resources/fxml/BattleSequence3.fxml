@@ -94,7 +94,7 @@
             <Image url="@../enemy%20health.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnBack" layoutX="503.0" layoutY="595.0" mnemonicParsing="false" onAction="#clickBack" styleClass="bevel-gold" text="RETURN" visible="false">
+      <Button fx:id="btnBack" layoutX="503.0" layoutY="607.0" mnemonicParsing="false" onAction="#clickBack" styleClass="bevel-gold" text="RETURN" visible="false">
          <font>
             <Font name="Comic Sans MS Bold" size="20.0" />
          </font></Button>
