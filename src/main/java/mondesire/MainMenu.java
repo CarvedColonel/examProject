@@ -53,9 +53,6 @@ public class MainMenu implements Initializable {
     @FXML
     private Label lblUsername;
 
-    @FXML
-    private Button btnClear;
-
     boolean sound = MainApp.sound;
 
 
@@ -77,47 +74,61 @@ public class MainMenu implements Initializable {
 
     @FXML
     void clickHelp(MouseEvent event) {
-
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Help");
+        alert.setHeaderText(null);
+        alert.setContentText("Welcome!" + "\n" +
+                "GAMEPLAY: Use W, A, S, D, to move around the map. Reach the Skull Icon to start a battle. Go through the map clearing your way through the town" +
+                " to liberate it of the devilish monsters that have come ransacking your village. Get through all 6 battles to beat the game!"
+                +" Look around for secrets or easter eggs as well, or maybe even visit the shopkeep near the north side of the town!"+"\n"
+                +"BATTLES: A turn based combat system where you can choose to fight, or attempt to bless the monster. Fighting are standard damage" +
+                " moves, bless moves are ones that aren't your typical moves, you can joke with the monster, or attempt an exorcism. But be weary" +
+                " because these moves won't always work, so sometimes it might not be worth taking the damage to try to reason with a monster.");
+        alert.showAndWait();
     }
 
     @FXML
     void clickSettings(MouseEvent event) {
-
         toggle(false,true);
-
-        if(MainApp.user != ""){
-            btnConfirm.setDisable(true);
-            btnClear.setDisable(false);
+        if(MainApp.user == ""){
+            imgUser.setVisible(false);
+            txtUser.setVisible(false);
+            btnConfirm.setVisible(false);
+            lblError.setVisible(false);
+        }else{
         }
     }
 
     @FXML
     void clickConfirm(ActionEvent event){
-        if (txtUser.getText().trim() == "") {
+        if (txtUser.getText().isEmpty()) {
             lblError.setText("Please fill out ALL fields.");
         } else if (txtUser.getText().length() > 10) {
             lblError.setText("Username must be 10 characters or less");
         }else {
             MainApp.user = txtUser.getText();
             txtUser.setEditable(false);
-            btnConfirm.setDisable(true);
-            btnClear.setDisable(false);
-            lblUsername.setText("Milan" + MainApp.user);
+            txtUser.setVisible(false);
+            btnConfirm.setVisible(false);
+            imgPlay.setVisible(true);
+            imgUser.setVisible(false);
+            lblUsername.setText("" + MainApp.user);
         }
-    }
-
-    @FXML
-    void clickClear(ActionEvent event){
-        lblUsername.setText("");
-        btnConfirm.setDisable(false);
-        txtUser.setEditable(true);
-        MainApp.user = "";
-        btnClear.setDisable(true);
     }
 
     @FXML
     void clickMenu(MouseEvent event){
         toggle(true,false);
+        if (MainApp.user == ""){
+            imgPlay.setVisible(false);
+            imgUser.setVisible(true);
+            txtUser.setVisible(true);
+            btnConfirm.setVisible(true);
+        }else{
+            imgUser.setVisible(false);
+            btnConfirm.setVisible(false);
+            txtUser.setVisible(false);
+        }
     }
 
     @FXML
@@ -138,14 +149,9 @@ public class MainMenu implements Initializable {
         imgHelp.setVisible(menu);
         imgSettings.setVisible(menu);
         //toggles the things on the settings page on or off
-        imgUser.setVisible(settings);
         imgSound.setVisible(settings);
         lblSound.setVisible(settings);
-        btnConfirm.setVisible(settings);
-        txtUser.setVisible(settings);
         imgMenu.setVisible(settings);
-        btnConfirm.setVisible(settings);
-        btnClear.setVisible(settings);
     }
 
 
