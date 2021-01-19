@@ -79,8 +79,22 @@ public class BattleSequence2 implements Initializable {
     @FXML
     private Button btnBack;
 
+    @FXML
+    private ImageView imgStaff;
+
+    @FXML
+    private ImageView imgHoly;
+
+    @FXML
+    private ImageView imgHealth;
+
 
     Image skeleton = new Image(getClass().getResource("/SKELETON.png").toString());
+
+    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
+    Image potion = new Image(getClass().getResource("/holyWater.png").toString());
+    Image scroll = new Image(getClass().getResource("/healthScroll.png").toString());
+
 
     Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
     Timeline pause = new Timeline(new KeyFrame(Duration.millis(1000), ae -> pauseVoid()));
@@ -356,6 +370,18 @@ public class BattleSequence2 implements Initializable {
             imgEnemy.setImage(skeleton);
             imageSize(238, 146, 1011, 305);
             AnimateText(lblMessage, "A Skeleton has appeared! You will...");
+        }
+
+        if (MainApp.healthBuff == true){
+            health = 125;
+            lblPlayerHealth.setText("" + health);
+            imgHealth.setImage(scroll);
+        }
+        if (MainApp.dmgBuff > 0){
+            imgStaff.setImage(staff);
+        }
+        if (MainApp.holyWater == true){
+            imgHoly.setImage(potion);
         }
     }
 }

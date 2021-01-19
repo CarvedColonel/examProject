@@ -10,6 +10,11 @@
 
 <AnchorPane id="AnchorPane" prefHeight="728.0" prefWidth="1217.0" style="-fx-background-size: 1300;" styleClass="bgImage" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.MainMenu">
    <children>
+      <Label fx:id="lblError" alignment="CENTER" contentDisplay="CENTER" layoutX="178.0" layoutY="274.0" prefHeight="41.0" prefWidth="824.0" textFill="#ab0000">
+         <font>
+            <Font name="Century Gothic Bold" size="32.0" />
+         </font>
+      </Label>
       <TextField fx:id="txtUser" layoutX="450.0" layoutY="317.0" prefHeight="39.0" prefWidth="278.0" promptText="name here">
          <font>
             <Font name="Century Gothic Bold" size="20.0" />
@@ -69,10 +74,5 @@
             <Image url="@../menu.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblError" alignment="CENTER" contentDisplay="CENTER" layoutX="178.0" layoutY="467.0" prefHeight="41.0" prefWidth="824.0" textFill="#ab0000">
-         <font>
-            <Font name="Century Gothic Bold" size="32.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

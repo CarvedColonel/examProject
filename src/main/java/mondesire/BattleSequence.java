@@ -86,14 +86,7 @@ public class BattleSequence implements Initializable {
     @FXML
     private Button btnBack;
 
-    @FXML
-            private ImageView imgStaff;
 
-    @FXML
-    private ImageView imgHoly;
-
-    @FXML
-    private ImageView imgHealth;
 
 
     Image wolf = new Image(getClass().getResource("/WOLF.png").toString());
@@ -102,9 +95,6 @@ public class BattleSequence implements Initializable {
     Image wizard = new Image(getClass().getResource("/WIZARD.png").toString());
     Image ghost = new Image(getClass().getResource("/GHOST.png").toString());
     Image orc = new Image(getClass().getResource("/HIGHORC.png").toString());
-
-    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
-
 
     Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
     Timeline pause = new Timeline(new KeyFrame(Duration.millis(1000), ae -> pauseVoid()));
@@ -379,16 +369,6 @@ public class BattleSequence implements Initializable {
             AnimateText(lblMessage, "The High Orc has appeared! You will...");
         }
 
-        if (MainApp.healthBuff == true){
-            health = 125;
-            lblPlayerHealth.setText("" + health);
-        }
-        if (MainApp.dmgBuff > 0){
-            imgStaff.setImage(staff);
-        }
-        if (MainApp.holyWater == true){
-
-        }
 
     }
 }
