@@ -16,6 +16,12 @@ public class MainApp extends Application {
     public static boolean sound = true;
     public static String user = "";
     public static int battleStage;
+    public static double x = 1222;
+    public static double y = 532;
+    public static int dmgBuff = 0;
+    public static boolean holyWater = false;
+    public static boolean healthBuff = false;
+    public static int gold = 0;
     @Override
     public void start(@SuppressWarnings("exports") Stage s) throws IOException {
         stage=s;

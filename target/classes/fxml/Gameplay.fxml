@@ -8,16 +8,16 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" onKeyPressed="#keyPressed" onKeyReleased="#keyReleased" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-size: auto;" styleClass="bgImage2" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.Gameplay">
+<AnchorPane id="AnchorPane" fx:id="ancGame" onKeyPressed="#keyPressed" onKeyReleased="#keyReleased" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-size: auto;" styleClass="bgImage2" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.Gameplay">
    <children>
-      <Pane layoutX="809.0" layoutY="506.0" prefHeight="37.0" prefWidth="40.0">
+      <Pane layoutX="824.0" layoutY="494.0" prefHeight="37.0" prefWidth="40.0">
          <children>
             <ImageView fitHeight="37.0" fitWidth="41.0" pickOnBounds="true">
                <image>
                   <Image url="@../skull.png" />
                </image>
             </ImageView>
-            <Polygon fx:id="plgEnemy1" fill="#1f93ff00" points="0.0, 37.0, 40.0, 37.0, 40.0, 0.0, 0.0, 0.0" stroke="BLACK" strokeType="INSIDE" />
+            <Polygon fx:id="plgEnemy1" fill="#1f93ff00" points="0.0, 37.0, 40.0, 37.0, 40.0, 0.0, 0.0, 0.0" stroke="TRANSPARENT" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane layoutX="519.0" layoutY="367.0" prefHeight="37.0" prefWidth="40.0">
@@ -27,7 +27,7 @@
                   <Image url="@../skull.png" />
                </image>
             </ImageView>
-            <Polygon fx:id="plgEnemy2" fill="#1f93ff00" points="0.0, 37.0, 40.0, 37.0, 40.0, 0.0, 0.0, 0.0" stroke="BLACK" strokeType="INSIDE" />
+            <Polygon fx:id="plgEnemy2" fill="#1f93ff00" points="0.0, 37.0, 40.0, 37.0, 40.0, 0.0, 0.0, 0.0" stroke="TRANSPARENT" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane layoutX="666.0" layoutY="203.0" prefHeight="37.0" prefWidth="40.0">
@@ -37,7 +37,7 @@
                   <Image url="@../skull.png" />
                </image>
             </ImageView>
-            <Polygon fx:id="plgEnemy3" fill="#1f93ff00" points="0.0, 37.0, 40.0, 37.0, 40.0, 0.0, 0.0, 0.0" stroke="BLACK" strokeType="INSIDE" />
+            <Polygon fx:id="plgEnemy3" fill="#1f93ff00" points="0.0, 37.0, 40.0, 37.0, 40.0, 0.0, 0.0, 0.0" stroke="TRANSPARENT" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane layoutX="246.0" layoutY="251.0" prefHeight="37.0" prefWidth="40.0">
@@ -47,7 +47,7 @@
                   <Image url="@../skull.png" />
                </image>
             </ImageView>
-            <Polygon fx:id="plgEnemy4" fill="#1f93ff00" points="0.0, 37.0, 40.0, 37.0, 40.0, 0.0, 0.0, 0.0" stroke="BLACK" strokeType="INSIDE" />
+            <Polygon fx:id="plgEnemy4" fill="#1f93ff00" points="0.0, 37.0, 40.0, 37.0, 40.0, 0.0, 0.0, 0.0" stroke="TRANSPARENT" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane layoutX="394.0" layoutY="532.0" prefHeight="37.0" prefWidth="40.0">
@@ -57,7 +57,7 @@
                   <Image url="@../skull.png" />
                </image>
             </ImageView>
-            <Polygon fx:id="plgEnemy5" fill="#1f93ff00" points="0.0, 37.0, 40.0, 37.0, 40.0, 0.0, 0.0, 0.0" stroke="BLACK" strokeType="INSIDE" />
+            <Polygon fx:id="plgEnemy5" fill="#1f93ff00" points="0.0, 37.0, 40.0, 37.0, 40.0, 0.0, 0.0, 0.0" stroke="TRANSPARENT" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane layoutX="514.0" layoutY="798.0" prefHeight="37.0" prefWidth="40.0">
@@ -67,7 +67,7 @@
                   <Image url="@../skull.png" />
                </image>
             </ImageView>
-            <Polygon fx:id="plgEnemy6" fill="#1f93ff00" points="0.0, 37.0, 40.0, 37.0, 40.0, 0.0, 0.0, 0.0" stroke="BLACK" strokeType="INSIDE" />
+            <Polygon fx:id="plgEnemy6" fill="#1f93ff00" points="0.0, 37.0, 40.0, 37.0, 40.0, 0.0, 0.0, 0.0" stroke="TRANSPARENT" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="panPriest" layoutX="1222.0" layoutY="525.0" prefHeight="37.0" prefWidth="33.0">
@@ -77,7 +77,18 @@
                   <Image url="@../priestCharacter.png" />
                </image>
             </ImageView>
+            <Polygon fx:id="plgInteract" fill="#1f93ff00" points="16.5, 28.0, 23.0, 9.0, 9.0, 16.0" stroke="TRANSPARENT" strokeType="INSIDE" />
             <Polygon fx:id="plgPriest" fill="#1f93ff00" points="0.0, 34.0, 33.3199462890625, 34.0, 33.0, 0.0, 0.0, 0.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+         </children>
+      </Pane>
+      <Pane layoutX="981.0" layoutY="229.0" prefHeight="37.0" prefWidth="33.0">
+         <children>
+            <ImageView fitHeight="37.0" fitWidth="40.0" layoutX="-5.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../shop8bit.png" />
+               </image>
+            </ImageView>
+            <Polygon fx:id="plgShop" fill="#1f93ff00" layoutX="-35.0" points="34.5, 37.0, 68.0, 37.0, 68.0, 0.0, 34.5, 0.0" stroke="TRANSPARENT" strokeType="INSIDE" />
          </children>
       </Pane>
       <ImageView fitHeight="75.0" fitWidth="56.0" layoutX="1149.0" layoutY="604.0" pickOnBounds="true" preserveRatio="true">
@@ -435,21 +446,56 @@
             <Image url="@../tree.png" />
          </image>
       </ImageView>
-      <Polygon fx:id="plgWall" fill="TRANSPARENT" layoutX="840.0" layoutY="494.0" points="349.0, 104.0, 336.0, 84.0, 306.3125, 77.5, 286.0, 25.0, 468.0, -158.0, 564.0, -158.0, 575.0, -131.0, 653.0, -131.0, 653.0, 25.0, 551.0, 84.0, 525.0, 126.0, 441.0, 183.0, 272.0, 177.0, 241.0, 177.0, 162.0, 170.0, -13.0, 81.0, -117.0, 25.0, -189.0, -22.0, -240.0, -22.0, -311.0, -67.0, -350.0, -53.0, -380.0, -22.0, -380.0, 68.0, -283.0, 68.0, -268.0, 52.0, -157.0, 52.0, -157.0, 143.0, -214.0, 143.0, -274.0, 143.0, -283.0, 183.0, -189.0, 206.0, -105.0, 206.0, -13.0, 206.0, -13.0, 245.0, 30.0, 256.0, 65.0, 245.0, 65.0, 126.0, -95.0, 92.0, 55.0, 78.0, 148.0, 177.0, 264.0, 198.0, 375.0, 183.0, 431.0, 170.0, 468.0, 150.0, 485.0, 78.0, 525.0, 126.0, 485.0, 78.0, 551.0, 84.0, 575.0, 46.0, 672.0, 39.5, 653.0, -29.0, 672.0, -158.0, 564.0, -158.0, 515.0, -170.0, 468.0, -158.0, 461.0, -76.0, 461.0, 16.0, 387.0, 16.0, 345.0, 16.0, 336.0, -13.0, 280.0, 16.0, 241.0, 10.0, 183.0, -2.0, 65.0, -22.0, 241.0, -44.0, 345.0, -141.0, 742.0, -194.0, 569.0, -303.0, 557.0, -340.0, 252.0, -410.0, 196.0, -271.0, 196.0, -340.0, 235.0, -318.0, 264.0, -340.0, 375.0, -340.0, 468.0, -340.0, 525.0, -340.0, 537.0, -311.0, 564.0, -311.0, 564.0, -248.0, 564.0, -170.0, 336.0, -170.0, 235.0, -170.0, 219.0, -158.0, 196.0, -109.0, 162.0, -131.0, 134.0, -117.0, 77.0, -109.0, 43.0, -88.0, 43.0, -44.0, 24.0, -44.0, 24.0, -22.0, 77.0, -2.0, 109.0, -2.0, 141.0, -2.0, 183.0, 10.0, 196.0, 52.0, 252.0, 98.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" visible="false" />
-      <Polygon fx:id="plgWall2" fill="#1f93ff00" layoutX="674.0" layoutY="349.0" points="-206.0, -23.0, -303.0, 0.0, -326.0, -60.0, -258.0, -128.0, -277.0, -211.0, -366.0, -203.0, -394.0, -89.0, -394.0, -101.0, -541.0, -116.0, -436.375, -53.0, -486.0, -72.0, -553.0, -72.0, -599.0, 48.0, -560.0, 191.0, -486.0, 166.0, -455.0, 166.0, -455.0, 191.0, -425.0, 191.0, -354.0, 180.0, -311.0, 114.0, -436.0, 23.0, -553.0, 23.0, -553.0, -72.0, -436.0, -72.0, -461.0, -108.0, -372.0, -116.0, -366.0, -220.0, -237.0, -293.0, -137.0, -273.0, -137.0, -172.0, -57.0, -172.0, -48.0, -153.0, 67.0, -153.0, 73.0, -172.0, 144.0, -172.0, 178.0, -188.0, 178.0, -273.0, 215.0, -287.0, 293.0, -287.0, 321.0, -249.0, 321.0, -220.0, 310.0, -211.0, 293.0, -211.0, 293.0, -172.0, 260.0, -116.0, 192.0, -60.0, 162.0, -38.0, 128.0, -45.0, 118.0, -53.0, 128.0, -23.0, 137.0, 6.0, 137.0, 66.0, 67.0, 54.0, 24.0, 54.0, -58.6875, 51.0, -82.0, -6.0, -82.0, -45.0, -26.0, -60.0, 15.0, -60.0, 118.0, -60.0, 144.0, -38.0, 204.0, -60.0, 293.0, -128.0, 366.0, -128.0, 321.0, -273.0, 243.0, -321.0, -237.0, -273.0, -237.0, -188.0, -214.0, -128.0, -188.0, -72.0, -129.0, -38.0, -167.0, -6.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+      <ImageView fitHeight="129.0" fitWidth="189.0" layoutX="107.0" layoutY="367.0" pickOnBounds="true">
+         <image>
+            <Image url="@../housetop7.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="96.0" fitWidth="139.0" layoutX="902.0" layoutY="357.0" pickOnBounds="true">
+         <image>
+            <Image url="@../housetop8.png" />
+         </image>
+      </ImageView>
+      <Polygon fx:id="plgWall" fill="TRANSPARENT" layoutX="840.0" layoutY="494.0" points="349.0, 104.0, 336.0, 84.0, 306.3125, 77.5, 286.0, 25.0, 468.0, -158.0, 564.0, -158.0, 575.0, -131.0, 653.0, -131.0, 653.0, 25.0, 551.0, 84.0, 525.0, 126.0, 441.0, 183.0, 272.0, 177.0, 241.0, 177.0, 162.0, 170.0, -13.0, 81.0, -117.0, 25.0, -189.0, -22.0, -240.0, -22.0, -311.0, -67.0, -350.0, -53.0, -380.0, -22.0, -380.0, 68.0, -283.0, 68.0, -268.0, 52.0, -157.0, 52.0, -157.0, 143.0, -214.0, 143.0, -274.0, 143.0, -283.0, 183.0, -189.0, 206.0, -105.0, 206.0, -13.0, 206.0, -13.0, 245.0, 30.0, 256.0, 65.0, 245.0, 65.0, 126.0, -95.0, 92.0, 56.0, 84.0, 148.0, 177.0, 264.0, 198.0, 375.0, 183.0, 431.0, 170.0, 468.0, 150.0, 485.0, 78.0, 525.0, 126.0, 485.0, 78.0, 551.0, 84.0, 575.0, 46.0, 672.0, 39.5, 653.0, -29.0, 672.0, -158.0, 564.0, -158.0, 515.0, -170.0, 468.0, -158.0, 461.0, -76.0, 461.0, 16.0, 387.0, 16.0, 345.0, 16.0, 336.0, -13.0, 280.0, 16.0, 241.0, 10.0, 183.0, -2.0, 65.0, -22.0, 241.0, -44.0, 345.0, -141.0, 742.0, -194.0, 569.0, -303.0, 557.0, -340.0, 252.0, -410.0, 196.0, -271.0, 196.0, -340.0, 235.0, -318.0, 264.0, -340.0, 375.0, -340.0, 468.0, -340.0, 525.0, -340.0, 537.0, -311.0, 564.0, -311.0, 564.0, -248.0, 564.0, -170.0, 336.0, -170.0, 235.0, -170.0, 219.0, -158.0, 196.0, -103.0, 162.0, -103.0, 128.0, -103.0, 77.0, -103.0, 43.0, -82.0, 43.0, -44.0, 24.0, -44.0, 24.0, -29.0, 65.0, -29.0, 77.0, -2.0, 109.0, -2.0, 141.0, -2.0, 183.0, 10.0, 196.0, 52.0, 252.0, 98.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" visible="false" />
+      <Polygon fx:id="plgWall2" fill="#1f93ff00" layoutX="674.0" layoutY="349.0" points="-206.0, -23.0, -303.0, 0.0, -326.0, -60.0, -258.0, -128.0, -277.0, -211.0, -366.0, -203.0, -394.0, -89.0, -394.0, -101.0, -541.0, -116.0, -436.375, -53.0, -486.0, -72.0, -553.0, -72.0, -599.0, 48.0, -560.0, 191.0, -486.0, 166.0, -455.0, 166.0, -455.0, 191.0, -425.0, 191.0, -354.0, 180.0, -311.0, 114.0, -366.0, 114.0, -387.0, 66.0, -477.0, 66.0, -553.0, 18.0, -436.0, 18.0, -650.0, 6.0, -553.0, -72.0, -436.0, -72.0, -461.0, -108.0, -372.0, -116.0, -366.0, -220.0, -237.0, -293.0, -137.0, -273.0, -137.0, -172.0, -57.0, -172.0, -48.0, -153.0, 67.0, -153.0, 73.0, -172.0, 144.0, -172.0, 178.0, -188.0, 178.0, -273.0, 215.0, -287.0, 293.0, -287.0, 321.0, -249.0, 321.0, -220.0, 310.0, -211.0, 293.0, -211.0, 293.0, -172.0, 260.0, -116.0, 192.0, -60.0, 162.0, -38.0, 128.0, -45.0, 118.0, -53.0, 128.0, -23.0, 137.0, 6.0, 137.0, 66.0, 67.0, 54.0, 24.0, 54.0, -58.6875, 51.0, -82.0, -6.0, -82.0, -45.0, -26.0, -60.0, 15.0, -60.0, 118.0, -60.0, 144.0, -38.0, 204.0, -60.0, 293.0, -128.0, 366.0, -128.0, 321.0, -273.0, 243.0, -321.0, -237.0, -273.0, -237.0, -188.0, -214.0, -128.0, -188.0, -72.0, -129.0, -38.0, -167.0, -6.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
       <Polygon fx:id="plgWell" fill="#1f93ff00" layoutX="949.0" layoutY="309.0" points="-42.0, 5.0, 16.0, -2.0, 16.0, -26.0, -17.0, -32.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
       <Polygon fx:id="plgInn" fill="#1f93ff00" layoutX="349.0" layoutY="695.0" points="-155.0, 46.0, 50.0, 46.0, 50.0, -83.0, -24.0, -83.0, -186.0, -56.0, -239.0, -56.0, -186.0, -44.0, -186.0, 23.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
       <Polygon fx:id="plgWall3" fill="#1f93ff00" layoutX="699.0" layoutY="846.0" points="20.0, 24.0, 125.0, -69.0, 237.0, -90.0, 237.0, -149.0, 212.0, -156.0, 248.0, -133.0, 228.0, -82.0, 86.0, -41.0, -10.0, 11.0, -81.0, -2.0, -273.0, -1.5, -286.0, -34.0, -433.0, -34.0, -511.375, -17.0, -659.0, -41.0, -601.0, -337.0, -589.0, -90.0, -563.0, -50.0, -503.0, -57.0, -496.0, -34.0, -462.0, -34.0, -253.0, 11.0, -50.0, 24.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+      <Polygon fx:id="plgGrave1" fill="#ffffff00" layoutX="1365.0" layoutY="494.0" points="3.0, -20.0, 9.0, -14.0, 16.0, -20.0, 9.0, -27.0" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fx:id="plgGrave2" fill="#ffffff00" layoutX="1418.0" layoutY="493.0" points="3.0, -20.0, 9.0, -14.0, 16.0, -20.0, 9.0, -27.0" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fx:id="plgGrave4" fill="#ffffff00" layoutX="1419.0" layoutY="452.0" points="3.0, -20.0, 9.0, -14.0, 16.0, -20.0, 9.0, -27.0" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fx:id="plgGrave3" fill="#ffffff00" layoutX="1365.0" layoutY="450.0" points="3.0, -20.0, 9.0, -14.0, 16.0, -20.0, 9.0, -27.0" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fx:id="plgGrave5" fill="#ffffff00" layoutX="1363.0" layoutY="405.0" points="3.0, -20.0, 9.0, -14.0, 16.0, -20.0, 9.0, -27.0" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fx:id="plgGrave6" fill="#ffffff00" layoutX="1416.0" layoutY="404.0" points="3.0, -20.0, 9.0, -14.0, 16.0, -20.0, 9.0, -27.0" stroke="BLACK" strokeType="INSIDE" />
+      <ImageView fx:id="imgText" fitHeight="302.0" fitWidth="1042.0" layoutX="290.0" layoutY="586.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../textbox.png" />
+         </image>
+      </ImageView>
       <Label fx:id="lblUsername" layoutX="14.0" layoutY="858.0" prefHeight="28.0" prefWidth="81.0" text="Label" textFill="WHITE">
          <font>
             <Font name="Century Gothic Bold" size="20.0" />
          </font>
       </Label>
-      <Polygon fx:id="plgGrave" fill="#1f93ff00" layoutX="1362.0" layoutY="486.0" points="6.0, -7.0, 18.0, -7.0, 18.0, -15.0, 6.0, -15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.01" />
-      <Polygon fx:id="plgGrave2" fill="#1f93ff00" layoutX="1416.0" layoutY="488.0" points="6.0, -6.0, 18.0, -6.0, 18.0, -15.0, 6.0, -15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.01" />
-      <Polygon fx:id="plgGrave3" fill="#1f93ff00" layoutX="1361.0" layoutY="437.0" points="6.0, -9.0, 18.0, -9.0, 18.0, -15.0, 6.0, -15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.01" />
-      <Polygon fx:id="plgGrave4" fill="#1f93ff00" layoutX="1415.0" layoutY="437.0" points="6.0, -8.0, 18.0, -8.0, 18.0, -15.0, 6.0, -15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.01" />
-      <Polygon fx:id="plgGrave5" fill="#1f93ff00" layoutX="1363.0" layoutY="392.0" points="6.0, -8.0, 18.0, -8.0, 18.0, -15.0, 6.0, -15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.01" />
-      <Polygon fx:id="plgGrave6" fill="#1f93ff00" layoutX="1414.0" layoutY="393.0" points="6.0, -8.0, 18.0, -8.0, 18.0, -15.0, 6.0, -15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.01" />
+      <Label fx:id="lblLetter1" alignment="TOP_CENTER" layoutX="340.0" layoutY="634.0" prefHeight="185.0" prefWidth="942.0" textFill="WHITE" visible="false">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblUsername1" layoutX="147.0" layoutY="858.0" prefHeight="28.0" prefWidth="81.0" text="Label" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblOption1" layoutX="477.0" layoutY="775.0" onMouseClicked="#decision1" prefHeight="43.0" prefWidth="74.0" text="Label" textFill="WHITE" visible="false">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblOption2" layoutX="1084.0" layoutY="775.0" onMouseClicked="#decision2" prefHeight="43.0" prefWidth="74.0" text="Label" textFill="WHITE" visible="false">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
