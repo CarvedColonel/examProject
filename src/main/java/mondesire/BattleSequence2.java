@@ -79,8 +79,22 @@ public class BattleSequence2 implements Initializable {
     @FXML
     private Button btnBack;
 
+    @FXML
+    private ImageView imgStaff;
+
+    @FXML
+    private ImageView imgHoly;
+
+    @FXML
+    private ImageView imgHealth;
+
 
     Image skeleton = new Image(getClass().getResource("/SKELETON.png").toString());
+
+    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
+    Image potion = new Image(getClass().getResource("/holyWater.png").toString());
+    Image scroll = new Image(getClass().getResource("/healthScroll.png").toString());
+
 
     Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
     Timeline pause = new Timeline(new KeyFrame(Duration.millis(1000), ae -> pauseVoid()));
@@ -131,7 +145,11 @@ public class BattleSequence2 implements Initializable {
         lblMove3.setVisible(true);
         lblMove1.setText("JOKE");
         lblMove2.setText("EXORCISE");
-        lblMove3.setText("[LOCKED]");
+        if (MainApp.holyWater == true){
+            lblMove3.setText("Holy Water");
+        }else {
+            lblMove3.setText("[LOCKED]");
+        }
     }
 
     void pauseVoid() {
@@ -169,18 +187,29 @@ public class BattleSequence2 implements Initializable {
             health = health - trombone;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
+            die();
         } else if (skeletonAttack == 2) {
             AnimateText(lblMessage, "The Skeleton used Bone Slash!");
             int bite = ThreadLocalRandom.current().nextInt(14, 19 + 1);
             health = health - bite;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
+            die();
         } else if (skeletonAttack == 3) {
             AnimateText(lblMessage, "The Skeleton used Bone Dance!");
             int lunge = ThreadLocalRandom.current().nextInt(5, 22 + 1);
             health = health - lunge;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
+            die();
+        }
+    }
+
+    void die(){
+        if(health <= 0){
+            toggleOptions(false,false);
+            AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
+            btnBack.setVisible(true);
         }
     }
 
@@ -201,15 +230,16 @@ public class BattleSequence2 implements Initializable {
         if (fight == true) {
             smiteDmg = ThreadLocalRandom.current().nextInt(10, 14 + 1);
             skeletonHealth = skeletonHealth - (smiteDmg + MainApp.dmgBuff);
-            if (skeletonHealth < 0) {
+            if (skeletonHealth <= 0) {
                 skeletonHealth = 0;
                 lblEnemyHealth.setText("" + skeletonHealth);
                 AnimateText(lblMessage, "You defeated the Skeleton!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
+                MainApp.winCount = 2;
             } else {
                 lblEnemyHealth.setText("" + skeletonHealth);
-                AnimateText(lblMessage, "You did " + smiteDmg + " damage to the Skeleton!");
+                AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the Skeleton!");
                 pause.play();
                 toggleOptions(false, false);
             }
@@ -228,15 +258,16 @@ public class BattleSequence2 implements Initializable {
         if (fight == true) {
             spearDmg = ThreadLocalRandom.current().nextInt(6, 20 + 1);
             skeletonHealth = skeletonHealth - (spearDmg + MainApp.dmgBuff);
-            if (skeletonHealth < 0) {
+            if (skeletonHealth <= 0) {
                 skeletonHealth = 0;
                 lblEnemyHealth.setText("" + skeletonHealth);
                 AnimateText(lblMessage, "You defeated the Skeleton!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
+                MainApp.winCount = 2;
             } else {
                 lblEnemyHealth.setText("" + skeletonHealth);
-                AnimateText(lblMessage, "You did " + spearDmg + " damage to the Skeleton!");
+                AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the Skeleton!");
                 pause.play();
                 toggleOptions(false, false);
             }
@@ -250,13 +281,24 @@ public class BattleSequence2 implements Initializable {
 
     @FXML
     void clickMove3(MouseEvent event) {
+        System.out.println(MainApp.dmgBuff);
+        int maxHealth;
 //if they chose to fight, then use the Pray move that heals you for 25 health, run the animations, and toggle the UI. if bless and they have it unlocked, do 50 damage
         if (fight == true) {
-            if ((pray > 0) && ((health < 100))) {
+
+            if(MainApp.healthBuff == true){
+                maxHealth = 125;
+            }else{
+                maxHealth = 100;
+            }
+
+            if ((pray > 0) && ((health < maxHealth))) {
                 pray--;
                 health = health + 25;
-                if(health > 100){
-                    health = 100;
+                if(MainApp.healthBuff == true){
+                    if(health > maxHealth){
+                        health = maxHealth;
+                    }
                 }
                 lblPlayerHealth.setText("" + health);
                 AnimateText(lblMessage, "You healed 25 health!");
@@ -270,19 +312,24 @@ public class BattleSequence2 implements Initializable {
             if (lblMove3.getText() == "[LOCKED]") {
 
             } else {
-                if (skeletonHealth < 0) {
+                skeletonHealth = skeletonHealth - (50 + MainApp.dmgBuff);
+                lblEnemyHealth.setText("" + skeletonHealth);
+                if (skeletonHealth <= 0) {
                     skeletonHealth = 0;
                     lblEnemyHealth.setText("" + skeletonHealth);
                     AnimateText(lblMessage, "You defeated the Skeleton!");
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
+                    MainApp.winCount = 2;
                 } else {
-                    skeletonHealth = skeletonHealth - (50 + MainApp.dmgBuff);
+                    //skeletonHealth = skeletonHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + skeletonHealth);
                     AnimateText(lblMessage, "You did 50 damage to the Skeleton!");
                     pause.play();
                     toggleOptions(false, false);
                 }
+                MainApp.holyWater = false;
+
             }
         }
     }
@@ -352,10 +399,25 @@ public class BattleSequence2 implements Initializable {
         pause.setCycleCount(Timeline.INDEFINITE);
         delay.setCycleCount(Timeline.INDEFINITE);
         UI.play();
+
+        lblEnemyHealth.setText(""+skeletonHealth);
+
         if (MainApp.battleStage == 2) {
             imgEnemy.setImage(skeleton);
             imageSize(238, 146, 1011, 305);
             AnimateText(lblMessage, "A Skeleton has appeared! You will...");
+        }
+
+        if (MainApp.healthBuff == true){
+            health = 125;
+            lblPlayerHealth.setText("" + health);
+            imgHealth.setImage(scroll);
+        }
+        if (MainApp.dmgBuff > 0){
+            imgStaff.setImage(staff);
+        }
+        if (MainApp.holyWater == true){
+            imgHoly.setImage(potion);
         }
     }
 }
