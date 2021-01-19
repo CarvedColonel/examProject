@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
@@ -59,13 +60,27 @@ public class Shop<NFANode> implements Initializable {
 
     @FXML
     private Label lblPrice2;
+    @FXML
+    private Label lblItem3;
 
+    @FXML
+    private ImageView imgHealthScroll;
+
+    @FXML
+    private Label lblPrice3;
+    @FXML
+    private ImageView imgBitcoin;
+
+    @FXML
+    private Label lblBack;
+
+    @FXML
+    private Label lblCurrency;
 
     public void animateText(Label lbl, String message) {
 
         String content = message;
-final Animation animation = new Transition()
-{
+        final Animation animation = new Transition() {
             {
                 setCycleDuration(Duration.millis(5000));
             }
@@ -85,33 +100,99 @@ final Animation animation = new Transition()
         animation.play();
 
     }
+
     @FXML
     void buy(MouseEvent event) {
-lblShopText.setVisible(false);
-lblLeave.setVisible(false);
-lblBuy.setVisible(false);
-lblItem1.setVisible(true);
-imgStaff.setVisible(true);
-lblPrice.setVisible(true);
-lblItem2.setVisible(true);
-imgHolyWater.setVisible(true);
-lblPrice2.setVisible(true);
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(50), ae -> check()));
+        lblShopText.setVisible(false);
+        lblLeave.setVisible(false);
+        lblBuy.setVisible(false);
+        lblItem1.setVisible(true);
+        imgStaff.setVisible(true);
+        lblPrice.setVisible(true);
+        lblItem2.setVisible(true);
+        imgHolyWater.setVisible(true);
+        lblPrice2.setVisible(true);
+        lblItem3.setVisible(true);
+        imgHealthScroll.setVisible(true);
+        lblPrice3.setVisible(true);
+        lblBack.setVisible(true);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5), ae -> check()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+        if (MainApp.dmgBuff == 10) {
+            imgStaff.setVisible(false);
+            lblPrice.setVisible(false);
+            lblItem1.setVisible(false);
+        }if (MainApp.holyWater == true) {
+            imgHolyWater.setVisible(false);
+            lblPrice2.setVisible(false);
+            lblItem2.setVisible(false);
+        } if (MainApp.healthBuff == true) {
+            imgHealthScroll.setVisible(false);
+            lblPrice3.setVisible(false);
+            lblItem3.setVisible(false);
+        }
     }
+
     void check() {
         if (imgStaff.isHover()) {
             lblInfo.setText("Damage Increased");
         } else if (imgHolyWater.isHover() == true) {
             lblInfo.setText("Does Extra Damge (One Time Use)");
-        } else if (!imgStaff.isHover() || !imgHolyWater.isHover()) {
+        } else if (imgHealthScroll.isHover() == true) {
+            lblInfo.setText("Increases Health");
+        } else if (!imgStaff.isHover() || !imgHolyWater.isHover() || !imgHealthScroll.isHover()) {
             lblInfo.setText("");
+        }
+        if (MainApp.gold >= 10) {
+            lblPrice.setTextFill(Color.LIMEGREEN);
+            lblPrice2.setTextFill(Color.LIMEGREEN);
+            lblPrice3.setTextFill(Color.LIMEGREEN);
+        } else {
+            lblPrice.setTextFill(Color.RED);
+            lblPrice2.setTextFill(Color.RED);
+            lblPrice3.setTextFill(Color.RED);
+        }
+    }
+
+    @FXML
+    void leave(MouseEvent event) throws IOException {
+        MainApp.setRoot("Gameplay");
+    }
+
+    @FXML
+    void staff(MouseEvent event) {
+        if (MainApp.gold >= 10) {
+            MainApp.dmgBuff = 10;
+            MainApp.gold = MainApp.gold - 10;
+            lblCurrency.setText("" + MainApp.gold + " x");
+            imgStaff.setVisible(false);
+            lblPrice.setVisible(false);
+            lblItem1.setVisible(false);
+        }
+    }
+
+    @FXML
+    void holyWater(MouseEvent event) {
+        if (MainApp.gold >= 10) {
+            MainApp.holyWater = true;
+            MainApp.gold = MainApp.gold - 10;
+            lblCurrency.setText("" + MainApp.gold + " x");
+            imgHolyWater.setVisible(false);
+            lblPrice2.setVisible(false);
+            lblItem2.setVisible(false);
         }
     }
     @FXML
-    void leave(MouseEvent event) throws IOException {
-    MainApp.setRoot("Gameplay");
+    void healthScroll(MouseEvent event) {
+        if (MainApp.gold >= 10) {
+            MainApp.healthBuff = true;
+            MainApp.gold = MainApp.gold - 10;
+            lblCurrency.setText("" + MainApp.gold + " x");
+            imgHealthScroll.setVisible(false);
+            lblPrice3.setVisible(false);
+            lblItem3.setVisible(false);
+        }
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -128,6 +209,7 @@ lblPrice2.setVisible(true);
         fade2.setToValue(10);
         fade2.setNode(imgHat);
         fade2.play();
+        lblCurrency.setText("" + MainApp.gold + " x");
 
 
     }

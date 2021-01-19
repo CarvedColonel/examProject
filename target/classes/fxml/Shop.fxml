@@ -53,7 +53,7 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <ImageView fx:id="imgStaff" fitHeight="152.0" fitWidth="87.0" layoutX="291.0" layoutY="476.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="imgStaff" fitHeight="152.0" fitWidth="87.0" layoutX="291.0" layoutY="476.0" onMouseClicked="#staff" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../staff.png" />
          </image>
@@ -73,12 +73,42 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <ImageView fx:id="imgHolyWater" fitHeight="124.0" fitWidth="173.0" layoutX="499.0" layoutY="476.0" pickOnBounds="true" visible="false">
+      <ImageView fx:id="imgHolyWater" fitHeight="124.0" fitWidth="173.0" layoutX="499.0" layoutY="476.0" onMouseClicked="#holyWater" pickOnBounds="true" visible="false">
          <image>
             <Image url="@../holywater.png" />
          </image>
       </ImageView>
       <Label fx:id="lblPrice2" layoutX="560.0" layoutY="588.0" onMouseClicked="#leave" text="10g" textFill="WHITE" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblItem3" layoutX="750.0" layoutY="431.0" onMouseClicked="#leave" text="Health Scroll" textFill="WHITE" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imgHealthScroll" fitHeight="100.0" fitWidth="93.0" layoutX="787.0" layoutY="488.0" onMouseClicked="#healthScroll" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../healthScroll.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblPrice3" layoutX="808.0" layoutY="588.0" onMouseClicked="#leave" text="10g" textFill="WHITE" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imgBitcoin" fitHeight="43.0" fitWidth="41.0" layoutX="1115.0" layoutY="14.0" pickOnBounds="true">
+         <image>
+            <Image url="@../bitcoin.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblCurrency" alignment="CENTER_RIGHT" layoutX="974.0" layoutY="22.0" prefHeight="28.0" prefWidth="132.0" text="0 x" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblBack" layoutX="207.0" layoutY="623.0" onMouseClicked="#leave" prefHeight="45.0" prefWidth="87.0" text="Leave" textFill="WHITE" visible="false">
          <font>
             <Font size="30.0" />
          </font>

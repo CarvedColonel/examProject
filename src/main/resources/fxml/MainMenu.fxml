@@ -15,7 +15,12 @@
             <Image url="@../menuImage.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="txtUser" layoutX="460.0" layoutY="327.0" prefHeight="39.0" prefWidth="278.0" promptText="name here" visible="false">
+      <Label fx:id="lblError" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="284.0" prefHeight="41.0" prefWidth="824.0" textFill="#ab0000">
+         <font>
+            <Font name="Century Gothic Bold" size="32.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUser" layoutX="460.0" layoutY="327.0" prefHeight="39.0" prefWidth="278.0" promptText="name here">
          <font>
             <Font name="Century Gothic Bold" size="20.0" />
          </font>
@@ -25,27 +30,27 @@
             <Image url="@../title.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgPlay" fitHeight="150.0" fitWidth="200.0" layoutX="519.0" layoutY="287.0" onMouseClicked="#clickPlay" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgPlay" fitHeight="150.0" fitWidth="200.0" layoutX="519.0" layoutY="287.0" onMouseClicked="#clickPlay" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../play.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imgHelp" fitHeight="150.0" fitWidth="200.0" layoutX="521.0" layoutY="405.0" onMouseClicked="#clickHelp" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../help.png" />
+            <Image url="@../Help.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imgSettings" fitHeight="104.0" fitWidth="315.0" layoutX="463.0" layoutY="529.0" onMouseClicked="#clickSettings" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../settings.png" />
+            <Image url="@../Settings.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="64.0" fitWidth="136.0" layoutX="33.0" layoutY="650.0" onMouseClicked="#clickExit" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../exit.png" />
+            <Image url="@../Exit.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgUser" fitHeight="64.0" fitWidth="346.0" layoutX="135.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="imgUser" fitHeight="64.0" fitWidth="346.0" layoutX="135.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../username.png" />
          </image>
@@ -55,7 +60,7 @@
             <Image url="@../sound.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnConfirm" layoutX="740.0" layoutY="327.0" mnemonicParsing="false" onAction="#clickConfirm" styleClass="bevel-gold" text="Confirm" visible="false">
+      <Button fx:id="btnConfirm" layoutX="740.0" layoutY="327.0" mnemonicParsing="false" onAction="#clickConfirm" styleClass="bevel-gold" text="Confirm">
          <font>
             <Font name="Century Gothic Bold" size="15.0" />
          </font>
@@ -75,15 +80,5 @@
             <Image url="@../menu.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblError" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="477.0" prefHeight="41.0" prefWidth="824.0" textFill="#ab0000">
-         <font>
-            <Font name="Century Gothic Bold" size="32.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnClear" disable="true" layoutX="821.0" layoutY="327.0" mnemonicParsing="false" onAction="#clickClear" styleClass="bevel-gold" text="Clear" visible="false">
-         <font>
-            <Font name="Century Gothic Bold" size="15.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>
