@@ -166,7 +166,7 @@ public class BattleSequence3 implements Initializable {
         //timer to add comedic effect and pauses for the ghost joke code
         pauseTimer++;
         if(pauseTimer == 1){
-            AnimateText(lblMessage, "The ghost smiled as you exorcised him."+"\n"+"Happy that you've freed him from" +"\n"+ "this realm. He thanks you.");
+            AnimateText(lblMessage, "The ghost smiled as you exorcised him."+"\n"+"Happy that you've freed him from" +"\n"+ "this realm. He thanks you...");
             toggleOptions(false, false);
         }
         if(pauseTimer == 10){

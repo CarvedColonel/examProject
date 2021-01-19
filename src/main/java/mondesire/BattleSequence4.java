@@ -13,18 +13,11 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Polyline;
-import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -32,7 +25,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class BattleSequence implements Initializable {
+public class BattleSequence4 implements Initializable {
 
     @FXML
     private ImageView imgPlayer;
@@ -86,21 +79,29 @@ public class BattleSequence implements Initializable {
     @FXML
     private Button btnBack;
 
+    @FXML
+    private ImageView imgStaff;
+
+    @FXML
+    private ImageView imgHoly;
+
+    @FXML
+    private ImageView imgHealth;
 
 
-
-    Image wolf = new Image(getClass().getResource("/WOLF.png").toString());
-    Image skeleton = new Image(getClass().getResource("/SKELETON.png").toString());
-    Image zombie = new Image(getClass().getResource("/ZOMBIE.png").toString());
     Image wizard = new Image(getClass().getResource("/WIZARD.png").toString());
-    Image ghost = new Image(getClass().getResource("/GHOST.png").toString());
-    Image orc = new Image(getClass().getResource("/HIGHORC.png").toString());
+
+    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
+    Image potion = new Image(getClass().getResource("/holyWater.png").toString());
+    Image scroll = new Image(getClass().getResource("/healthScroll.png").toString());
+
 
     Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
     Timeline pause = new Timeline(new KeyFrame(Duration.millis(1000), ae -> pauseVoid()));
+    Timeline delay = new Timeline(new KeyFrame(Duration.millis(1000), ae -> delay()));
 
     int health = 100;
-    int zombieHealth = 50;
+    int wizardHealth = 80;
 
     boolean fight;
     boolean bless;
@@ -111,7 +112,9 @@ public class BattleSequence implements Initializable {
 
     int pauseTimer = 0;
 
-    int zombieAttack;
+    int wizardAttack;
+
+    int animateLength = 2000;//milliseconds
 
 
     @FXML
@@ -119,13 +122,6 @@ public class BattleSequence implements Initializable {
         MainApp.setRoot("Gameplay", "Priest's Conquest");
     }
 
-    void die(){
-        if(health <= 0){
-            toggleOptions(false,false);
-            AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
-            btnBack.setVisible(true);
-        }
-    }
 
     @FXML
     void clickFight(MouseEvent event) {
@@ -134,9 +130,9 @@ public class BattleSequence implements Initializable {
         lblMove1.setVisible(true);
         lblMove2.setVisible(true);
         lblMove3.setVisible(true);
-        lblMove1.setText("SMITE");//base dmg: 9-12
-        lblMove2.setText("HOLY SPEAR");//base dmg: 6-15
-        lblMove3.setText("PRAY("+pray+"/2)");//heals 25 health (Can be used twice per fight)
+        lblMove1.setText("SMITE");//base dmg: 10-14
+        lblMove2.setText("HOLY SPEAR");//base dmg: 6-20
+        lblMove3.setText("PRAY(" + pray + "/2)");//heals 25 health (Can be used twice per fight)
     }
 
 
@@ -149,41 +145,69 @@ public class BattleSequence implements Initializable {
         lblMove3.setVisible(true);
         lblMove1.setText("JOKE");
         lblMove2.setText("EXORCISE");
-        lblMove3.setText("[LOCKED]");
+        if (MainApp.holyWater == true){
+            lblMove3.setText("Holy Water");
+        }else {
+            lblMove3.setText("[LOCKED]");
+        }
     }
 
     void pauseVoid() {
+        //timer to add some delay and then run the attack code
         pauseTimer++;
             if (pauseTimer == 3) {
-                zombieAttack();
+                wizardAttack();
                 pauseTimer = 0;
                 pause.stop();
             }
     }
 
-    void zombieAttack() {
-        zombieAttack = ThreadLocalRandom.current().nextInt(1, 3 + 1);
-        if (zombieAttack == 1) {
-            AnimateText(lblMessage, "The Zombie used Scratch!");
-            int scratch = ThreadLocalRandom.current().nextInt(10, 15 + 1);
-            health = health - scratch;
+    void delay(){
+        //timer to add comedic effect and pauses for the wizard joke code
+        pauseTimer++;
+        if(pauseTimer == 1){
+            AnimateText(lblMessage, "The wizard smiled as you exorcised him."+"\n"+"Happy that you've freed him from" +"\n"+ "this realm. He thanks you...");
+            toggleOptions(false, false);
+        }
+        if(pauseTimer == 10){
+            btnBack.setVisible(true);
+            delay.stop();
+            pauseTimer = 0;
+        }
+    }
+
+    void wizardAttack() {
+        wizardAttack = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+        if (wizardAttack == 1) {
+            AnimateText(lblMessage, "The wizard used Fireball!");
+            int fire = ThreadLocalRandom.current().nextInt(15, 25 + 1);
+            health = health - fire;
+            pause.play();
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
             die();
-        } else if (zombieAttack == 2) {
-            AnimateText(lblMessage, "The Zombie used Bite!");
-            int bite = ThreadLocalRandom.current().nextInt(15, 20 + 1);
-            health = health - bite;
+        } else if (wizardAttack == 2) {
+            AnimateText(lblMessage, "The wizard used Dark Magic!");
+            int magic = ThreadLocalRandom.current().nextInt(13, 19 + 1);
+            health = health - magic;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
             die();
-        } else if (zombieAttack == 3) {
-            AnimateText(lblMessage, "The Zombie used Lunge!");
-            int lunge = ThreadLocalRandom.current().nextInt(5, 20 + 1);
-            health = health - lunge;
+        } else if (wizardAttack == 3) {
+            AnimateText(lblMessage, "The wizard used Healing Aura!");
+            int heal = ThreadLocalRandom.current().nextInt(5, 15 + 1);
             lblPlayerHealth.setText("" + health);
+            wizardHealth = wizardHealth + heal;
+            lblEnemyHealth.setText("" + wizardHealth);
             toggleOptions(true, false);
-            die();
+        }
+    }
+
+    void die(){
+        if(health <= 0){
+            toggleOptions(false,false);
+            AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
+            btnBack.setVisible(true);
         }
     }
 
@@ -203,91 +227,106 @@ public class BattleSequence implements Initializable {
 
         if (fight == true) {
             smiteDmg = ThreadLocalRandom.current().nextInt(10, 14 + 1);
-            zombieHealth = zombieHealth - smiteDmg;
-            if (zombieHealth <= 0) {
-                zombieHealth = 0;
-                lblEnemyHealth.setText("" + zombieHealth);
-                AnimateText(lblMessage, "You defeated the Zombie!");
+            wizardHealth = wizardHealth - (smiteDmg + MainApp.dmgBuff);
+            if (wizardHealth <= 0) {
+                wizardHealth = 0;
+                lblEnemyHealth.setText("" + wizardHealth);
+                AnimateText(lblMessage, "You defeated the wizard!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
-                MainApp.winCount = 1;
+                MainApp.winCount = 3;
             } else {
-                lblEnemyHealth.setText("" + zombieHealth);
-                AnimateText(lblMessage, "You did " + smiteDmg + " damage to the Zombie!");
+                lblEnemyHealth.setText("" + wizardHealth);
+                AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the wizard!");
                 pause.play();
                 toggleOptions(false, false);
-
             }
 
         } else if (bless = true) {
-            AnimateText(lblMessage, "The Zombie didn't understand the joke...");
-            toggleOptions(true, false);
+            animateLength = 2000;
+            toggleOptions(false, false);
+            delay.play();
         }
     }
 
     @FXML
     void clickMove2(MouseEvent event) {
-//if they chose to fight, then use the holy spear move that does 6-20 damage, run the animations, and toggle the UI. if they choose bless nothing (zombies can't be exorcised)
+//if they chose to fight, then use the holy spear move that does 6-20 damage, run the animations, and toggle the UI. if they choose bless nothing (wizards can't be exorcised)
         if (fight == true) {
             spearDmg = ThreadLocalRandom.current().nextInt(6, 20 + 1);
-            zombieHealth = zombieHealth - spearDmg;
-            if(zombieHealth <= 0) {
-                zombieHealth = 0;
-                lblEnemyHealth.setText("" + zombieHealth);
-                AnimateText(lblMessage, "You defeated the Zombie!");
+            wizardHealth = wizardHealth - (spearDmg + MainApp.dmgBuff);
+            if (wizardHealth <= 0) {
+                wizardHealth = 0;
+                lblEnemyHealth.setText("" + wizardHealth);
+                AnimateText(lblMessage, "You defeated the wizard!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
-                MainApp.winCount = 1;
-            }else{
-                lblEnemyHealth.setText("" + zombieHealth);
-                AnimateText(lblMessage, "You did " + spearDmg + " damage to the Zombie!");
+                MainApp.winCount = 3;
+            } else {
+                lblEnemyHealth.setText("" + wizardHealth);
+                AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the wizard!");
                 pause.play();
                 toggleOptions(false, false);
             }
 
         } else if (bless = true) {
-            AnimateText(lblMessage, "Zombies can't be exorcised...");
-            pause.play();
+            animateLength = 10000;
             toggleOptions(false, false);
+            delay.play();
         }
     }
 
     @FXML
     void clickMove3(MouseEvent event) {
+        System.out.println(MainApp.dmgBuff);
+        int maxHealth;
 //if they chose to fight, then use the Pray move that heals you for 25 health, run the animations, and toggle the UI. if bless and they have it unlocked, do 50 damage
         if (fight == true) {
-            if ((pray > 0) && ((health < 100))) {
+
+            if(MainApp.healthBuff == true){
+                maxHealth = 125;
+            }else{
+                maxHealth = 100;
+            }
+
+            if ((pray > 0) && ((health < maxHealth))) {
                 pray--;
                 health = health + 25;
-                if(health > 100){
-                    health = 100;
+                if(MainApp.healthBuff == true){
+                    if(health > maxHealth){
+                        health = maxHealth;
+                    }
                 }
                 lblPlayerHealth.setText("" + health);
                 AnimateText(lblMessage, "You healed 25 health!");
                 pause.play();
                 toggleOptions(false, false);
             } else {
-                lblMessage.setText("Can't perform that action");
+                AnimateText(lblMessage, "Can't perform that action");
             }
 
         } else if (bless = true) {
-            if(lblMove3.getText() == "[LOCKED]"){
+            if (lblMove3.getText() == "[LOCKED]") {
 
-            }else{
-                if(zombieHealth < 0){
-                    zombieHealth = 0;
-                    lblEnemyHealth.setText("" + zombieHealth);
-                    AnimateText(lblMessage, "You defeated the Zombie!");
-                    MainApp.winCount = 1;
+            } else {
+                wizardHealth = wizardHealth - (50 + MainApp.dmgBuff);
+                lblEnemyHealth.setText("" + wizardHealth);
+                if (wizardHealth <= 0) {
+                    wizardHealth = 0;
+                    lblEnemyHealth.setText("" + wizardHealth);
+                    AnimateText(lblMessage, "You defeated the wizard!");
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
-                }else{
-                    zombieHealth = zombieHealth - 50;
-                    lblEnemyHealth.setText("" + zombieHealth);
-                    AnimateText(lblMessage, "You did 50 damage to the Zombie!");
+                    MainApp.winCount = 3;
+                } else {
+                    //wizardHealth = wizardHealth - (50 + MainApp.dmgBuff);
+                    lblEnemyHealth.setText("" + wizardHealth);
+                    AnimateText(lblMessage, "You did 50 damage to the wizard!");
                     pause.play();
                     toggleOptions(false, false);
                 }
+                MainApp.holyWater = false;
+
             }
         }
     }
@@ -307,7 +346,7 @@ public class BattleSequence implements Initializable {
         String content = descImp;
         final Animation animation = new Transition() {
             {
-                setCycleDuration(Duration.millis(2000));
+                setCycleDuration(Duration.millis(animateLength));
             }
 
             protected void interpolate(double frac) {
@@ -355,22 +394,27 @@ public class BattleSequence implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         UI.setCycleCount(Timeline.INDEFINITE);
         pause.setCycleCount(Timeline.INDEFINITE);
+        delay.setCycleCount(Timeline.INDEFINITE);
         UI.play();
 
-        if (MainApp.battleStage == 1) {
-            imgEnemy.setImage(zombie);
-            imageSize(238, 146, 1011, 305);
-            AnimateText(lblMessage, "A Zombie has appeared! You will...");
-        }else if (MainApp.battleStage == 5) {
-            imgEnemy.setImage(wolf);
-            imageSize(143, 142, 1011, 420);
-            AnimateText(lblMessage, "A Wolf has appeared! You will...");
-        }  else if (MainApp.battleStage == 6) {
-            imgEnemy.setImage(orc);
-            imageSize(386, 343, 856, 195);
-            AnimateText(lblMessage, "The High Orc has appeared! You will...");
+        lblEnemyHealth.setText(""+wizardHealth);
+
+        if (MainApp.battleStage == 4) {
+            imgEnemy.setImage(wizard);
+            imageSize(161, 124, 1011, 420);
+            AnimateText(lblMessage, "A Wizard has appeared! You will...");
         }
 
-
+        if (MainApp.healthBuff == true){
+            health = 125;
+            lblPlayerHealth.setText("" + health);
+            imgHealth.setImage(scroll);
+        }
+        if (MainApp.dmgBuff > 0){
+            imgStaff.setImage(staff);
+        }
+        if (MainApp.holyWater == true){
+            imgHoly.setImage(potion);
+        }
     }
 }
