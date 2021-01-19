@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="717.0" prefWidth="1218.0" styleClass="bgImage3" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.BattleSequence">
+<AnchorPane id="AnchorPane" prefHeight="717.0" prefWidth="1218.0" styleClass="bgImage3" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.BattleSequence3">
    <children>
       <ImageView fitHeight="258.0" fitWidth="600.0" layoutX="256.0" layoutY="457.0" pickOnBounds="true">
          <image>
@@ -20,11 +20,7 @@
          </image>
       </ImageView>
       <ImageView fx:id="imgEnemy" fitHeight="226.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true" translateX="964.0" translateY="317.0" />
-      <Button fx:id="btnBack" layoutX="503.0" layoutY="595.0" mnemonicParsing="false" onAction="#clickBack" styleClass="bevel-gold" text="RETURN" visible="false">
-         <font>
-            <Font name="Comic Sans MS Bold" size="20.0" />
-         </font></Button>
-      <Label fx:id="lblMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="275.0" layoutY="496.0" prefHeight="35.0" prefWidth="560.0" textFill="WHITE">
+      <Label fx:id="lblMessage" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="324.0" layoutY="496.0" prefHeight="184.0" prefWidth="474.0" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="24.0" />
          </font>
@@ -98,6 +94,10 @@
             <Image url="@../enemy%20health.png" />
          </image>
       </ImageView>
+      <Button fx:id="btnBack" layoutX="503.0" layoutY="595.0" mnemonicParsing="false" onAction="#clickBack" styleClass="bevel-gold" text="RETURN" visible="false">
+         <font>
+            <Font name="Comic Sans MS Bold" size="20.0" />
+         </font></Button>
       <Label fx:id="lblPlayerHealth" layoutX="350.0" layoutY="321.0" text="100">
          <font>
             <Font name="Comic Sans MS Bold" size="30.0" />
@@ -108,5 +108,8 @@
             <Font name="Comic Sans MS Bold" size="30.0" />
          </font>
       </Label>
+      <ImageView fx:id="imgStaff" fitHeight="110.0" fitWidth="95.0" layoutX="436.0" layoutY="24.0" pickOnBounds="true" />
+      <ImageView fx:id="imgHoly" fitHeight="110.0" fitWidth="74.0" layoutX="537.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgHealth" fitHeight="110.0" fitWidth="95.0" layoutX="614.0" layoutY="24.0" pickOnBounds="true" />
    </children>
 </AnchorPane>
