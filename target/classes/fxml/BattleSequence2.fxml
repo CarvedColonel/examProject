@@ -109,7 +109,7 @@
          </font>
       </Label>
       <ImageView fx:id="imgStaff" fitHeight="110.0" fitWidth="95.0" layoutX="436.0" layoutY="24.0" pickOnBounds="true" />
-      <ImageView fx:id="imgHoly" fitHeight="110.0" fitWidth="74.0" layoutX="537.0" layoutY="24.0" pickOnBounds="true" />
+      <ImageView fx:id="imgHoly" fitHeight="110.0" fitWidth="74.0" layoutX="537.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="imgHealth" fitHeight="110.0" fitWidth="95.0" layoutX="614.0" layoutY="24.0" pickOnBounds="true" />
    </children>
 </AnchorPane>
