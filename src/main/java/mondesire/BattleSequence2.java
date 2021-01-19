@@ -80,20 +80,14 @@ public class BattleSequence2 implements Initializable {
     private Button btnBack;
 
 
-    Image wolf = new Image(getClass().getResource("/WOLF.png").toString());
     Image skeleton = new Image(getClass().getResource("/SKELETON.png").toString());
-    Image zombie = new Image(getClass().getResource("/ZOMBIE.png").toString());
-    Image wizard = new Image(getClass().getResource("/WIZARD.png").toString());
-    Image ghost = new Image(getClass().getResource("/GHOST.png").toString());
-    Image orc = new Image(getClass().getResource("/HIGHORC.png").toString());
-
 
     Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
     Timeline pause = new Timeline(new KeyFrame(Duration.millis(1000), ae -> pauseVoid()));
     Timeline delay = new Timeline(new KeyFrame(Duration.millis(1000), ae -> delay()));
 
     int health = 100;
-    int skeletonHealth = 75;
+    int skeletonHealth = 65;
 
     boolean fight;
     boolean bless;
@@ -122,8 +116,8 @@ public class BattleSequence2 implements Initializable {
         lblMove1.setVisible(true);
         lblMove2.setVisible(true);
         lblMove3.setVisible(true);
-        lblMove1.setText("SMITE");//base dmg: 9-12
-        lblMove2.setText("HOLY SPEAR");//base dmg: 6-15
+        lblMove1.setText("SMITE");//base dmg: 10-14
+        lblMove2.setText("HOLY SPEAR");//base dmg: 6-20
         lblMove3.setText("PRAY(" + pray + "/2)");//heals 25 health (Can be used twice per fight)
     }
 
@@ -141,17 +135,17 @@ public class BattleSequence2 implements Initializable {
     }
 
     void pauseVoid() {
+        //timer to add some delay and then run the attack code
         pauseTimer++;
-        if (MainApp.battleStage == 1) {
             if (pauseTimer == 3) {
                 skeletonAttack();
                 pauseTimer = 0;
                 pause.stop();
             }
-        }
     }
 
     void delay(){
+        //timer to add comedic effect and pauses for the skeleton joke code
         pauseTimer++;
         if(pauseTimer == 8){
             AnimateText(lblMessage, "...");
@@ -177,13 +171,13 @@ public class BattleSequence2 implements Initializable {
             toggleOptions(true, false);
         } else if (skeletonAttack == 2) {
             AnimateText(lblMessage, "The Skeleton used Bone Slash!");
-            int bite = ThreadLocalRandom.current().nextInt(18, 20 + 1);
+            int bite = ThreadLocalRandom.current().nextInt(14, 19 + 1);
             health = health - bite;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
         } else if (skeletonAttack == 3) {
             AnimateText(lblMessage, "The Skeleton used Bone Dance!");
-            int lunge = ThreadLocalRandom.current().nextInt(5, 30 + 1);
+            int lunge = ThreadLocalRandom.current().nextInt(5, 22 + 1);
             health = health - lunge;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
@@ -248,8 +242,9 @@ public class BattleSequence2 implements Initializable {
             }
 
         } else if (bless = true) {
-            AnimateText(lblMessage, "Skeleton can't be exorcised...");
-            toggleOptions(true, false);
+            AnimateText(lblMessage, "Skeletons can't be exorcised...");
+            pause.play();
+            toggleOptions(false, false);
         }
     }
 
@@ -257,15 +252,18 @@ public class BattleSequence2 implements Initializable {
     void clickMove3(MouseEvent event) {
 //if they chose to fight, then use the Pray move that heals you for 25 health, run the animations, and toggle the UI. if bless and they have it unlocked, do 50 damage
         if (fight == true) {
-            if ((pray > 0) || ((health < 100))) {
+            if ((pray > 0) && ((health < 100))) {
                 pray--;
                 health = health + 25;
+                if(health > 100){
+                    health = 100;
+                }
                 lblPlayerHealth.setText("" + health);
                 AnimateText(lblMessage, "You healed 25 health!");
                 pause.play();
                 toggleOptions(false, false);
             } else {
-                lblMessage.setText("Can't perform that action");
+                AnimateText(lblMessage, "Can't perform that action");
             }
 
         } else if (bless = true) {
@@ -323,7 +321,7 @@ public class BattleSequence2 implements Initializable {
         if (fight == true) {
             changePrompt(true, false);
             lblInfo.textProperty().bind(Bindings.when(lblMove1.hoverProperty()).then("10-14dmg").otherwise(""));
-            lblInfo2.textProperty().bind(Bindings.when(lblMove2.hoverProperty()).then("6-17dmg").otherwise(""));
+            lblInfo2.textProperty().bind(Bindings.when(lblMove2.hoverProperty()).then("6-20dmg").otherwise(""));
             lblInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("Heal 25 Health " + "\n" + " (Uses Charge)").otherwise(""));
         } else if (fight == false) {
             changePrompt(false, true);

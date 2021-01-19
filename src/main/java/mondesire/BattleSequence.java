@@ -86,6 +86,15 @@ public class BattleSequence implements Initializable {
     @FXML
     private Button btnBack;
 
+    @FXML
+            private ImageView imgStaff;
+
+    @FXML
+    private ImageView imgHoly;
+
+    @FXML
+    private ImageView imgHealth;
+
 
     Image wolf = new Image(getClass().getResource("/WOLF.png").toString());
     Image skeleton = new Image(getClass().getResource("/SKELETON.png").toString());
@@ -93,6 +102,8 @@ public class BattleSequence implements Initializable {
     Image wizard = new Image(getClass().getResource("/WIZARD.png").toString());
     Image ghost = new Image(getClass().getResource("/GHOST.png").toString());
     Image orc = new Image(getClass().getResource("/HIGHORC.png").toString());
+
+    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
 
 
     Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
@@ -146,13 +157,11 @@ public class BattleSequence implements Initializable {
 
     void pauseVoid() {
         pauseTimer++;
-        if (MainApp.battleStage == 1) {
             if (pauseTimer == 3) {
                 zombieAttack();
                 pauseTimer = 0;
                 pause.stop();
             }
-        }
     }
 
     void zombieAttack() {
@@ -235,7 +244,8 @@ public class BattleSequence implements Initializable {
 
         } else if (bless = true) {
             AnimateText(lblMessage, "Zombies can't be exorcised...");
-            toggleOptions(true, false);
+            pause.play();
+            toggleOptions(false, false);
         }
     }
 
@@ -243,9 +253,12 @@ public class BattleSequence implements Initializable {
     void clickMove3(MouseEvent event) {
 //if they chose to fight, then use the Pray move that heals you for 25 health, run the animations, and toggle the UI. if bless and they have it unlocked, do 50 damage
         if (fight == true) {
-            if ((pray > 0) || ((health < 100))) {
+            if ((pray > 0) && ((health < 100))) {
                 pray--;
                 health = health + 25;
+                if(health > 100){
+                    health = 100;
+                }
                 lblPlayerHealth.setText("" + health);
                 AnimateText(lblMessage, "You healed 25 health!");
                 pause.play();
@@ -309,7 +322,7 @@ public class BattleSequence implements Initializable {
         if (fight == true) {
             changePrompt(true, false);
             lblInfo.textProperty().bind(Bindings.when(lblMove1.hoverProperty()).then("10-14dmg").otherwise(""));
-            lblInfo2.textProperty().bind(Bindings.when(lblMove2.hoverProperty()).then("6-17dmg").otherwise(""));
+            lblInfo2.textProperty().bind(Bindings.when(lblMove2.hoverProperty()).then("6-20dmg").otherwise(""));
             lblInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("Heal 25 Health " + "\n" + " (Uses Charge)").otherwise(""));
         } else if (fight == false) {
             changePrompt(false, true);
@@ -365,5 +378,17 @@ public class BattleSequence implements Initializable {
             imageSize(386, 343, 856, 195);
             AnimateText(lblMessage, "The High Orc has appeared! You will...");
         }
+
+        if (MainApp.healthBuff == true){
+            health = 125;
+            lblPlayerHealth.setText("" + health);
+        }
+        if (MainApp.dmgBuff > 0){
+            imgStaff.setImage(staff);
+        }
+        if (MainApp.holyWater == true){
+
+        }
+
     }
 }
