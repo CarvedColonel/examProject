@@ -7,9 +7,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="717.0" prefWidth="1217.0" styleClass="bgImage3" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.BattleSequence">
+
+<AnchorPane prefHeight="725.0" prefWidth="942.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.BattleSequence2">
    <children>
-      <ImageView fitHeight="725.0" fitWidth="1228.0" layoutX="-9.0" pickOnBounds="true">
+      <ImageView fitHeight="725.0" fitWidth="1228.0" layoutX="1.0" layoutY="2.0" pickOnBounds="true">
          <image>
             <Image url="@../battlebackground.jpg" />
          </image>
@@ -25,12 +26,7 @@
          </image>
       </ImageView>
       <ImageView fx:id="imgEnemy" fitHeight="226.0" fitWidth="129.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnBack" layoutX="513.0" layoutY="605.0" mnemonicParsing="false" onAction="#clickBack" styleClass="bevel-gold" text="RETURN" visible="false">
-         <font>
-            <Font name="Comic Sans MS Bold" size="20.0" />
-         </font>
-      </Button>
-      <Label fx:id="lblMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="334.0" layoutY="506.0" prefHeight="35.0" prefWidth="474.0" textFill="WHITE">
+      <Label fx:id="lblMessage" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="334.0" layoutY="506.0" prefHeight="184.0" prefWidth="474.0" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="24.0" />
          </font>
@@ -96,14 +92,19 @@
       <Label layoutX="277.0" layoutY="337.0" prefHeight="30.0" prefWidth="220.0" style="-fx-background-color: green;" textFill="RED" />
       <ImageView fitHeight="226.0" fitWidth="297.0" layoutX="231.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../health_bar.png" />
+            <Image url="@../health%20bar.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="226.0" fitWidth="297.0" layoutX="624.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../enemy_health.png" />
+            <Image url="@../enemy%20health.png" />
          </image>
       </ImageView>
+      <Button fx:id="btnBack" layoutX="513.0" layoutY="605.0" mnemonicParsing="false" onAction="#clickBack" styleClass="bevel-gold" text="RETURN" visible="false">
+         <font>
+            <Font name="Comic Sans MS Bold" size="20.0" />
+         </font>
+      </Button>
       <Label fx:id="lblPlayerHealth" layoutX="360.0" layoutY="331.0" text="100">
          <font>
             <Font name="Comic Sans MS Bold" size="30.0" />
@@ -114,8 +115,5 @@
             <Font name="Comic Sans MS Bold" size="30.0" />
          </font>
       </Label>
-      <ImageView fx:id="imgStaff" fitHeight="110.0" fitWidth="95.0" layoutX="481.0" layoutY="24.0" pickOnBounds="true" visible="false" />
-      <ImageView fx:id="imgHoly" fitHeight="110.0" fitWidth="190.0" layoutX="582.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" visible="false" />
-      <ImageView fx:id="imgHealth" fitHeight="110.0" fitWidth="95.0" layoutX="679.0" layoutY="24.0" pickOnBounds="true" visible="false" />
    </children>
 </AnchorPane>
