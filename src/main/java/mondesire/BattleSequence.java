@@ -119,6 +119,13 @@ public class BattleSequence implements Initializable {
         MainApp.setRoot("Gameplay", "Priest's Conquest");
     }
 
+    void die(){
+        if(health <= 0){
+            toggleOptions(false,false);
+            AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
+            btnBack.setVisible(true);
+        }
+    }
 
     @FXML
     void clickFight(MouseEvent event) {
@@ -162,18 +169,21 @@ public class BattleSequence implements Initializable {
             health = health - scratch;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
+            die();
         } else if (zombieAttack == 2) {
             AnimateText(lblMessage, "The Zombie used Bite!");
             int bite = ThreadLocalRandom.current().nextInt(15, 20 + 1);
             health = health - bite;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
+            die();
         } else if (zombieAttack == 3) {
             AnimateText(lblMessage, "The Zombie used Lunge!");
             int lunge = ThreadLocalRandom.current().nextInt(5, 20 + 1);
             health = health - lunge;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
+            die();
         }
     }
 
