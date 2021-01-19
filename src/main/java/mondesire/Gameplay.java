@@ -71,6 +71,22 @@ public class Gameplay implements Initializable {
         System.out.println(MainApp.battleStage);
     }
 
+    @FXML
+    void clickDamage(ActionEvent event) {
+        MainApp.dmgBuff = 10;
+    }
+
+    @FXML
+    void clickHealth(ActionEvent event) {
+        MainApp.healthBuff = true;
+    }
+
+    @FXML
+    void clickHoly(ActionEvent event) {
+        MainApp.holyWater = true;
+    }
+
+
 
 
 

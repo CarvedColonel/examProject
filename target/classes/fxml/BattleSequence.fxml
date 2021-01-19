@@ -108,8 +108,5 @@
             <Font name="Comic Sans MS Bold" size="30.0" />
          </font>
       </Label>
-      <ImageView fx:id="imgStaff" fitHeight="110.0" fitWidth="95.0" layoutX="428.0" layoutY="14.0" pickOnBounds="true" />
-      <ImageView fx:id="imgHoly" fitHeight="110.0" fitWidth="95.0" layoutX="530.0" layoutY="14.0" pickOnBounds="true" />
-      <ImageView fx:id="imgHealth" fitHeight="110.0" fitWidth="95.0" layoutX="634.0" layoutY="14.0" pickOnBounds="true" />
    </children>
 </AnchorPane>

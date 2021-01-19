@@ -3,7 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="335.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.Gameplay">
+<AnchorPane id="AnchorPane" prefHeight="259.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.Gameplay">
    <children>
       <Button layoutX="47.0" layoutY="31.0" mnemonicParsing="false" onAction="#clickBattle1" text="Battle 1" />
       <Button layoutX="47.0" layoutY="79.0" mnemonicParsing="false" onAction="#clickBattle2" text="Battle 2" />
@@ -11,5 +11,8 @@
       <Button layoutX="237.0" layoutY="79.0" mnemonicParsing="false" onAction="#clickBattle5" text="Battle 5" />
       <Button layoutX="237.0" layoutY="31.0" mnemonicParsing="false" onAction="#clickBattle4" text="Battle 4" />
       <Button layoutX="47.0" layoutY="132.0" mnemonicParsing="false" onAction="#clickBattle3" text="Battle 3" />
+      <Button layoutX="35.0" layoutY="195.0" mnemonicParsing="false" onAction="#clickDamage" text="damage" />
+      <Button layoutX="218.0" layoutY="195.0" mnemonicParsing="false" onAction="#clickHoly" text="holy water" />
+      <Button layoutX="127.0" layoutY="195.0" mnemonicParsing="false" onAction="#clickHealth" text="health" />
    </children>
 </AnchorPane>

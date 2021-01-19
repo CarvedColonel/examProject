@@ -145,7 +145,11 @@ public class BattleSequence2 implements Initializable {
         lblMove3.setVisible(true);
         lblMove1.setText("JOKE");
         lblMove2.setText("EXORCISE");
-        lblMove3.setText("[LOCKED]");
+        if (MainApp.holyWater == true){
+            lblMove3.setText("Holy Water");
+        }else {
+            lblMove3.setText("[LOCKED]");
+        }
     }
 
     void pauseVoid() {
@@ -269,8 +273,14 @@ public class BattleSequence2 implements Initializable {
             if ((pray > 0) && ((health < 100))) {
                 pray--;
                 health = health + 25;
-                if(health > 100){
-                    health = 100;
+                if(MainApp.healthBuff == true){
+                    if(health > 125){
+                        health = 125;
+                    }
+                }else{
+                    if(health > 100){
+                        health = 100;
+                    }
                 }
                 lblPlayerHealth.setText("" + health);
                 AnimateText(lblMessage, "You healed 25 health!");
