@@ -30,7 +30,7 @@
             <Font name="Comic Sans MS Bold" size="20.0" />
          </font>
       </Button>
-      <Label fx:id="lblMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="334.0" layoutY="506.0" prefHeight="35.0" prefWidth="474.0" textFill="WHITE">
+      <Label fx:id="lblMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="285.0" layoutY="506.0" prefHeight="35.0" prefWidth="560.0" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="24.0" />
          </font>
@@ -114,8 +114,5 @@
             <Font name="Comic Sans MS Bold" size="30.0" />
          </font>
       </Label>
-      <ImageView fx:id="imgStaff" fitHeight="110.0" fitWidth="95.0" layoutX="481.0" layoutY="24.0" pickOnBounds="true" visible="false" />
-      <ImageView fx:id="imgHoly" fitHeight="110.0" fitWidth="190.0" layoutX="582.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" visible="false" />
-      <ImageView fx:id="imgHealth" fitHeight="110.0" fitWidth="95.0" layoutX="679.0" layoutY="24.0" pickOnBounds="true" visible="false" />
    </children>
 </AnchorPane>
