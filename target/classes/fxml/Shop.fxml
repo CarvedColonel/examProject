@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="714.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.Shop">
+   <children>
+      <ImageView fitHeight="714.0" fitWidth="1180.0" pickOnBounds="true">
+         <image>
+            <Image url="@../shopbackground2.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgShopKeeper" fitHeight="398.0" fitWidth="336.0" layoutX="450.0" layoutY="85.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../shopkeeper6.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="308.0" fitWidth="814.0" layoutX="178.0" layoutY="394.0" pickOnBounds="true">
+         <image>
+            <Image url="@../textbox.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblShopText" alignment="TOP_CENTER" layoutX="276.0" layoutY="453.0" prefHeight="180.0" prefWidth="640.0" textFill="WHITE">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="95.0" fitWidth="160.0" layoutX="71.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../hat.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgHat" fitHeight="95.0" fitWidth="160.0" layoutX="521.0" layoutY="48.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../hat2.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblBuy" layoutX="335.0" layoutY="566.0" onMouseClicked="#buy" text="Buy" textFill="WHITE" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblLeave" layoutX="757.0" layoutY="566.0" onMouseClicked="#leave" text="Leave" textFill="WHITE" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblItem1" layoutX="304.0" layoutY="431.0" onMouseClicked="#leave" text="Staff" textFill="WHITE" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imgStaff" fitHeight="152.0" fitWidth="87.0" layoutX="291.0" layoutY="476.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../staff.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblInfo" alignment="CENTER" layoutX="237.0" layoutY="623.0" onMouseClicked="#leave" prefHeight="45.0" prefWidth="705.0" textFill="WHITE">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPrice" layoutX="309.0" layoutY="588.0" onMouseClicked="#leave" text="10g" textFill="WHITE" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblItem2" layoutX="516.0" layoutY="431.0" onMouseClicked="#leave" text="Holy Water" textFill="WHITE" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imgHolyWater" fitHeight="124.0" fitWidth="173.0" layoutX="499.0" layoutY="476.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../holywater.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblPrice2" layoutX="560.0" layoutY="588.0" onMouseClicked="#leave" text="10g" textFill="WHITE" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
