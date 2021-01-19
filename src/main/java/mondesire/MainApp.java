@@ -15,6 +15,7 @@ public class MainApp extends Application {
     public static String user = "";
     public static int battleStage;
     public static boolean holyWater = false;
+    public static int dmgBuff = 0;
 
     @Override
     public void start(@SuppressWarnings("exports") Stage s) throws IOException {

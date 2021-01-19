@@ -206,7 +206,7 @@ public class BattleSequence2 implements Initializable {
 
         if (fight == true) {
             smiteDmg = ThreadLocalRandom.current().nextInt(10, 14 + 1);
-            skeletonHealth = skeletonHealth - smiteDmg;
+            skeletonHealth = skeletonHealth - (smiteDmg + MainApp.dmgBuff);
             if (skeletonHealth < 0) {
                 skeletonHealth = 0;
                 lblEnemyHealth.setText("" + skeletonHealth);
@@ -230,9 +230,10 @@ public class BattleSequence2 implements Initializable {
 
     @FXML
     void clickMove2(MouseEvent event) {
+//if they chose to fight, then use the holy spear move that does 6-20 damage, run the animations, and toggle the UI. if they choose bless nothing (skeletons can't be exorcised)
         if (fight == true) {
             spearDmg = ThreadLocalRandom.current().nextInt(6, 20 + 1);
-            skeletonHealth = skeletonHealth - spearDmg;
+            skeletonHealth = skeletonHealth - (spearDmg + MainApp.dmgBuff);
             if (skeletonHealth < 0) {
                 skeletonHealth = 0;
                 lblEnemyHealth.setText("" + skeletonHealth);
@@ -254,7 +255,7 @@ public class BattleSequence2 implements Initializable {
 
     @FXML
     void clickMove3(MouseEvent event) {
-
+//if they chose to fight, then use the Pray move that heals you for 25 health, run the animations, and toggle the UI. if bless and they have it unlocked, do 50 damage
         if (fight == true) {
             if ((pray > 0) || ((health < 100))) {
                 pray--;
@@ -278,7 +279,7 @@ public class BattleSequence2 implements Initializable {
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
                 } else {
-                    skeletonHealth = skeletonHealth - 50;
+                    skeletonHealth = skeletonHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + skeletonHealth);
                     AnimateText(lblMessage, "You did 50 damage to the Skeleton!");
                     pause.play();
@@ -318,17 +319,18 @@ public class BattleSequence2 implements Initializable {
 
     void ui() {
         //timer for the Interface stuff
+        //these are code for hovering over the options, when you hover over an option text with a description will pop up
         if (fight == true) {
             changePrompt(true, false);
-            lblInfo.textProperty().bind(Bindings.when(lblMove1.hoverProperty()).then("9-12dmg").otherwise(""));
-            lblInfo2.textProperty().bind(Bindings.when(lblMove2.hoverProperty()).then("6-15dmg").otherwise(""));
-            lblInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("Heal 1 Health " + "\n" + " (Uses Turn)").otherwise(""));
+            lblInfo.textProperty().bind(Bindings.when(lblMove1.hoverProperty()).then("10-14dmg").otherwise(""));
+            lblInfo2.textProperty().bind(Bindings.when(lblMove2.hoverProperty()).then("6-17dmg").otherwise(""));
+            lblInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("Heal 25 Health " + "\n" + " (Uses Charge)").otherwise(""));
         } else if (fight == false) {
             changePrompt(false, true);
             lblBInfo.textProperty().bind(Bindings.when(lblMove1.hoverProperty()).then("Tell a joke, maybe they'll like it").otherwise(""));
             lblBInfo2.textProperty().bind(Bindings.when(lblMove2.hoverProperty()).then("Some enemies may be susceptible to an exorcism").otherwise(""));
             if (MainApp.holyWater == true) {
-                lblBInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("Automatically Exorcises 1 enemy " + "\n" + "(excludes boss types)").otherwise(""));
+                lblBInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("Does 50 Damage flat to your enemy (1 USE)").otherwise(""));
             } else {
                 lblBInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("[LOCKED]").otherwise(""));
 
@@ -337,6 +339,7 @@ public class BattleSequence2 implements Initializable {
     }
 
     void imageSize(double height, double width, double x, double y) {
+        //sets height and width
         imgEnemy.setFitHeight(height);
         imgEnemy.setFitWidth(width);
 

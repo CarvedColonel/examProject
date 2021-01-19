@@ -216,6 +216,7 @@ public class BattleSequence implements Initializable {
 
     @FXML
     void clickMove2(MouseEvent event) {
+//if they chose to fight, then use the holy spear move that does 6-20 damage, run the animations, and toggle the UI. if they choose bless nothing (zombies can't be exorcised)
         if (fight == true) {
             spearDmg = ThreadLocalRandom.current().nextInt(6, 20 + 1);
             zombieHealth = zombieHealth - spearDmg;
@@ -240,7 +241,7 @@ public class BattleSequence implements Initializable {
 
     @FXML
     void clickMove3(MouseEvent event) {
-
+//if they chose to fight, then use the Pray move that heals you for 25 health, run the animations, and toggle the UI. if bless and they have it unlocked, do 50 damage
         if (fight == true) {
             if ((pray > 0) || ((health < 100))) {
                 pray--;
@@ -304,17 +305,18 @@ public class BattleSequence implements Initializable {
 
     void ui() {
         //timer for the Interface stuff
+        //these are code for hovering over the options, when you hover over an option text with a description will pop up
         if (fight == true) {
             changePrompt(true, false);
-            lblInfo.textProperty().bind(Bindings.when(lblMove1.hoverProperty()).then("9-12dmg").otherwise(""));
-            lblInfo2.textProperty().bind(Bindings.when(lblMove2.hoverProperty()).then("6-15dmg").otherwise(""));
-            lblInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("Heal 1 Health " + "\n" + " (Uses Turn)").otherwise(""));
+            lblInfo.textProperty().bind(Bindings.when(lblMove1.hoverProperty()).then("10-14dmg").otherwise(""));
+            lblInfo2.textProperty().bind(Bindings.when(lblMove2.hoverProperty()).then("6-17dmg").otherwise(""));
+            lblInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("Heal 25 Health " + "\n" + " (Uses Charge)").otherwise(""));
         } else if (fight == false) {
             changePrompt(false, true);
             lblBInfo.textProperty().bind(Bindings.when(lblMove1.hoverProperty()).then("Tell a joke, maybe they'll like it").otherwise(""));
             lblBInfo2.textProperty().bind(Bindings.when(lblMove2.hoverProperty()).then("Some enemies may be susceptible to an exorcism").otherwise(""));
             if (MainApp.holyWater == true) {
-                lblBInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("Automatically Exorcises 1 enemy " + "\n" + "(excludes boss types)").otherwise(""));
+                lblBInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("Does 50 Damage flat to your enemy (1 USE)").otherwise(""));
             } else {
                 lblBInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("[LOCKED]").otherwise(""));
 
@@ -323,6 +325,7 @@ public class BattleSequence implements Initializable {
     }
 
     void imageSize(double height, double width, double x, double y) {
+        //sets height and width
         imgEnemy.setFitHeight(height);
         imgEnemy.setFitWidth(width);
 
