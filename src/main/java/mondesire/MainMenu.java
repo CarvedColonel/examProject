@@ -78,10 +78,12 @@ public class MainMenu implements Initializable {
         alert.setTitle("Help");
         alert.setHeaderText(null);
         alert.setContentText("Welcome!" + "\n" +
-                "GAMEPLAY: Use W, A, S, D, to move around the map. Reach the Sword Icon to start a battle. Go through the map clearing your way through the town" +
-                " to liberate it of the devilish monsters that have come ransacking your village. Get through all 6 battles to beat the game!" + "\n"
-                + "BATTLES: Use W, A, S, D, to move your icon around. Choose to fight the enemy, or to attempt a blessing to try and save them. Blessings will take multiple attempts and may " +
-                "not work depending on how you've treated the enemy so choose your path wisely.");
+                "GAMEPLAY: Use W, A, S, D, to move around the map. Reach the Skull Icon to start a battle. Go through the map clearing your way through the town" +
+                " to liberate it of the devilish monsters that have come ransacking your village. Get through all 6 battles to beat the game!"
+                +" Look around for secrets or easter eggs as well, or maybe even visit the shopkeep near the north side of the town!"+"\n"
+                +"BATTLES: A turn based combat system where you can choose to fight, or attempt to bless the monster. Fighting are standard damage" +
+                " moves, bless moves are ones that aren't your typical moves, you can joke with the monster, or attempt an exorcism. But be weary" +
+                " because these moves won't always work, so sometimes it might not be worth taking the damage to try to reason with a monster.");
         alert.showAndWait();
     }
 
@@ -92,14 +94,14 @@ public class MainMenu implements Initializable {
             imgUser.setVisible(false);
             txtUser.setVisible(false);
             btnConfirm.setVisible(false);
+            lblError.setVisible(false);
         }else{
-            //btnConfirm.setVisible(false);
         }
     }
 
     @FXML
     void clickConfirm(ActionEvent event){
-        if (txtUser.getText().trim() == "") {
+        if (txtUser.getText().isEmpty()) {
             lblError.setText("Please fill out ALL fields.");
         } else if (txtUser.getText().length() > 10) {
             lblError.setText("Username must be 10 characters or less");
