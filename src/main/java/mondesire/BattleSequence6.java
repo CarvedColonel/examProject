@@ -177,9 +177,9 @@ public class BattleSequence6 implements Initializable {
     }
 
     void orcAttack() {
-        orcAttack = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+        orcAttack = ThreadLocalRandom.current().nextInt(1, 4 + 1);
         if (orcAttack == 1) {
-            AnimateText(lblMessage, "The orc used Staff Smash!");
+            AnimateText(lblMessage, "The High Orc used Staff Smash!");
             int fright = ThreadLocalRandom.current().nextInt(35, 40 + 1);
             health = health - fright;
             pause.play();
@@ -187,14 +187,14 @@ public class BattleSequence6 implements Initializable {
             toggleOptions(true, false);
             die();
         } else if (orcAttack == 2) {
-            AnimateText(lblMessage, "The orc used Heavy Kick!");
+            AnimateText(lblMessage, "The High Orc used Heavy Kick!");
             int punch = ThreadLocalRandom.current().nextInt(20, 25 + 1);
             health = health - punch;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
             die();
         } else if (orcAttack == 3) {
-            AnimateText(lblMessage, "The orc used Great Healing!");
+            AnimateText(lblMessage, "The High Orc used Great Healing!");
             if (orcHealth == 125) {
                 pause.play();
             }else{
@@ -203,6 +203,12 @@ public class BattleSequence6 implements Initializable {
                 lblEnemyHealth.setText("" + orcHealth);
                 toggleOptions(true, false);
             }
+
+        }else if (orcAttack == 4) {
+
+            AnimateText(lblMessage, "The High Orc used Missed his Attack!");
+
+                toggleOptions(true, false);
 
         }
     }
