@@ -237,6 +237,7 @@ public class BattleSequence2 implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 2;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + skeletonHealth);
                 AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the Skeleton!");
@@ -265,6 +266,7 @@ public class BattleSequence2 implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 2;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + skeletonHealth);
                 AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the Skeleton!");
@@ -321,6 +323,7 @@ public class BattleSequence2 implements Initializable {
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
                     MainApp.winCount = 2;
+                    MainApp.gold = MainApp.gold + 10;
                 } else {
                     //skeletonHealth = skeletonHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + skeletonHealth);

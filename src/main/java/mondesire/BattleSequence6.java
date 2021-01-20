@@ -101,7 +101,7 @@ public class BattleSequence6 implements Initializable {
     Timeline delay = new Timeline(new KeyFrame(Duration.millis(1000), ae -> delay()));
 
     int health = 100;
-    int orcHealth = 150;
+    int orcHealth = 125;
 
     boolean fight;
     boolean bless;
@@ -232,7 +232,7 @@ public class BattleSequence6 implements Initializable {
         animateLength = 2000;
 
         if (fight == true) {
-            smiteDmg = ThreadLocalRandom.current().nextInt(10, 14 + 1);
+            smiteDmg = ThreadLocalRandom.current().nextInt(10, 15 + 1);
             orcHealth = orcHealth - (smiteDmg + MainApp.dmgBuff);
             if (orcHealth <= 0) {
                 orcHealth = 0;
@@ -240,7 +240,8 @@ public class BattleSequence6 implements Initializable {
                 AnimateText(lblMessage, "You defeated the orc!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
-                MainApp.winCount = 3;
+                MainApp.winCount = 6;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + orcHealth);
                 AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the orc!");
@@ -263,7 +264,7 @@ public class BattleSequence6 implements Initializable {
 
 //if they chose to fight, then use the holy spear move that does 6-20 damage, run the animations, and toggle the UI. if they choose bless nothing (orcs can't be exorcised)
         if (fight == true) {
-            spearDmg = ThreadLocalRandom.current().nextInt(6, 20 + 1);
+            spearDmg = ThreadLocalRandom.current().nextInt(10, 20 + 1);
             orcHealth = orcHealth - (spearDmg + MainApp.dmgBuff);
             if (orcHealth <= 0) {
                 orcHealth = 0;
@@ -271,7 +272,8 @@ public class BattleSequence6 implements Initializable {
                 AnimateText(lblMessage, "You defeated the orc!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
-                MainApp.winCount = 3;
+                MainApp.winCount = 6;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + orcHealth);
                 AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the orc!");
@@ -330,7 +332,8 @@ public class BattleSequence6 implements Initializable {
                     AnimateText(lblMessage, "You defeated the orc!");
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
-                    MainApp.winCount = 3;
+                    MainApp.winCount = 6;
+                    MainApp.gold = MainApp.gold + 10;
                 } else {
                     //orcHealth = orcHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + orcHealth);

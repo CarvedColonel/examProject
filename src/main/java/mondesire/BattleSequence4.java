@@ -226,6 +226,7 @@ public class BattleSequence4 implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 4;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + wizardHealth);
                 AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the wizard!");
@@ -259,6 +260,7 @@ public class BattleSequence4 implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 4;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + wizardHealth);
                 AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the wizard!");
@@ -321,6 +323,7 @@ public class BattleSequence4 implements Initializable {
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
                     MainApp.winCount = 4;
+                    MainApp.gold = MainApp.gold + 10;
                 } else {
                     //wizardHealth = wizardHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + wizardHealth);

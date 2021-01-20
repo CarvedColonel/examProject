@@ -240,6 +240,7 @@ public class BattleSequence3 implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 3;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + ghostHealth);
                 AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the ghost!");
@@ -271,6 +272,7 @@ public class BattleSequence3 implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 3;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + ghostHealth);
                 AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the ghost!");
@@ -330,6 +332,7 @@ public class BattleSequence3 implements Initializable {
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
                     MainApp.winCount = 3;
+                    MainApp.gold = MainApp.gold + 10;
                 } else {
                     //ghostHealth = ghostHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + ghostHealth);

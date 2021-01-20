@@ -206,6 +206,7 @@ public class BattleSequence implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 1;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + zombieHealth);
                 AnimateText(lblMessage, "You did " + smiteDmg + " damage to the Zombie!");
@@ -233,6 +234,7 @@ public class BattleSequence implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 1;
+                MainApp.gold = MainApp.gold + 10;
             }else{
                 lblEnemyHealth.setText("" + zombieHealth);
                 AnimateText(lblMessage, "You did " + spearDmg + " damage to the Zombie!");
@@ -276,6 +278,7 @@ public class BattleSequence implements Initializable {
                     MainApp.winCount = 1;
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
+                    MainApp.gold = MainApp.gold + 10;
                 }else{
                     zombieHealth = zombieHealth - 50;
                     lblEnemyHealth.setText("" + zombieHealth);

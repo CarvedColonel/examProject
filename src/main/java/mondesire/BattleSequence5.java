@@ -228,7 +228,8 @@ public class BattleSequence5 implements Initializable {
                 AnimateText(lblMessage, "You defeated the wolf!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
-                MainApp.winCount = 3;
+                MainApp.winCount = 5;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + wolfHealth);
                 AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the wolf!");
@@ -259,7 +260,8 @@ public class BattleSequence5 implements Initializable {
                 AnimateText(lblMessage, "You defeated the wolf!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
-                MainApp.winCount = 3;
+                MainApp.winCount = 5;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + wolfHealth);
                 AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the wolf!");
@@ -319,7 +321,8 @@ public class BattleSequence5 implements Initializable {
                     AnimateText(lblMessage, "You defeated the wolf!");
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
-                    MainApp.winCount = 3;
+                    MainApp.winCount = 5;
+                    MainApp.gold = MainApp.gold + 10;
                 } else {
                     //wolfHealth = wolfHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + wolfHealth);
