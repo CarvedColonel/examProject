@@ -98,7 +98,6 @@ public class BattleSequence4 implements Initializable {
 
     Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
     Timeline pause = new Timeline(new KeyFrame(Duration.millis(1000), ae -> pauseVoid()));
-    Timeline delay = new Timeline(new KeyFrame(Duration.millis(1000), ae -> delay()));
 
     int health = 100;
     int wizardHealth = 80;
@@ -162,25 +161,12 @@ public class BattleSequence4 implements Initializable {
             }
     }
 
-    void delay(){
-        //timer to add comedic effect and pauses for the wizard joke code
-        pauseTimer++;
-        if(pauseTimer == 1){
-            AnimateText(lblMessage, "The wizard smiled as you exorcised him."+"\n"+"Happy that you've freed him from" +"\n"+ "this realm. He thanks you...");
-            toggleOptions(false, false);
-        }
-        if(pauseTimer == 10){
-            btnBack.setVisible(true);
-            delay.stop();
-            pauseTimer = 0;
-        }
-    }
 
     void wizardAttack() {
         wizardAttack = ThreadLocalRandom.current().nextInt(1, 3 + 1);
         if (wizardAttack == 1) {
             AnimateText(lblMessage, "The wizard used Fireball!");
-            int fire = ThreadLocalRandom.current().nextInt(15, 25 + 1);
+            int fire = ThreadLocalRandom.current().nextInt(10, 25 + 1);
             health = health - fire;
             pause.play();
             lblPlayerHealth.setText("" + health);
@@ -188,7 +174,7 @@ public class BattleSequence4 implements Initializable {
             die();
         } else if (wizardAttack == 2) {
             AnimateText(lblMessage, "The wizard used Dark Magic!");
-            int magic = ThreadLocalRandom.current().nextInt(13, 19 + 1);
+            int magic = ThreadLocalRandom.current().nextInt(10, 19 + 1);
             health = health - magic;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
@@ -205,6 +191,8 @@ public class BattleSequence4 implements Initializable {
 
     void die(){
         if(health <= 0){
+            health = 0;
+            lblPlayerHealth.setText(""+health);
             toggleOptions(false,false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
@@ -225,8 +213,11 @@ public class BattleSequence4 implements Initializable {
     @FXML
     void clickMove1(MouseEvent event) {
 
+
+        animateLength = 2000;
+
         if (fight == true) {
-            smiteDmg = ThreadLocalRandom.current().nextInt(10, 14 + 1);
+            smiteDmg = ThreadLocalRandom.current().nextInt(10, 15 + 1);
             wizardHealth = wizardHealth - (smiteDmg + MainApp.dmgBuff);
             if (wizardHealth <= 0) {
                 wizardHealth = 0;
@@ -234,7 +225,7 @@ public class BattleSequence4 implements Initializable {
                 AnimateText(lblMessage, "You defeated the wizard!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
-                MainApp.winCount = 3;
+                MainApp.winCount = 4;
             } else {
                 lblEnemyHealth.setText("" + wizardHealth);
                 AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the wizard!");
@@ -243,17 +234,23 @@ public class BattleSequence4 implements Initializable {
             }
 
         } else if (bless = true) {
-            animateLength = 2000;
+
+            animateLength = 3000;
+            AnimateText(lblMessage, "'This is no time for jokes'"+"\n"+"The wizard exclaims.");
+            pause.play();
             toggleOptions(false, false);
-            delay.play();
+
         }
     }
 
     @FXML
     void clickMove2(MouseEvent event) {
 //if they chose to fight, then use the holy spear move that does 6-20 damage, run the animations, and toggle the UI. if they choose bless nothing (wizards can't be exorcised)
+
+        animateLength = 2000;
+
         if (fight == true) {
-            spearDmg = ThreadLocalRandom.current().nextInt(6, 20 + 1);
+            spearDmg = ThreadLocalRandom.current().nextInt(10, 20 + 1);
             wizardHealth = wizardHealth - (spearDmg + MainApp.dmgBuff);
             if (wizardHealth <= 0) {
                 wizardHealth = 0;
@@ -261,7 +258,7 @@ public class BattleSequence4 implements Initializable {
                 AnimateText(lblMessage, "You defeated the wizard!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
-                MainApp.winCount = 3;
+                MainApp.winCount = 4;
             } else {
                 lblEnemyHealth.setText("" + wizardHealth);
                 AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the wizard!");
@@ -270,14 +267,20 @@ public class BattleSequence4 implements Initializable {
             }
 
         } else if (bless = true) {
-            animateLength = 10000;
+
+            animateLength = 3000;
+            AnimateText(lblMessage, "Exorcisms don't work"+"\n"+"on wizards");
+            pause.play();
             toggleOptions(false, false);
-            delay.play();
+
         }
     }
 
     @FXML
     void clickMove3(MouseEvent event) {
+
+        animateLength = 2000;
+
         System.out.println(MainApp.dmgBuff);
         int maxHealth;
 //if they chose to fight, then use the Pray move that heals you for 25 health, run the animations, and toggle the UI. if bless and they have it unlocked, do 50 damage
@@ -317,7 +320,7 @@ public class BattleSequence4 implements Initializable {
                     AnimateText(lblMessage, "You defeated the wizard!");
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
-                    MainApp.winCount = 3;
+                    MainApp.winCount = 4;
                 } else {
                     //wizardHealth = wizardHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + wizardHealth);
@@ -364,8 +367,8 @@ public class BattleSequence4 implements Initializable {
         //these are code for hovering over the options, when you hover over an option text with a description will pop up
         if (fight == true) {
             changePrompt(true, false);
-            lblInfo.textProperty().bind(Bindings.when(lblMove1.hoverProperty()).then("10-14dmg").otherwise(""));
-            lblInfo2.textProperty().bind(Bindings.when(lblMove2.hoverProperty()).then("6-20dmg").otherwise(""));
+            lblInfo.textProperty().bind(Bindings.when(lblMove1.hoverProperty()).then("10-15dmg").otherwise(""));
+            lblInfo2.textProperty().bind(Bindings.when(lblMove2.hoverProperty()).then("10-20dmg").otherwise(""));
             lblInfo3.textProperty().bind(Bindings.when(lblMove3.hoverProperty()).then("Heal 25 Health " + "\n" + " (Uses Charge)").otherwise(""));
         } else if (fight == false) {
             changePrompt(false, true);
@@ -394,7 +397,6 @@ public class BattleSequence4 implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         UI.setCycleCount(Timeline.INDEFINITE);
         pause.setCycleCount(Timeline.INDEFINITE);
-        delay.setCycleCount(Timeline.INDEFINITE);
         UI.play();
 
         lblEnemyHealth.setText(""+wizardHealth);

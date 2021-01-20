@@ -228,6 +228,8 @@ public class BattleSequence3 implements Initializable {
     @FXML
     void clickMove1(MouseEvent event) {
 
+        animateLength = 2000;
+
         if (fight == true) {
             smiteDmg = ThreadLocalRandom.current().nextInt(10, 14 + 1);
             ghostHealth = ghostHealth - (smiteDmg + MainApp.dmgBuff);
@@ -246,14 +248,18 @@ public class BattleSequence3 implements Initializable {
             }
 
         } else if (bless = true) {
-            animateLength = 2000;
+            animateLength = 3000;
+            AnimateText(lblMessage, "He didnt understand,"+"\n"+" the joke went right through him");
+            pause.play();
             toggleOptions(false, false);
-            delay.play();
         }
     }
 
     @FXML
     void clickMove2(MouseEvent event) {
+
+        animateLength = 2000;
+
 //if they chose to fight, then use the holy spear move that does 6-20 damage, run the animations, and toggle the UI. if they choose bless nothing (ghosts can't be exorcised)
         if (fight == true) {
             spearDmg = ThreadLocalRandom.current().nextInt(6, 20 + 1);
@@ -281,6 +287,9 @@ public class BattleSequence3 implements Initializable {
 
     @FXML
     void clickMove3(MouseEvent event) {
+
+        animateLength = 2000;
+
         System.out.println(MainApp.dmgBuff);
         int maxHealth;
 //if they chose to fight, then use the Pray move that heals you for 25 health, run the animations, and toggle the UI. if bless and they have it unlocked, do 50 damage
