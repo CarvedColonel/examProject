@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
@@ -94,7 +95,8 @@ public class Gameplay implements Initializable {
 
     @FXML
     private Polygon plgGrave6;
-
+    @FXML
+    private Pane panEnemy1;
 
     @FXML
     private ImageView imgHealthScroll;
@@ -107,9 +109,40 @@ public class Gameplay implements Initializable {
 
     @FXML
     private ImageView imgBitcoin;
+    @FXML
+    private Polygon plgEnemy1;
+
+    @FXML
+    private Polygon plgEnemy2;
+
+    @FXML
+    private Polygon plgEnemy3;
 
     @FXML
     private Label lblCurrency;
+
+    @FXML
+    private Pane panEnemy2;
+
+    @FXML
+    private Button btnSave;
+
+    @FXML
+    private Button btnSave2;
+
+    @FXML
+    private Button btnSave3;
+
+    @FXML
+    private Button btnSave4;
+
+    @FXML
+    private Button btnSave5;
+
+    @FXML
+    private Button btnSave6;
+
+    Button sButton[] = new Button[6];
     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), ae -> {
         try {
             move();
@@ -123,6 +156,7 @@ public class Gameplay implements Initializable {
     int buildings;
     boolean well = false;
     int decision;
+    username info = new username();
 
     @FXML
     public void keyPressed(KeyEvent event) throws InterruptedException {
@@ -253,6 +287,23 @@ public class Gameplay implements Initializable {
                 ancGame.setDisable(false);
                 ancGame.requestFocus();
             });
+        } else if (decision == 3) {
+            animation.setOnFinished(e -> {
+                lblOption1.setVisible(true);
+                lblOption2.setVisible(true);
+                lblOption1.setText("Yes");
+                lblOption2.setText("No");
+                ancGame.setDisable(false);
+                ancGame.requestFocus();
+            });
+        } else if (decision == 4) {
+            animation.setOnFinished(e -> {
+                ancGame.setDisable(false);
+                ancGame.requestFocus();
+                for (Button visible : sButton) {
+                    visible.setVisible(true);
+                }
+            });
         }
 
         animation.play();
@@ -271,20 +322,26 @@ public class Gameplay implements Initializable {
             dx = 0;
             dy = 0;
 
-        }/* else if (collision(plgPriest, plgEnemy1)) {
+        }
+        if (collision(plgPriest, plgEnemy1) && MainApp.winCount == 0) {
             MainApp.battleStage = 1;
             MainApp.setRoot("BattleSequence", "Priest's Conquest");
             panPriest.setTranslateX(panPriest.getTranslateX() - 10000);
             panPriest.setTranslateY(panPriest.getTranslateY() - 10000);
-        } else if (collision(plgPriest, plgEnemy2)) {
+        } else if (collision(plgPriest, plgEnemy2) && MainApp.winCount == 1) {
             MainApp.battleStage = 2;
-            MainApp.setRoot("BattleSequence", "Priest's Conquest");
+            MainApp.setRoot("BattleSequence2", "Priest's Conquest");
             panPriest.setTranslateX(panPriest.getTranslateX() - 10000);
             panPriest.setTranslateY(panPriest.getTranslateY() - 10000);
-        } */ else if (collision(plgPriest, plgGrave1)) {
+        } else if (collision(plgPriest, plgEnemy3) && MainApp.winCount == 2) {
+            MainApp.battleStage = 3;
+            MainApp.setRoot("BattleSequence3", "Priest's Conquest");
+            panPriest.setTranslateX(panPriest.getTranslateX() - 10000);
+            panPriest.setTranslateY(panPriest.getTranslateY() - 10000);
+        } else if (collision(plgPriest, plgGrave1)) {
             interactCheck();
             interactGrave = 1;
-decision = 3;
+            decision = 3;
 
         } else if (collision(plgPriest, plgGrave2)) {
             interactCheck();
@@ -321,7 +378,7 @@ decision = 3;
         } else if (collision(plgPriest, plgWell) && well == false) {
             interactCheck();
             buildings = 2;
-decision = 2;
+            decision = 2;
         }
 
     }
@@ -356,12 +413,28 @@ decision = 2;
             timeline.play();
             lblLetter1.setVisible(false);
             lblOption1.setVisible(false);
+            decision = 0;
+        } else if (decision == 3) {
+
+            decision = 4;
+            animateText(lblLetter1, "Please select a spot");
+            lblOption1.setVisible(false);
+            lblOption2.setVisible(false);
+
+
         }
     }
 
     @FXML
     void decision2(MouseEvent event) {
         if (decision == 1) {
+            imgText.setVisible(false);
+            timeline.play();
+            lblLetter1.setVisible(false);
+            lblOption1.setVisible(false);
+            lblOption2.setVisible(false);
+            decision = 0;
+        } else if (decision == 3) {
             imgText.setVisible(false);
             timeline.play();
             lblLetter1.setVisible(false);
@@ -377,6 +450,48 @@ decision = 2;
         return a.getBoundsInLocal().getWidth() != -1;
     }
 
+    @FXML
+    void save(ActionEvent event) {
+        saveInfo();
+        info.save("matt.raf", 1);
+    }
+
+    @FXML
+    void save2(ActionEvent event) {
+        saveInfo();
+        info.save("matt.raf", 2);
+    }
+
+    @FXML
+    void save3(ActionEvent event) {
+        saveInfo();
+        info.save("matt.raf", 3);
+    }
+
+    @FXML
+    void save4(ActionEvent event) {
+        saveInfo();
+        info.save("matt.raf", 4);
+    }
+
+    @FXML
+    void save5(ActionEvent event) {
+        saveInfo();
+        info.save("matt.raf", 5);
+    }
+
+    @FXML
+    void save6(ActionEvent event) {
+        saveInfo();
+        info.save("matt.raf", 6);
+    }
+
+    void saveInfo() {
+        info.setuserName(MainApp.user);
+        info.setBitcoin(MainApp.gold);
+        info.setX(panPriest.getLayoutX());
+        info.setY(panPriest.getLayoutY());
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -396,5 +511,27 @@ decision = 2;
         if (MainApp.healthBuff == true) {
             imgHealthScroll.setVisible(true);
         }
+        if (MainApp.winCount >= 1) {
+            panPriest.setLayoutX(774);
+            panPriest.setLayoutY(478);
+            panEnemy1.setVisible(false);
+            interact();
+            decision = 3;
+            animateText(lblLetter1, "Would you like to save?");
+
+        }
+        if (MainApp.winCount >= 2) {
+            panPriest.setLayoutX(464);
+            panPriest.setLayoutY(365);
+            panEnemy2.setVisible(false);
+        }
+        sButton[0] = btnSave;
+        sButton[1] = btnSave2;
+        sButton[2] = btnSave3;
+        sButton[3] = btnSave4;
+        sButton[4] = btnSave5;
+        sButton[5] = btnSave6;
     }
+
+
 }

@@ -76,6 +76,7 @@ public class Shop<NFANode> implements Initializable {
 
     @FXML
     private Label lblCurrency;
+    Label text[] = new Label[6];
 
     public void animateText(Label lbl, String message) {
 
@@ -106,16 +107,13 @@ public class Shop<NFANode> implements Initializable {
         lblShopText.setVisible(false);
         lblLeave.setVisible(false);
         lblBuy.setVisible(false);
-        lblItem1.setVisible(true);
         imgStaff.setVisible(true);
-        lblPrice.setVisible(true);
-        lblItem2.setVisible(true);
         imgHolyWater.setVisible(true);
-        lblPrice2.setVisible(true);
-        lblItem3.setVisible(true);
         imgHealthScroll.setVisible(true);
-        lblPrice3.setVisible(true);
         lblBack.setVisible(true);
+        for (Label visible : text) {
+        visible.setVisible(true);
+        }
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5), ae -> check()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
@@ -123,11 +121,13 @@ public class Shop<NFANode> implements Initializable {
             imgStaff.setVisible(false);
             lblPrice.setVisible(false);
             lblItem1.setVisible(false);
-        }if (MainApp.holyWater == true) {
+        }
+        if (MainApp.holyWater == true) {
             imgHolyWater.setVisible(false);
             lblPrice2.setVisible(false);
             lblItem2.setVisible(false);
-        } if (MainApp.healthBuff == true) {
+        }
+        if (MainApp.healthBuff == true) {
             imgHealthScroll.setVisible(false);
             lblPrice3.setVisible(false);
             lblItem3.setVisible(false);
@@ -183,6 +183,7 @@ public class Shop<NFANode> implements Initializable {
             lblItem2.setVisible(false);
         }
     }
+
     @FXML
     void healthScroll(MouseEvent event) {
         if (MainApp.gold >= 10) {
@@ -194,9 +195,10 @@ public class Shop<NFANode> implements Initializable {
             lblItem3.setVisible(false);
         }
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        animateText(lblShopText, "My name's Rick Harrison and this is my \n                       Pawn Shop");
+        animateText(lblShopText, "My name's Rick Harrison and this is my \n Pawn Shop");
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(3000));
         fade.setFromValue(0);
@@ -210,7 +212,12 @@ public class Shop<NFANode> implements Initializable {
         fade2.setNode(imgHat);
         fade2.play();
         lblCurrency.setText("" + MainApp.gold + " x");
-
-
+        text[0] = lblItem1;
+        text[1] = lblItem2;
+        text[2] = lblItem3;
+        text[3] = lblPrice;
+        text[4] = lblPrice2;
+        text[5] = lblPrice3;
+        lblShopText.setTextAlignment(TextAlignment.CENTER);
     }
 }

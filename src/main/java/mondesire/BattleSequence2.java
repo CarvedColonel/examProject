@@ -91,8 +91,8 @@ public class BattleSequence2 implements Initializable {
 
     Image skeleton = new Image(getClass().getResource("/SKELETON.png").toString());
 
-    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
-    Image potion = new Image(getClass().getResource("/holyWater.png").toString());
+    Image staff = new Image(getClass().getResource("/staff.png").toString());
+    Image potion = new Image(getClass().getResource("/holywater.png").toString());
     Image scroll = new Image(getClass().getResource("/healthScroll.png").toString());
 
 
