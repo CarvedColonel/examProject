@@ -191,7 +191,7 @@ public class MainMenu implements Initializable {
         alert.setTitle("Help");
         alert.setHeaderText(null);
         alert.setContentText("Welcome!" + "\n" +
-                "Please consult the help button if this si your first time playing and type your username into the text field to play! Otherwise if you're a returning" +
+                "Please consult the help button if this is your first time playing and type your username into the text field to play! Otherwise if you're a returning" +
                 " player, type in your save slot and load your previous game!");
         alert.showAndWait();
     }
