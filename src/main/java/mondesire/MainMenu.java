@@ -8,6 +8,7 @@ Main Menu for the exam project game
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 public class MainMenu implements Initializable {
 
@@ -53,12 +55,23 @@ public class MainMenu implements Initializable {
     @FXML
     private Label lblUsername;
 
+    @FXML
+    private ImageView imgLoad;
+
+    @FXML
+    private TextField txtLoad;
+
+    @FXML
+    private Button btnLoad;
+
+
+
     boolean sound = MainApp.sound;
 
 
     @FXML
     void clickPlay(MouseEvent event) throws IOException {
-        if(lblUsername.getText() == ""){
+        if (lblUsername.getText() == "") {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Help");
             alert.setHeaderText(null);
@@ -66,8 +79,8 @@ public class MainMenu implements Initializable {
                     " Then, if this is your first time playing, feel free to click on the help button and learn how to play the game!" + "\n" + "\n" +
                     "Thank you for playing and enjoy your time!");
             alert.showAndWait();
-        }else{
-            MainApp.setRoot("Gameplay","Priest's Conquest");
+        } else {
+            MainApp.setRoot("Gameplay", "Priest's Conquest");
         }
 
     }
@@ -80,8 +93,8 @@ public class MainMenu implements Initializable {
         alert.setContentText("Welcome!" + "\n" +
                 "GAMEPLAY: Use W, A, S, D, to move around the map. Reach the Skull Icon to start a battle. Go through the map clearing your way through the town" +
                 " to liberate it of the devilish monsters that have come ransacking your village. Get through all 6 battles to beat the game!"
-                +" Look around for secrets or easter eggs as well, or maybe even visit the shopkeep near the north side of the town!"+"\n"
-                +"BATTLES: A turn based combat system where you can choose to fight, or attempt to bless the monster. Fighting are standard damage" +
+                + " Look around for secrets or easter eggs as well, or maybe even visit the shopkeep near the north side of the town!" + "\n"
+                + "BATTLES: A turn based combat system where you can choose to fight, or attempt to bless the monster. Fighting are standard damage" +
                 " moves, bless moves are ones that aren't your typical moves, you can joke with the monster, or attempt an exorcism. But be weary" +
                 " because these moves won't always work, so sometimes it might not be worth taking the damage to try to reason with a monster.");
         alert.showAndWait();
@@ -89,23 +102,23 @@ public class MainMenu implements Initializable {
 
     @FXML
     void clickSettings(MouseEvent event) {
-        toggle(false,true);
-        if(MainApp.user == ""){
+        toggle(false, true);
+        if (MainApp.user == "") {
             imgUser.setVisible(false);
             txtUser.setVisible(false);
             btnConfirm.setVisible(false);
             lblError.setVisible(false);
-        }else{
+        } else {
         }
     }
 
     @FXML
-    void clickConfirm(ActionEvent event){
+    void clickConfirm(ActionEvent event) {
         if (txtUser.getText().isEmpty()) {
             lblError.setText("Please fill out ALL fields.");
         } else if (txtUser.getText().length() > 10) {
             lblError.setText("Username must be 10 characters or less");
-        }else {
+        } else {
             MainApp.user = txtUser.getText();
             txtUser.setEditable(false);
             txtUser.setVisible(false);
@@ -117,14 +130,14 @@ public class MainMenu implements Initializable {
     }
 
     @FXML
-    void clickMenu(MouseEvent event){
-        toggle(true,false);
-        if (MainApp.user == ""){
+    void clickMenu(MouseEvent event) {
+        toggle(true, false);
+        if (MainApp.user == "") {
             imgPlay.setVisible(false);
             imgUser.setVisible(true);
             txtUser.setVisible(true);
             btnConfirm.setVisible(true);
-        }else{
+        } else {
             imgUser.setVisible(false);
             btnConfirm.setVisible(false);
             txtUser.setVisible(false);
@@ -143,7 +156,7 @@ public class MainMenu implements Initializable {
     }
 
 
-    void toggle(boolean menu , boolean settings ){
+    void toggle(boolean menu, boolean settings) {
         //toggles the menu things either on or off
         imgPlay.setVisible(menu);
         imgHelp.setVisible(menu);
@@ -163,5 +176,5 @@ public class MainMenu implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-    }    
+    }
 }
