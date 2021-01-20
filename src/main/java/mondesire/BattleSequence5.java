@@ -167,7 +167,7 @@ public class BattleSequence5 implements Initializable {
         wolfAttack = ThreadLocalRandom.current().nextInt(1, 3 + 1);
         if (wolfAttack == 1) {
             AnimateText(lblMessage, "The wolf used Bark!");
-            int bark = ThreadLocalRandom.current().nextInt(10, 15 + 1);
+            int bark = ThreadLocalRandom.current().nextInt(5, 10 + 1);
             health = health - bark;
             pause.play();
             lblPlayerHealth.setText("" + health);
@@ -175,14 +175,14 @@ public class BattleSequence5 implements Initializable {
             die();
         } else if (wolfAttack == 2) {
             AnimateText(lblMessage, "The wolf used Sword Slash!");
-            int slash = ThreadLocalRandom.current().nextInt(20, 30 + 1);
+            int slash = ThreadLocalRandom.current().nextInt(25, 35 + 1);
             health = health - slash;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
             die();
         } else if (wolfAttack == 3) {
-            AnimateText(lblMessage, "The wolf used !");
-            int trick = ThreadLocalRandom.current().nextInt(0, 20 + 1);
+            AnimateText(lblMessage, "The wolf used Dash!");
+            int trick = ThreadLocalRandom.current().nextInt(15, 15 + 1);
             health = health - trick;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);

@@ -102,7 +102,10 @@ public class MainMenu implements Initializable {
                 + " Look around for secrets or easter eggs as well, or maybe even visit the shopkeep near the north side of the town!" + "\n"
                 + "BATTLES: A turn based combat system where you can choose to fight, or attempt to bless the monster. Fighting are standard damage" +
                 " moves, bless moves are ones that aren't your typical moves, you can joke with the monster, or attempt an exorcism. But be weary" +
-                " because these moves won't always work, so sometimes it might not be worth taking the damage to try to reason with a monster.");
+                " because these moves won't always work, so sometimes it might not be worth taking the damage to try to reason with a monster."+"\n" +
+                "SHOP: You have three items in the shop to purchase. The damage staff, which boosts your attack by 10, the health scroll, which adds 25 to your max health, and " +
+                "the holy water, which is a one-time use potion that does 50 damage to your enemy. The shop is located near the top of the map next to the farm. Visit after you finish the " +
+                "first battle and see what you'd like!");
         alert.showAndWait();
     }
 
@@ -131,6 +134,9 @@ public class MainMenu implements Initializable {
             btnConfirm.setVisible(false);
             imgPlay.setVisible(true);
             imgUser.setVisible(false);
+            imgLoad.setVisible(false);
+            txtLoad.setVisible(false);
+            btnLoad.setVisible(false);
             lblUsername.setText("" + MainApp.user);
         }
     }
@@ -181,6 +187,12 @@ public class MainMenu implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Help");
+        alert.setHeaderText(null);
+        alert.setContentText("Welcome!" + "\n" +
+                "Please consult the help button if this si your first time playing and type your username into the text field to play! Otherwise if you're a returning" +
+                " player, type in your save slot and load your previous game!");
+        alert.showAndWait();
     }
 }
