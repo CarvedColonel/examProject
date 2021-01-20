@@ -190,6 +190,9 @@ public class BattleSequence5 implements Initializable {
         }
     }
 
+
+
+
     void die(){
         if(health <= 0){
             health = 0;

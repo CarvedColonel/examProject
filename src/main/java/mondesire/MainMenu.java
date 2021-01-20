@@ -68,6 +68,12 @@ public class MainMenu implements Initializable {
 
     boolean sound = MainApp.sound;
 
+    @FXML
+    void clickLoad(ActionEvent event){
+
+    }
+
+
 
     @FXML
     void clickPlay(MouseEvent event) throws IOException {
