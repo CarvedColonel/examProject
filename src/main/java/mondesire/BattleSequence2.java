@@ -1,8 +1,8 @@
 package mondesire;
 /*
-Put header here
-
-
+Aidan Mason-Mondesire
+January 18th 2021
+The second battle sequence of six where you fight the skeleton
  */
 
 import javafx.animation.Animation;
@@ -131,6 +131,7 @@ public class BattleSequence2 implements Initializable {
 
     @FXML
     void clickFight(MouseEvent event) {
+
         fight = true;
         bless = false;
         lblMove1.setVisible(true);
@@ -144,6 +145,7 @@ public class BattleSequence2 implements Initializable {
 
     @FXML
     void clickBless(MouseEvent event) {
+
         bless = true;
         fight = false;
         lblMove1.setVisible(true);
@@ -151,77 +153,97 @@ public class BattleSequence2 implements Initializable {
         lblMove3.setVisible(true);
         lblMove1.setText("JOKE");
         lblMove2.setText("EXORCISE");
-        if (MainApp.holyWater == true){
+
+        if (MainApp.holyWater == true) {
             lblMove3.setText("Holy Water");
-        }else {
+        } else {
             lblMove3.setText("[LOCKED]");
         }
     }
 
     void pauseVoid() {
+
         //timer to add some delay and then run the attack code
         pauseTimer++;
-            if (pauseTimer == 3) {
-                skeletonAttack();
-                pauseTimer = 0;
-                pause.stop();
-            }
+        if (pauseTimer == 3) {
+            skeletonAttack();
+            pauseTimer = 0;
+            pause.stop();
+        }
     }
 
-    void delay(){
+    void delay() {
+
         //timer to add comedic effect and pauses for the skeleton joke code
         pauseTimer++;
-        if(pauseTimer == 8){
+        if (pauseTimer == 8) {
+
             AnimateText(lblMessage, "...");
         }
-        if(pauseTimer == 13){
-            AnimateText(lblMessage, "The Skeleton burst out Laughing!"+"\n"+" 'You Win' he declares.");
+        if (pauseTimer == 13) {
+
+            AnimateText(lblMessage, "The Skeleton burst out Laughing!" + "\n" + " 'You Win' he declares.");
             toggleOptions(false, false);
+
         }
-        if(pauseTimer == 18){
+        if (pauseTimer == 18) {
+
             btnBack.setVisible(true);
             delay.stop();
             pauseTimer = 0;
+
         }
     }
 
     void skeletonAttack() {
+
         skeletonAttack = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+
         if (skeletonAttack == 1) {
+
             AnimateText(lblMessage, "The Skeleton used TromBONE!");
             int trombone = ThreadLocalRandom.current().nextInt(15, 15 + 1);
             health = health - trombone;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
             die();
+
         } else if (skeletonAttack == 2) {
+
             AnimateText(lblMessage, "The Skeleton used Bone Slash!");
             int bite = ThreadLocalRandom.current().nextInt(14, 19 + 1);
             health = health - bite;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
             die();
+
         } else if (skeletonAttack == 3) {
+
             AnimateText(lblMessage, "The Skeleton used Bone Dance!");
             int lunge = ThreadLocalRandom.current().nextInt(5, 22 + 1);
             health = health - lunge;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
             die();
+
         }
     }
 
-    void die(){
-        if(health <= 0){
+    void die() {
+
+        if (health <= 0) {
+
             health = 0;
-            lblPlayerHealth.setText(""+health);
-            toggleOptions(false,false);
+            lblPlayerHealth.setText("" + health);
+            toggleOptions(false, false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
+
         }
     }
 
-    void win(){
+    void win() {
+
         skeletonHealth = 0;
         lblEnemyHealth.setText("" + skeletonHealth);
         AnimateText(lblMessage, "You defeated the Zombie!");
@@ -229,7 +251,8 @@ public class BattleSequence2 implements Initializable {
         toggleOptions(false, false);
         btnBack.setVisible(true);
         MainApp.gold = MainApp.gold + 10;
-        if (MainApp.sound == true){
+
+        if (MainApp.sound == true) {
             battle.stop();
             victory.play();
         }
@@ -250,22 +273,30 @@ public class BattleSequence2 implements Initializable {
     void clickMove1(MouseEvent event) {
 
         if (fight == true) {
+
             smiteDmg = ThreadLocalRandom.current().nextInt(10, 14 + 1);
             skeletonHealth = skeletonHealth - (smiteDmg + MainApp.dmgBuff);
+
             if (skeletonHealth <= 0) {
+
                 win();
+
             } else {
+
                 lblEnemyHealth.setText("" + skeletonHealth);
-                AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the Skeleton!");
+                AnimateText(lblMessage, "You did " + (smiteDmg + MainApp.dmgBuff) + " damage to the Skeleton!");
                 pause.play();
                 toggleOptions(false, false);
+
             }
 
         } else if (bless = true) {
+
             animateLength = 5000;
             toggleOptions(false, false);
-            AnimateText(lblMessage, "The skeleton canceled the gallery"+"\n"+"showing of his skull-ptures because"+"\n"+"his heart wasn't in it!");
+            AnimateText(lblMessage, "The skeleton canceled the gallery" + "\n" + "showing of his skull-ptures because" + "\n" + "his heart wasn't in it!");
             delay.play();
+
         }
     }
 
@@ -273,42 +304,51 @@ public class BattleSequence2 implements Initializable {
     void clickMove2(MouseEvent event) {
 //if they chose to fight, then use the holy spear move that does 6-20 damage, run the animations, and toggle the UI. if they choose bless nothing (skeletons can't be exorcised)
         if (fight == true) {
+
             spearDmg = ThreadLocalRandom.current().nextInt(6, 20 + 1);
             skeletonHealth = skeletonHealth - (spearDmg + MainApp.dmgBuff);
+
             if (skeletonHealth <= 0) {
+
                 win();
+
             } else {
+
                 lblEnemyHealth.setText("" + skeletonHealth);
-                AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the Skeleton!");
+                AnimateText(lblMessage, "You did " + (spearDmg + MainApp.dmgBuff) + " damage to the Skeleton!");
                 pause.play();
                 toggleOptions(false, false);
+
             }
 
         } else if (bless = true) {
+
             AnimateText(lblMessage, "Skeletons can't be exorcised...");
             pause.play();
             toggleOptions(false, false);
+
         }
     }
 
     @FXML
     void clickMove3(MouseEvent event) {
+
         System.out.println(MainApp.dmgBuff);
         int maxHealth;
 //if they chose to fight, then use the Pray move that heals you for 25 health, run the animations, and toggle the UI. if bless and they have it unlocked, do 50 damage
         if (fight == true) {
 
-            if(MainApp.healthBuff == true){
+            if (MainApp.healthBuff == true) {
                 maxHealth = 125;
-            }else{
+            } else {
                 maxHealth = 100;
             }
 
             if ((pray > 0) && ((health < maxHealth))) {
                 pray--;
                 health = health + 25;
-                if(MainApp.healthBuff == true){
-                    if(health > maxHealth){
+                if (MainApp.healthBuff == true) {
+                    if (health > maxHealth) {
                         health = maxHealth;
                     }
                 }
@@ -413,11 +453,11 @@ public class BattleSequence2 implements Initializable {
         battle.setVolume(25);
         victory.setVolume(25);
 
-        if(MainApp.sound == true){
+        if (MainApp.sound == true) {
             battle.play();
         }
 
-        lblEnemyHealth.setText(""+skeletonHealth);
+        lblEnemyHealth.setText("" + skeletonHealth);
 
         if (MainApp.battleStage == 2) {
             imgEnemy.setImage(skeleton);
@@ -425,15 +465,15 @@ public class BattleSequence2 implements Initializable {
             AnimateText(lblMessage, "A Skeleton has appeared! You will...");
         }
 
-        if (MainApp.healthBuff == true){
+        if (MainApp.healthBuff == true) {
             health = 125;
             lblPlayerHealth.setText("" + health);
             imgHealth.setImage(scroll);
         }
-        if (MainApp.dmgBuff > 0){
+        if (MainApp.dmgBuff > 0) {
             imgStaff.setImage(staff);
         }
-        if (MainApp.holyWater == true){
+        if (MainApp.holyWater == true) {
             imgHoly.setImage(potion);
         }
     }

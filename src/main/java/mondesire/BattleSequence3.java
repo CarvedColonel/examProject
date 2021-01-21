@@ -1,8 +1,8 @@
 package mondesire;
 /*
-Put header here
-
-
+Aidan Mason-Mondesire
+January 18th 2021
+The third battle sequence of six where you fight the ghost
  */
 
 import javafx.animation.Animation;
@@ -130,12 +130,13 @@ public class BattleSequence3 implements Initializable {
 
     @FXML
     void clickFight(MouseEvent event) {
+
         fight = true;
         bless = false;
         lblMove1.setVisible(true);
         lblMove2.setVisible(true);
         lblMove3.setVisible(true);
-        lblMove1.setText("SMITE");//base dmg: 10-14
+        lblMove1.setText("SMITE");//base dmg: 10-15
         lblMove2.setText("HOLY SPEAR");//base dmg: 6-20
         lblMove3.setText("PRAY(" + pray + "/2)");//heals 25 health (Can be used twice per fight)
     }
@@ -143,6 +144,7 @@ public class BattleSequence3 implements Initializable {
 
     @FXML
     void clickBless(MouseEvent event) {
+
         bless = true;
         fight = false;
         lblMove1.setVisible(true);
@@ -150,40 +152,51 @@ public class BattleSequence3 implements Initializable {
         lblMove3.setVisible(true);
         lblMove1.setText("JOKE");
         lblMove2.setText("EXORCISE");
-        if (MainApp.holyWater == true){
+
+        if (MainApp.holyWater == true) {
             lblMove3.setText("Holy Water");
-        }else {
+        } else {
             lblMove3.setText("[LOCKED]");
         }
+
     }
 
     void pauseVoid() {
         //timer to add some delay and then run the attack code
         pauseTimer++;
-            if (pauseTimer == 3) {
-                ghostAttack();
-                pauseTimer = 0;
-                pause.stop();
-            }
+
+        if (pauseTimer == 3) {
+            ghostAttack();
+            pauseTimer = 0;
+            pause.stop();
+        }
     }
 
-    void delay(){
+    void delay() {
         //timer to add comedic effect and pauses for the ghost joke code
         pauseTimer++;
-        if(pauseTimer == 1){
-            AnimateText(lblMessage, "The ghost smiled as you exorcised him."+"\n"+"Happy that you've freed him from" +"\n"+ "this realm. He thanks you...");
+
+        if (pauseTimer == 1) {
+
+            AnimateText(lblMessage, "The ghost smiled as you exorcised him." + "\n" + "Happy that you've freed him from" + "\n" + "this realm. He thanks you...");
             toggleOptions(false, false);
+
         }
-        if(pauseTimer == 10){
+        if (pauseTimer == 10) {
+
             btnBack.setVisible(true);
             delay.stop();
             pauseTimer = 0;
+
         }
     }
 
     void ghostAttack() {
+
         ghostAttack = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+
         if (ghostAttack == 1) {
+
             AnimateText(lblMessage, "The ghost used Fright!");
             int fright = ThreadLocalRandom.current().nextInt(5, 10 + 1);
             health = health - fright;
@@ -191,37 +204,46 @@ public class BattleSequence3 implements Initializable {
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
             die();
+
         } else if (ghostAttack == 2) {
+
             AnimateText(lblMessage, "The ghost used Shadow Punch!");
             int punch = ThreadLocalRandom.current().nextInt(14, 19 + 1);
             health = health - punch;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
             die();
+
         } else if (ghostAttack == 3) {
+
             AnimateText(lblMessage, "The ghost used Trick-or-Treat!");
             int trick = ThreadLocalRandom.current().nextInt(0, 20 + 1);
-            if(trick == 0){
+            if (trick == 0) {
                 AnimateText(lblMessage, "The ghost's Trick-or-Treat wasn't very effective'");
             }
             health = health - trick;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
             die();
+
         }
     }
 
-    void die(){
-        if(health <= 0){
+    void die() {
+
+        if (health <= 0) {
+
             health = 0;
-            lblPlayerHealth.setText(""+health);
-            toggleOptions(false,false);
+            lblPlayerHealth.setText("" + health);
+            toggleOptions(false, false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
+
         }
     }
 
-    void win(){
+    void win() {
+
         ghostHealth = 0;
         lblEnemyHealth.setText("" + ghostHealth);
         AnimateText(lblMessage, "You defeated the Zombie!");
@@ -229,7 +251,8 @@ public class BattleSequence3 implements Initializable {
         toggleOptions(false, false);
         btnBack.setVisible(true);
         MainApp.gold = MainApp.gold + 10;
-        if (MainApp.sound == true){
+
+        if (MainApp.sound == true) {
             battle.stop();
             victory.play();
         }
@@ -254,18 +277,24 @@ public class BattleSequence3 implements Initializable {
         if (fight == true) {
             smiteDmg = ThreadLocalRandom.current().nextInt(10, 14 + 1);
             ghostHealth = ghostHealth - (smiteDmg + MainApp.dmgBuff);
+
             if (ghostHealth <= 0) {
+
                 win();
+
             } else {
+
                 lblEnemyHealth.setText("" + ghostHealth);
-                AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the ghost!");
+                AnimateText(lblMessage, "You did " + (smiteDmg + MainApp.dmgBuff) + " damage to the ghost!");
                 pause.play();
                 toggleOptions(false, false);
+
             }
 
         } else if (bless = true) {
+
             animateLength = 3000;
-            AnimateText(lblMessage, "He didnt understand,"+"\n"+" the joke went right through him");
+            AnimateText(lblMessage, "He didnt understand," + "\n" + " the joke went right through him");
             pause.play();
             toggleOptions(false, false);
         }
@@ -278,18 +307,22 @@ public class BattleSequence3 implements Initializable {
 
 //if they chose to fight, then use the holy spear move that does 6-20 damage, run the animations, and toggle the UI. if they choose bless nothing (ghosts can't be exorcised)
         if (fight == true) {
+
             spearDmg = ThreadLocalRandom.current().nextInt(6, 20 + 1);
             ghostHealth = ghostHealth - (spearDmg + MainApp.dmgBuff);
+
             if (ghostHealth <= 0) {
                 win();
             } else {
+
                 lblEnemyHealth.setText("" + ghostHealth);
-                AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the ghost!");
+                AnimateText(lblMessage, "You did " + (spearDmg + MainApp.dmgBuff) + " damage to the ghost!");
                 pause.play();
                 toggleOptions(false, false);
             }
 
         } else if (bless = true) {
+
             animateLength = 10000;
             toggleOptions(false, false);
             delay.play();
@@ -306,17 +339,17 @@ public class BattleSequence3 implements Initializable {
 //if they chose to fight, then use the Pray move that heals you for 25 health, run the animations, and toggle the UI. if bless and they have it unlocked, do 50 damage
         if (fight == true) {
 
-            if(MainApp.healthBuff == true){
+            if (MainApp.healthBuff == true) {
                 maxHealth = 125;
-            }else{
+            } else {
                 maxHealth = 100;
             }
 
             if ((pray > 0) && ((health < maxHealth))) {
                 pray--;
                 health = health + 25;
-                if(MainApp.healthBuff == true){
-                    if(health > maxHealth){
+                if (MainApp.healthBuff == true) {
+                    if (health > maxHealth) {
                         health = maxHealth;
                     }
                 }
@@ -332,16 +365,20 @@ public class BattleSequence3 implements Initializable {
             if (lblMove3.getText() == "[LOCKED]") {
 
             } else {
+
                 ghostHealth = ghostHealth - (50 + MainApp.dmgBuff);
                 lblEnemyHealth.setText("" + ghostHealth);
+
                 if (ghostHealth <= 0) {
                     win();
                 } else {
+
                     ghostHealth = ghostHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + ghostHealth);
                     AnimateText(lblMessage, "You did 50 damage to the ghost!");
                     pause.play();
                     toggleOptions(false, false);
+
                 }
                 MainApp.holyWater = false;
 
@@ -415,7 +452,7 @@ public class BattleSequence3 implements Initializable {
         delay.setCycleCount(Timeline.INDEFINITE);
         UI.play();
 
-        lblEnemyHealth.setText(""+ghostHealth);
+        lblEnemyHealth.setText("" + ghostHealth);
 
         battle = new MediaPlayer((new Media(getClass().getResource("/BattleMusic.mp3").toString())));
         victory = new MediaPlayer((new Media(getClass().getResource("/WinMusic.mp3").toString())));
@@ -423,25 +460,25 @@ public class BattleSequence3 implements Initializable {
         battle.setVolume(25);
         victory.setVolume(25);
 
-        if(MainApp.sound == true){
+        if (MainApp.sound == true) {
             battle.play();
         }
 
-         if (MainApp.battleStage == 3) {
+        if (MainApp.battleStage == 3) {
             imgEnemy.setImage(ghost);
             imageSize(238, 146, 1011, 305);
             AnimateText(lblMessage, "A Ghost has appeared! You will...");
         }
 
-        if (MainApp.healthBuff == true){
+        if (MainApp.healthBuff == true) {
             health = 125;
             lblPlayerHealth.setText("" + health);
             imgHealth.setImage(scroll);
         }
-        if (MainApp.dmgBuff > 0){
+        if (MainApp.dmgBuff > 0) {
             imgStaff.setImage(staff);
         }
-        if (MainApp.holyWater == true){
+        if (MainApp.holyWater == true) {
             imgHoly.setImage(potion);
         }
     }

@@ -1,8 +1,8 @@
 package mondesire;
 /*
-Put header here
-
-
+Aidan Mason-Mondesire
+January 18th 2021
+The sixth and final battle sequence of six where you fight the orc
  */
 
 import javafx.animation.Animation;
@@ -150,9 +150,9 @@ public class BattleSequence6 implements Initializable {
         lblMove3.setVisible(true);
         lblMove1.setText("JOKE");
         lblMove2.setText("EXORCISE");
-        if (MainApp.holyWater == true){
+        if (MainApp.holyWater == true) {
             lblMove3.setText("Holy Water");
-        }else {
+        } else {
             lblMove3.setText("[LOCKED]");
         }
     }
@@ -160,21 +160,21 @@ public class BattleSequence6 implements Initializable {
     void pauseVoid() {
         //timer to add some delay and then run the attack code
         pauseTimer++;
-            if (pauseTimer == 3) {
-                orcAttack();
-                pauseTimer = 0;
-                pause.stop();
-            }
+        if (pauseTimer == 3) {
+            orcAttack();
+            pauseTimer = 0;
+            pause.stop();
+        }
     }
 
-    void delay(){
+    void delay() {
         //timer to add comedic effect and pauses for the orc joke code
         pauseTimer++;
-        if(pauseTimer == 1){
+        if (pauseTimer == 1) {
             AnimateText(lblMessage, "");
             toggleOptions(false, false);
         }
-        if(pauseTimer == 10){
+        if (pauseTimer == 10) {
             btnBack.setVisible(true);
             delay.stop();
             pauseTimer = 0;
@@ -202,33 +202,33 @@ public class BattleSequence6 implements Initializable {
             AnimateText(lblMessage, "The High Orc used Great Healing!");
             if (orcHealth == 125) {
                 pause.play();
-            }else{
+            } else {
                 int heal = ThreadLocalRandom.current().nextInt(10, 20 + 1);
                 orcHealth = orcHealth + heal;
                 lblEnemyHealth.setText("" + orcHealth);
                 toggleOptions(true, false);
             }
 
-        }else if (orcAttack == 4) {
+        } else if (orcAttack == 4) {
 
             AnimateText(lblMessage, "The High Orc Missed his Attack!");
 
-                toggleOptions(true, false);
+            toggleOptions(true, false);
 
         }
     }
 
-    void die(){
-        if(health <= 0){
+    void die() {
+        if (health <= 0) {
             health = 0;
-            lblPlayerHealth.setText(""+health);
-            toggleOptions(false,false);
+            lblPlayerHealth.setText("" + health);
+            toggleOptions(false, false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
         }
     }
 
-    void win(){
+    void win() {
         orcHealth = 0;
         lblEnemyHealth.setText("" + orcHealth);
         AnimateText(lblMessage, "You defeated the Zombie!");
@@ -236,7 +236,7 @@ public class BattleSequence6 implements Initializable {
         toggleOptions(false, false);
         btnBack.setVisible(true);
         MainApp.gold = MainApp.gold + 10;
-        if (MainApp.sound == true){
+        if (MainApp.sound == true) {
             battle.stop();
             victory.play();
         }
@@ -265,14 +265,14 @@ public class BattleSequence6 implements Initializable {
                 win();
             } else {
                 lblEnemyHealth.setText("" + orcHealth);
-                AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the orc!");
+                AnimateText(lblMessage, "You did " + (smiteDmg + MainApp.dmgBuff) + " damage to the orc!");
                 pause.play();
                 toggleOptions(false, false);
             }
 
         } else if (bless = true) {
             animateLength = 3000;
-            AnimateText(lblMessage, "He didnt understand,"+"\n"+" the joke went right through him");
+            AnimateText(lblMessage, "He didnt understand," + "\n" + " the joke went right through him");
             pause.play();
             toggleOptions(false, false);
         }
@@ -291,7 +291,7 @@ public class BattleSequence6 implements Initializable {
                 win();
             } else {
                 lblEnemyHealth.setText("" + orcHealth);
-                AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the orc!");
+                AnimateText(lblMessage, "You did " + (spearDmg + MainApp.dmgBuff) + " damage to the orc!");
                 pause.play();
                 toggleOptions(false, false);
             }
@@ -313,17 +313,17 @@ public class BattleSequence6 implements Initializable {
 //if they chose to fight, then use the Pray move that heals you for 25 health, run the animations, and toggle the UI. if bless and they have it unlocked, do 50 damage
         if (fight == true) {
 
-            if(MainApp.healthBuff == true){
+            if (MainApp.healthBuff == true) {
                 maxHealth = 125;
-            }else{
+            } else {
                 maxHealth = 100;
             }
 
             if ((pray > 0) && ((health < maxHealth))) {
                 pray--;
                 health = health + 25;
-                if(MainApp.healthBuff == true){
-                    if(health > maxHealth){
+                if (MainApp.healthBuff == true) {
+                    if (health > maxHealth) {
                         health = maxHealth;
                     }
                 }
@@ -422,7 +422,7 @@ public class BattleSequence6 implements Initializable {
         delay.setCycleCount(Timeline.INDEFINITE);
         UI.play();
 
-        lblEnemyHealth.setText(""+orcHealth);
+        lblEnemyHealth.setText("" + orcHealth);
 
         battle = new MediaPlayer((new Media(getClass().getResource("/BattleMusic.mp3").toString())));
         victory = new MediaPlayer((new Media(getClass().getResource("/WinMusic.mp3").toString())));
@@ -430,7 +430,7 @@ public class BattleSequence6 implements Initializable {
         battle.setVolume(25);
         victory.setVolume(25);
 
-        if(MainApp.sound == true){
+        if (MainApp.sound == true) {
             battle.play();
         }
 
@@ -440,15 +440,15 @@ public class BattleSequence6 implements Initializable {
             AnimateText(lblMessage, "The High Orc has appeared! You will...");
         }
 
-        if (MainApp.healthBuff == true){
+        if (MainApp.healthBuff == true) {
             health = 125;
             lblPlayerHealth.setText("" + health);
             imgHealth.setImage(scroll);
         }
-        if (MainApp.dmgBuff > 0){
+        if (MainApp.dmgBuff > 0) {
             imgStaff.setImage(staff);
         }
-        if (MainApp.holyWater == true){
+        if (MainApp.holyWater == true) {
             imgHoly.setImage(potion);
         }
     }

@@ -50,7 +50,7 @@
             <Image url="@../username.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgSound" fitHeight="64.0" fitWidth="346.0" layoutX="125.0" layoutY="381.0" onMouseClicked="#clickSound" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="imgSound" fitHeight="64.0" fitWidth="346.0" layoutX="366.0" layoutY="428.0" onMouseClicked="#clickSound" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../sound.png" />
          </image>
@@ -59,7 +59,7 @@
          <font>
             <Font name="Century Gothic Bold" size="15.0" />
          </font></Button>
-      <Label fx:id="lblSound" layoutX="453.0" layoutY="393.0" text="ON" textFill="#00ff1e" visible="false">
+      <Label fx:id="lblSound" layoutX="693.0" layoutY="440.0" text="ON" textFill="#00ff1e" visible="false">
          <font>
             <Font name="Century Gothic Bold" size="32.0" />
          </font>
@@ -79,7 +79,7 @@
             <Font name="Century Gothic Bold" size="15.0" />
          </font>
       </Button>
-      <TextField fx:id="txtLoad" layoutX="450.0" layoutY="394.0" prefHeight="39.0" prefWidth="278.0" promptText="load slot">
+      <TextField fx:id="txtLoad" layoutX="451.0" layoutY="394.0" prefHeight="39.0" prefWidth="278.0" promptText="load slot">
          <font>
             <Font name="Century Gothic Bold" size="20.0" />
          </font>

@@ -88,6 +88,7 @@ public class MainMenu implements Initializable {
             alert.showAndWait();
         } else {
             MainApp.setRoot("Gameplay", "Priest's Conquest");
+            music.stop();
         }
 
     }
@@ -153,16 +154,16 @@ public class MainMenu implements Initializable {
             imgUser.setVisible(true);
             txtUser.setVisible(true);
             btnConfirm.setVisible(true);
-            imgLoad.setVisible(false);
-            txtLoad.setVisible(false);
-            btnLoad.setVisible(false);
+            imgLoad.setVisible(true);
+            txtLoad.setVisible(true);
+            btnLoad.setVisible(true);
         } else {
             imgUser.setVisible(false);
             btnConfirm.setVisible(false);
             txtUser.setVisible(false);
-            imgLoad.setVisible(false);
-            txtLoad.setVisible(false);
-            btnLoad.setVisible(false);
+            imgLoad.setVisible(true);
+            txtLoad.setVisible(true);
+            btnLoad.setVisible(true);
         }
     }
 
