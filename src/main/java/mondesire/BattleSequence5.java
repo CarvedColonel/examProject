@@ -91,8 +91,8 @@ public class BattleSequence5 implements Initializable {
 
     Image wolf = new Image(getClass().getResource("/WOLF.png").toString());
 
-    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
-    Image potion = new Image(getClass().getResource("/holyWater.png").toString());
+    Image staff = new Image(getClass().getResource("/staff.png").toString());
+    Image potion = new Image(getClass().getResource("/holywater.png").toString());
     Image scroll = new Image(getClass().getResource("/healthScroll.png").toString());
 
 

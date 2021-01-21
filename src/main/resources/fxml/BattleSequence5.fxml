@@ -7,9 +7,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.BattleSequence5">
    <children>
+      <ImageView fitHeight="728.0" fitWidth="1228.0" pickOnBounds="true">
+         <image>
+            <Image url="@../battlebackground.jpg" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="258.0" fitWidth="600.0" layoutX="266.0" layoutY="467.0" pickOnBounds="true">
          <image>
             <Image url="@../textbox.png" />
@@ -87,12 +91,12 @@
       <Label layoutX="277.0" layoutY="337.0" prefHeight="30.0" prefWidth="220.0" style="-fx-background-color: green;" textFill="RED" />
       <ImageView fitHeight="226.0" fitWidth="297.0" layoutX="231.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../health%20bar.png" />
+            <Image url="@../health_bar.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="226.0" fitWidth="297.0" layoutX="624.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../enemy%20health.png" />
+            <Image url="@../enemy_health.png" />
          </image>
       </ImageView>
       <Button fx:id="btnBack" layoutX="513.0" layoutY="617.0" mnemonicParsing="false" onAction="#clickBack" styleClass="bevel-gold" text="RETURN" visible="false">
