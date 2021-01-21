@@ -13,6 +13,7 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -94,7 +95,6 @@ public class BattleSequence4 implements Initializable {
     Image staff = new Image(getClass().getResource("/staff.png").toString());
     Image potion = new Image(getClass().getResource("/holywater.png").toString());
     Image scroll = new Image(getClass().getResource("/healthScroll.png").toString());
-
 
 
     Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
@@ -197,6 +197,7 @@ public class BattleSequence4 implements Initializable {
             toggleOptions(false,false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
+
         }
     }
 
@@ -227,6 +228,7 @@ public class BattleSequence4 implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 4;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + wizardHealth);
                 AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the wizard!");
@@ -260,6 +262,7 @@ public class BattleSequence4 implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 4;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + wizardHealth);
                 AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the wizard!");
@@ -322,6 +325,7 @@ public class BattleSequence4 implements Initializable {
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
                     MainApp.winCount = 4;
+                    MainApp.gold = MainApp.gold + 10;
                 } else {
                     //wizardHealth = wizardHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + wizardHealth);
