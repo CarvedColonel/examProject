@@ -35,12 +35,12 @@
             <Image url="@../play.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgHelp" fitHeight="150.0" fitWidth="200.0" layoutX="521.0" layoutY="405.0" onMouseClicked="#clickHelp" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgHelp" fitHeight="150.0" fitWidth="200.0" layoutX="521.0" layoutY="478.0" onMouseClicked="#clickHelp" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Help.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgSettings" fitHeight="104.0" fitWidth="315.0" layoutX="463.0" layoutY="529.0" onMouseClicked="#clickSettings" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgSettings" fitHeight="104.0" fitWidth="315.0" layoutX="463.0" layoutY="602.0" onMouseClicked="#clickSettings" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Settings.png" />
          </image>
@@ -78,6 +78,21 @@
       <ImageView fx:id="imgMenu" fitHeight="64.0" fitWidth="346.0" layoutX="436.0" layoutY="618.0" onMouseClicked="#clickMenu" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../menu.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnLoad" layoutX="754.0" layoutY="409.0" mnemonicParsing="false" onAction="#clickLoad" styleClass="bevel-gold" text="Load">
+         <font>
+            <Font name="Century Gothic Bold" size="15.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtLoad" layoutX="460.0" layoutY="404.0" prefHeight="39.0" prefWidth="278.0" promptText="load slot">
+         <font>
+            <Font name="Century Gothic Bold" size="20.0" />
+         </font>
+      </TextField>
+      <ImageView fx:id="imgLoad" fitHeight="64.0" fitWidth="346.0" layoutX="257.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Load.png" />
          </image>
       </ImageView>
    </children>

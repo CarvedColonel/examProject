@@ -125,24 +125,31 @@ public class Gameplay implements Initializable {
     private Pane panEnemy2;
 
     @FXML
-    private Button btnSave;
+    private Label lblSave;
 
     @FXML
-    private Button btnSave2;
+    private Label lblSave2;
 
     @FXML
-    private Button btnSave3;
+    private Label lblSave3;
 
     @FXML
-    private Button btnSave4;
+    private Label lblSave4;
 
     @FXML
-    private Button btnSave5;
+    private Label lblSave5;
 
     @FXML
-    private Button btnSave6;
+    private Label lblSave6;
 
-    Button sButton[] = new Button[6];
+    @FXML
+    private Polygon plgGate;
+
+    @FXML
+    private Polygon plgGate2;
+    //Array for the labels used for saving and the timeline used for moving
+    Label sLabel[] = new Label[6];
+    //In try catch due to collision opening up a new scene
     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), ae -> {
         try {
             move();
@@ -150,17 +157,22 @@ public class Gameplay implements Initializable {
             e.printStackTrace();
         }
     }));
+    //Movement Variables
     int dx;
     int dy;
     int interactGrave;
+    //Variables for interaction
     int buildings;
     boolean well = false;
     int decision;
+    boolean pause;
+    //Custom object used for saving
     username info = new username();
 
     @FXML
     public void keyPressed(KeyEvent event) throws InterruptedException {
-
+//Movement code that also allows user to move diagonally
+        //Also uses a disable interact method which stops the user from interacting with things that are not within it's range
         if ((event.getCode() == KeyCode.D)) {
             dx = 5;
             disableInteract();
@@ -177,7 +189,7 @@ public class Gameplay implements Initializable {
             MainApp.gold = MainApp.gold + 1;
             lblCurrency.setText("" + MainApp.gold + " x");
         }
-        //Interact code
+        //Interact code for gravestones
         else if ((event.getCode() == KeyCode.E) && interactGrave == 1 && plgInteract.isVisible() == false) {
             interact();
             animateText(lblLetter1, "'R.I.P' \n 'Aidan Mason-Mondesire' \n 'Died programming the battle sequence'");
@@ -202,7 +214,9 @@ public class Gameplay implements Initializable {
             interact();
             animateText(lblLetter1, "'R.I.P' \n 'A normal shop' \n 'Rick Harrison was better'");
 
-        } else if ((event.getCode() == KeyCode.E) && buildings == 1 && plgInteract.isVisible() == false) {
+        }
+        //Interact code for buildings
+        else if ((event.getCode() == KeyCode.E) && buildings == 1 && plgInteract.isVisible() == false) {
             interact();
             animateText(lblLetter1, "Would you like to enter my shop?");
             ancGame.setDisable(true);
@@ -213,17 +227,20 @@ public class Gameplay implements Initializable {
             lblCurrency.setText("" + MainApp.gold + " x");
             ancGame.setDisable(true);
             well = true;
-        } else if ((event.getCode() == KeyCode.E) && interactGrave == 0 || (event.getCode() == KeyCode.E) && buildings == 0) {
-            imgText.setVisible(false);
-            timeline.play();
-            lblLetter1.setVisible(false);
-            lblOption1.setVisible(false);
-            lblOption2.setVisible(false);
-
+        }
+        //Allows the user to use the e to close the dialogue box when there are no options or even when there are options
+        else if ((event.getCode() == KeyCode.E) && interactGrave == 0 || (event.getCode() == KeyCode.E) && buildings == 0) {
+            off();
         }
     }
 
+    @FXML
+    void clickExit(MouseEvent event) throws IOException {
+        MainApp.setRoot("MainMenu");
+    }
+
     void interact() {
+        ancGame.setDisable(true);
         imgText.setVisible(true);
         timeline.stop();
         lblLetter1.setVisible(true);
@@ -254,14 +271,7 @@ public class Gameplay implements Initializable {
 
         final Animation animation = new Transition() {
             {
-                if (interactGrave > 0) {
-
-                    setCycleDuration(Duration.millis(5000));
-                } else {
-
-                    setCycleDuration(Duration.millis(3000));
-                }
-
+                setCycleDuration(Duration.millis(3000));
             }
 
             protected void interpolate(double frac) {
@@ -300,9 +310,14 @@ public class Gameplay implements Initializable {
             animation.setOnFinished(e -> {
                 ancGame.setDisable(false);
                 ancGame.requestFocus();
-                for (Button visible : sButton) {
+                for (Label visible : sLabel) {
                     visible.setVisible(true);
                 }
+            });
+        } else {
+            animation.setOnFinished(e -> {
+                ancGame.setDisable(false);
+                ancGame.requestFocus();
             });
         }
 
@@ -316,7 +331,7 @@ public class Gameplay implements Initializable {
         panPriest.setTranslateY(panPriest.getTranslateY() + dy);
 
 
-        if (collision(plgPriest, plgWall) || collision(plgPriest, plgWall2) || collision(plgPriest, plgInn) || collision(plgPriest, plgWall3) || collision(plgPriest, plgWell) && well == true) {
+        if (collision(plgPriest, plgWall) || collision(plgPriest, plgWall2) || collision(plgPriest, plgInn) || collision(plgPriest, plgWall3) || collision(plgPriest, plgWell) && well == true || collision(plgPriest, plgGate) && MainApp.winCount < 3) {
             panPriest.setTranslateX(panPriest.getTranslateX() - dx);
             panPriest.setTranslateY(panPriest.getTranslateY() - dy);
             dx = 0;
@@ -341,7 +356,6 @@ public class Gameplay implements Initializable {
         } else if (collision(plgPriest, plgGrave1)) {
             interactCheck();
             interactGrave = 1;
-            decision = 3;
 
         } else if (collision(plgPriest, plgGrave2)) {
             interactCheck();
@@ -415,32 +429,23 @@ public class Gameplay implements Initializable {
             lblOption1.setVisible(false);
             decision = 0;
         } else if (decision == 3) {
-
             decision = 4;
             animateText(lblLetter1, "Please select a spot");
             lblOption1.setVisible(false);
             lblOption2.setVisible(false);
-
-
+            ancGame.setDisable(true);
         }
     }
 
     @FXML
     void decision2(MouseEvent event) {
         if (decision == 1) {
-            imgText.setVisible(false);
-            timeline.play();
-            lblLetter1.setVisible(false);
-            lblOption1.setVisible(false);
-            lblOption2.setVisible(false);
+            off();
             decision = 0;
         } else if (decision == 3) {
-            imgText.setVisible(false);
-            timeline.play();
-            lblLetter1.setVisible(false);
-            lblOption1.setVisible(false);
-            lblOption2.setVisible(false);
+            off();
             decision = 0;
+
         }
     }
 
@@ -450,47 +455,71 @@ public class Gameplay implements Initializable {
         return a.getBoundsInLocal().getWidth() != -1;
     }
 
-    @FXML
-    void save(ActionEvent event) {
-        saveInfo();
-        info.save("matt.raf", 1);
+    void off() {
+        imgText.setVisible(false);
+        lblLetter1.setVisible(false);
+        lblOption1.setVisible(false);
+        lblOption2.setVisible(false);
+        for (Label visible : sLabel) {
+            visible.setVisible(false);
+        }
+        timeline.play();
     }
 
     @FXML
-    void save2(ActionEvent event) {
+    void save(MouseEvent event) {
+        MainApp.save = MainApp.save + 1;
         saveInfo();
+        off();
+        info.save("matt.raf", 1);
+
+    }
+
+    @FXML
+    void save2(MouseEvent event) {
+        MainApp.save = MainApp.save + 1;
+        saveInfo();
+        off();
         info.save("matt.raf", 2);
     }
 
     @FXML
-    void save3(ActionEvent event) {
+    void save3(MouseEvent event) {
+        MainApp.save = MainApp.save + 1;
         saveInfo();
+        off();
         info.save("matt.raf", 3);
     }
 
     @FXML
-    void save4(ActionEvent event) {
+    void save4(MouseEvent event) {
+        MainApp.save = MainApp.save + 1;
         saveInfo();
+        off();
         info.save("matt.raf", 4);
     }
 
     @FXML
-    void save5(ActionEvent event) {
+    void save5(MouseEvent event) {
+        MainApp.save = MainApp.save + 1;
         saveInfo();
+        off();
         info.save("matt.raf", 5);
     }
 
     @FXML
-    void save6(ActionEvent event) {
+    void save6(MouseEvent event) {
+        MainApp.save = MainApp.save + 1;
         saveInfo();
+        off();
         info.save("matt.raf", 6);
     }
 
     void saveInfo() {
         info.setuserName(MainApp.user);
         info.setBitcoin(MainApp.gold);
-        info.setX(panPriest.getLayoutX());
-        info.setY(panPriest.getLayoutY());
+        info.setWinCounter(MainApp.winCount);
+        info.setSaveCounter(MainApp.save);
     }
 
     @Override
@@ -515,22 +544,47 @@ public class Gameplay implements Initializable {
             panPriest.setLayoutX(774);
             panPriest.setLayoutY(478);
             panEnemy1.setVisible(false);
-            interact();
-            decision = 3;
-            animateText(lblLetter1, "Would you like to save?");
+            if (MainApp.save == 0) {
+                decision = 3;
+                interact();
+                animateText(lblLetter1, "Would you like to save?");
+                ancGame.setDisable(true);
+            } else {
 
+            }
         }
         if (MainApp.winCount >= 2) {
             panPriest.setLayoutX(464);
             panPriest.setLayoutY(365);
             panEnemy2.setVisible(false);
+            if (MainApp.save == 0 || MainApp.save == 1) {
+                decision = 3;
+                interact();
+                animateText(lblLetter1, "Would you like to save?");
+                ancGame.setDisable(true);
+            } else {
+
+            }
         }
-        sButton[0] = btnSave;
-        sButton[1] = btnSave2;
-        sButton[2] = btnSave3;
-        sButton[3] = btnSave4;
-        sButton[4] = btnSave5;
-        sButton[5] = btnSave6;
+        if (MainApp.winCount >= 3) {
+            panPriest.setLayoutX(583);
+            panPriest.setLayoutY(222);
+            panEnemy2.setVisible(false);
+            if (MainApp.save == 0 || MainApp.save == 1 || MainApp.save == 2) {
+                decision = 3;
+                interact();
+                animateText(lblLetter1, "Would you like to save?");
+                ancGame.setDisable(true);
+            } else {
+
+            }
+        }
+        sLabel[0] = lblSave;
+        sLabel[1] = lblSave2;
+        sLabel[2] = lblSave3;
+        sLabel[3] = lblSave4;
+        sLabel[4] = lblSave5;
+        sLabel[5] = lblSave6;
     }
 
 

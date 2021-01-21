@@ -91,8 +91,8 @@ public class BattleSequence3 implements Initializable {
 
     Image ghost = new Image(getClass().getResource("/GHOST.png").toString());
 
-    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
-    Image potion = new Image(getClass().getResource("/holyWater.png").toString());
+    Image staff = new Image(getClass().getResource("/staff.png").toString());
+    Image potion = new Image(getClass().getResource("/holywater.png").toString());
     Image scroll = new Image(getClass().getResource("/healthScroll.png").toString());
 
 

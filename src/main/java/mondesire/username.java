@@ -5,23 +5,23 @@ import java.io.RandomAccessFile;
 
 public class username {
     private String userName;
-    private int bitcoin ;
-    private double x;
-    private double y;
+    private int bitcoin;
+    private int winCounter;
+private int saveCounter;
 
-
-    private final int RECSIZE = 40;
+    private final int RECSIZE = 32;
 
     //UserName = 10 * 2 = 20
     //gold = 4
-    //x = 8
-    //y = 8
+    //winCount = 4
+    //saveCounter = 4
     public username() {
         userName = "          ";
         bitcoin = 0;
-        x = 0;
-        y = 0;
+        winCounter = 0;
+        saveCounter = 0;
     }
+
     //All the sets setup the information for the file
     //All the gets get that information so we can use it
     public void setuserName(String u) {
@@ -38,21 +38,25 @@ public class username {
     public void setBitcoin(int g) {
         bitcoin = g;
     }
+
     public int getBitcoin() {
         return bitcoin;
     }
-    public void setX(double Ax) {
-        x = Ax;
-    }
-    public double getX() {
-        return x;
-    }   public void setY(double Ay) {
-        y = Ay;
-    }
-    public double getY() {
-        return y;
+
+    public void setWinCounter(int w) {
+        winCounter = w;
     }
 
+    public int getWinCounter() {
+        return winCounter;
+    }
+    public void setSaveCounter(int s) {
+        saveCounter = s;
+    }
+
+    public int getSaveCounter() {
+        return saveCounter;
+    }
 
     // The save method writes everything down in the file
     public void save(String file, int record) {
@@ -61,13 +65,14 @@ public class username {
             recordfile.seek(record * RECSIZE);
             recordfile.writeChars(userName);
             recordfile.writeInt(bitcoin);
-            recordfile.writeDouble(x);
-            recordfile.writeDouble(y);
+            recordfile.writeInt(winCounter);
+            recordfile.writeInt(saveCounter);
             recordfile.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     // The open method is to open the file and read the information
     public void open(String file, int record) {
         try {
@@ -79,8 +84,8 @@ public class username {
             }
             userName = new String(userN);
             bitcoin = recordFile.readInt();
-            x = recordFile.readDouble();
-            y = recordFile.readDouble();
+            winCounter = recordFile.readInt();
+            saveCounter = recordFile.readInt();
             recordFile.close();
 
         } catch (IOException e) {
@@ -88,6 +93,7 @@ public class username {
         }
 
     }
+
     // This  will tell us how much information is written in the file and how many spots are taken
     public int numRecord(String file) {
         int numR = 0;

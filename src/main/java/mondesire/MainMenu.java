@@ -65,14 +65,21 @@ public class MainMenu implements Initializable {
     private Button btnLoad;
 
 
-
     boolean sound = MainApp.sound;
+    username info = new username();
 
     @FXML
-    void clickLoad(ActionEvent event){
+    void clickLoad(ActionEvent event) throws IOException {
+        if (Integer.parseInt(txtLoad.getText()) == 1) {
+            info.open("matt.raf", 1);
+            MainApp.user = info.getuserName();
+            MainApp.gold = info.getBitcoin();
+            MainApp.winCount = info.getWinCounter();
+            MainApp.save = info.getSaveCounter();
+            MainApp.setRoot("Gameplay");
 
+        }
     }
-
 
 
     @FXML
