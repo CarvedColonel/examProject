@@ -19,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -89,6 +91,8 @@ public class BattleSequence3 implements Initializable {
     @FXML
     private ImageView imgHealth;
 
+    MediaPlayer battle;
+    MediaPlayer victory;
 
     Image ghost = new Image(getClass().getResource("/GHOST.png").toString());
 
@@ -214,7 +218,20 @@ public class BattleSequence3 implements Initializable {
             toggleOptions(false,false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
+        }
+    }
 
+    void win(){
+        ghostHealth = 0;
+        lblEnemyHealth.setText("" + ghostHealth);
+        AnimateText(lblMessage, "You defeated the Zombie!");
+        MainApp.winCount = 1;
+        toggleOptions(false, false);
+        btnBack.setVisible(true);
+        MainApp.gold = MainApp.gold + 10;
+        if (MainApp.sound == true){
+            battle.stop();
+            victory.play();
         }
     }
 
@@ -238,13 +255,7 @@ public class BattleSequence3 implements Initializable {
             smiteDmg = ThreadLocalRandom.current().nextInt(10, 14 + 1);
             ghostHealth = ghostHealth - (smiteDmg + MainApp.dmgBuff);
             if (ghostHealth <= 0) {
-                ghostHealth = 0;
-                lblEnemyHealth.setText("" + ghostHealth);
-                AnimateText(lblMessage, "You defeated the ghost!");
-                toggleOptions(false, false);
-                btnBack.setVisible(true);
-                MainApp.winCount = 3;
-                MainApp.gold = MainApp.gold + 10;
+                win();
             } else {
                 lblEnemyHealth.setText("" + ghostHealth);
                 AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the ghost!");
@@ -270,13 +281,7 @@ public class BattleSequence3 implements Initializable {
             spearDmg = ThreadLocalRandom.current().nextInt(6, 20 + 1);
             ghostHealth = ghostHealth - (spearDmg + MainApp.dmgBuff);
             if (ghostHealth <= 0) {
-                ghostHealth = 0;
-                lblEnemyHealth.setText("" + ghostHealth);
-                AnimateText(lblMessage, "You defeated the ghost!");
-                toggleOptions(false, false);
-                btnBack.setVisible(true);
-                MainApp.winCount = 3;
-                MainApp.gold = MainApp.gold + 10;
+                win();
             } else {
                 lblEnemyHealth.setText("" + ghostHealth);
                 AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the ghost!");
@@ -330,15 +335,9 @@ public class BattleSequence3 implements Initializable {
                 ghostHealth = ghostHealth - (50 + MainApp.dmgBuff);
                 lblEnemyHealth.setText("" + ghostHealth);
                 if (ghostHealth <= 0) {
-                    ghostHealth = 0;
-                    lblEnemyHealth.setText("" + ghostHealth);
-                    AnimateText(lblMessage, "You defeated the ghost!");
-                    toggleOptions(false, false);
-                    btnBack.setVisible(true);
-                    MainApp.winCount = 3;
-                    MainApp.gold = MainApp.gold + 10;
+                    win();
                 } else {
-                    //ghostHealth = ghostHealth - (50 + MainApp.dmgBuff);
+                    ghostHealth = ghostHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + ghostHealth);
                     AnimateText(lblMessage, "You did 50 damage to the ghost!");
                     pause.play();
@@ -417,6 +416,16 @@ public class BattleSequence3 implements Initializable {
         UI.play();
 
         lblEnemyHealth.setText(""+ghostHealth);
+
+        battle = new MediaPlayer((new Media(getClass().getResource("/BattleMusic.mp3").toString())));
+        victory = new MediaPlayer((new Media(getClass().getResource("/WinMusic.mp3").toString())));
+
+        battle.setVolume(25);
+        victory.setVolume(25);
+
+        if(MainApp.sound == true){
+            battle.play();
+        }
 
          if (MainApp.battleStage == 3) {
             imgEnemy.setImage(ghost);

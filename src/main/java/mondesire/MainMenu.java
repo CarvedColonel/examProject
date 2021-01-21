@@ -18,6 +18,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class MainMenu implements Initializable {
@@ -64,9 +67,7 @@ public class MainMenu implements Initializable {
     @FXML
     private Button btnLoad;
 
-
-
-    boolean sound = MainApp.sound;
+    MediaPlayer music;
 
     @FXML
     void clickLoad(ActionEvent event){
@@ -97,7 +98,7 @@ public class MainMenu implements Initializable {
         alert.setTitle("Help");
         alert.setHeaderText(null);
         alert.setContentText("Welcome!" + "\n" +
-                "GAMEPLAY: Use W, A, S, D, to move around the map. Reach the Skull Icon to start a battle. Go through the map clearing your way through the town" +
+                "GAMEPLAY: Use 'W', 'A', 'S', 'D', to move around the map. Use 'E' to interact with things around the map. Reach the Skull Icon to start a battle. Go through the map clearing your way through the town" +
                 " to liberate it of the devilish monsters that have come ransacking your village. Get through all 6 battles to beat the game!"
                 + " Look around for secrets or easter eggs as well, or maybe even visit the shopkeep near the north side of the town!" + "\n"
                 + "BATTLES: A turn based combat system where you can choose to fight, or attempt to bless the monster. Fighting are standard damage" +
@@ -117,6 +118,9 @@ public class MainMenu implements Initializable {
             txtUser.setVisible(false);
             btnConfirm.setVisible(false);
             lblError.setVisible(false);
+            imgLoad.setVisible(false);
+            txtLoad.setVisible(false);
+            btnLoad.setVisible(false);
         } else {
         }
     }
@@ -149,21 +153,31 @@ public class MainMenu implements Initializable {
             imgUser.setVisible(true);
             txtUser.setVisible(true);
             btnConfirm.setVisible(true);
+            imgLoad.setVisible(false);
+            txtLoad.setVisible(false);
+            btnLoad.setVisible(false);
         } else {
             imgUser.setVisible(false);
             btnConfirm.setVisible(false);
             txtUser.setVisible(false);
+            imgLoad.setVisible(false);
+            txtLoad.setVisible(false);
+            btnLoad.setVisible(false);
         }
     }
 
     @FXML
     void clickSound(MouseEvent event) {
-        if (sound == true) {
+        if (MainApp.sound == true) {
             MainApp.sound = false;
             lblSound.setText("OFF");
-        } else if (sound == false) {
+            music.stop();
+            lblSound.setTextFill(Color.RED);
+        } else if (MainApp.sound == false) {
             MainApp.sound = true;
             lblSound.setText("ON");
+            music.play();
+            lblSound.setTextFill(Color.GREEN);
         }
     }
 
@@ -187,6 +201,15 @@ public class MainMenu implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        music = new MediaPlayer((new Media(getClass().getResource("/MenuMusic.mp3").toString())));
+
+        music.setVolume(25);
+
+        if(MainApp.sound == true){
+            music.play();
+        }
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Help");
         alert.setHeaderText(null);

@@ -22,6 +22,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Shape;
@@ -86,10 +88,10 @@ public class BattleSequence implements Initializable {
     @FXML
     private Button btnBack;
 
+    MediaPlayer battle;
+    MediaPlayer victory;
 
     Image zombie = new Image(getClass().getResource("/ZOMBIE.png").toString());
-
-
 
     Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
     Timeline pause = new Timeline(new KeyFrame(Duration.millis(1000), ae -> pauseVoid()));
@@ -112,6 +114,9 @@ public class BattleSequence implements Initializable {
     @FXML
     void clickBack(ActionEvent event) throws IOException {
         MainApp.setRoot("Gameplay", "Priest's Conquest");
+        if(MainApp.sound == true){
+            victory.stop();
+        }
     }
 
     void die(){
@@ -121,6 +126,20 @@ public class BattleSequence implements Initializable {
             toggleOptions(false,false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
+        }
+    }
+
+    void win(){
+        zombieHealth = 0;
+        lblEnemyHealth.setText("" + zombieHealth);
+        AnimateText(lblMessage, "You defeated the Zombie!");
+        MainApp.winCount = 1;
+        toggleOptions(false, false);
+        btnBack.setVisible(true);
+        MainApp.gold = MainApp.gold + 10;
+        if (MainApp.sound == true){
+            battle.stop();
+            victory.play();
         }
     }
 
@@ -202,13 +221,7 @@ public class BattleSequence implements Initializable {
             smiteDmg = ThreadLocalRandom.current().nextInt(10, 14 + 1);
             zombieHealth = zombieHealth - smiteDmg;
             if (zombieHealth <= 0) {
-                zombieHealth = 0;
-                lblEnemyHealth.setText("" + zombieHealth);
-                AnimateText(lblMessage, "You defeated the Zombie!");
-                toggleOptions(false, false);
-                btnBack.setVisible(true);
-                MainApp.winCount = 1;
-                MainApp.gold = MainApp.gold + 10;
+                win();
             } else {
                 lblEnemyHealth.setText("" + zombieHealth);
                 AnimateText(lblMessage, "You did " + smiteDmg + " damage to the Zombie!");
@@ -230,13 +243,7 @@ public class BattleSequence implements Initializable {
             spearDmg = ThreadLocalRandom.current().nextInt(6, 20 + 1);
             zombieHealth = zombieHealth - spearDmg;
             if(zombieHealth <= 0) {
-                zombieHealth = 0;
-                lblEnemyHealth.setText("" + zombieHealth);
-                AnimateText(lblMessage, "You defeated the Zombie!");
-                toggleOptions(false, false);
-                btnBack.setVisible(true);
-                MainApp.winCount = 1;
-                MainApp.gold = MainApp.gold + 10;
+                win();
             }else{
                 lblEnemyHealth.setText("" + zombieHealth);
                 AnimateText(lblMessage, "You did " + spearDmg + " damage to the Zombie!");
@@ -274,13 +281,7 @@ public class BattleSequence implements Initializable {
 
             }else{
                 if(zombieHealth < 0){
-                    zombieHealth = 0;
-                    lblEnemyHealth.setText("" + zombieHealth);
-                    AnimateText(lblMessage, "You defeated the Zombie!");
-                    MainApp.winCount = 1;
-                    toggleOptions(false, false);
-                    btnBack.setVisible(true);
-                    MainApp.gold = MainApp.gold + 10;
+                    win();
                 }else{
                     zombieHealth = zombieHealth - 50;
                     lblEnemyHealth.setText("" + zombieHealth);
@@ -353,6 +354,17 @@ public class BattleSequence implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        battle = new MediaPlayer((new Media(getClass().getResource("/BattleMusic.mp3").toString())));
+        victory = new MediaPlayer((new Media(getClass().getResource("/WinMusic.mp3").toString())));
+
+        battle.setVolume(25);
+        victory.setVolume(25);
+
+        if(MainApp.sound == true){
+            battle.play();
+        }
+
         UI.setCycleCount(Timeline.INDEFINITE);
         pause.setCycleCount(Timeline.INDEFINITE);
         UI.play();

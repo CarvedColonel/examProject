@@ -19,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -88,6 +90,9 @@ public class BattleSequence2 implements Initializable {
 
     @FXML
     private ImageView imgHealth;
+
+    MediaPlayer battle;
+    MediaPlayer victory;
 
 
     Image skeleton = new Image(getClass().getResource("/SKELETON.png").toString());
@@ -216,6 +221,20 @@ public class BattleSequence2 implements Initializable {
         }
     }
 
+    void win(){
+        skeletonHealth = 0;
+        lblEnemyHealth.setText("" + skeletonHealth);
+        AnimateText(lblMessage, "You defeated the Zombie!");
+        MainApp.winCount = 1;
+        toggleOptions(false, false);
+        btnBack.setVisible(true);
+        MainApp.gold = MainApp.gold + 10;
+        if (MainApp.sound == true){
+            battle.stop();
+            victory.play();
+        }
+    }
+
     void toggleOptions(boolean tf, boolean all) {
 
         lblMove1.setVisible(all);
@@ -234,13 +253,7 @@ public class BattleSequence2 implements Initializable {
             smiteDmg = ThreadLocalRandom.current().nextInt(10, 14 + 1);
             skeletonHealth = skeletonHealth - (smiteDmg + MainApp.dmgBuff);
             if (skeletonHealth <= 0) {
-                skeletonHealth = 0;
-                lblEnemyHealth.setText("" + skeletonHealth);
-                AnimateText(lblMessage, "You defeated the Skeleton!");
-                toggleOptions(false, false);
-                btnBack.setVisible(true);
-                MainApp.winCount = 2;
-                MainApp.gold = MainApp.gold + 10;
+                win();
             } else {
                 lblEnemyHealth.setText("" + skeletonHealth);
                 AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the Skeleton!");
@@ -263,13 +276,7 @@ public class BattleSequence2 implements Initializable {
             spearDmg = ThreadLocalRandom.current().nextInt(6, 20 + 1);
             skeletonHealth = skeletonHealth - (spearDmg + MainApp.dmgBuff);
             if (skeletonHealth <= 0) {
-                skeletonHealth = 0;
-                lblEnemyHealth.setText("" + skeletonHealth);
-                AnimateText(lblMessage, "You defeated the Skeleton!");
-                toggleOptions(false, false);
-                btnBack.setVisible(true);
-                MainApp.winCount = 2;
-                MainApp.gold = MainApp.gold + 10;
+                win();
             } else {
                 lblEnemyHealth.setText("" + skeletonHealth);
                 AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the Skeleton!");
@@ -320,15 +327,9 @@ public class BattleSequence2 implements Initializable {
                 skeletonHealth = skeletonHealth - (50 + MainApp.dmgBuff);
                 lblEnemyHealth.setText("" + skeletonHealth);
                 if (skeletonHealth <= 0) {
-                    skeletonHealth = 0;
-                    lblEnemyHealth.setText("" + skeletonHealth);
-                    AnimateText(lblMessage, "You defeated the Skeleton!");
-                    toggleOptions(false, false);
-                    btnBack.setVisible(true);
-                    MainApp.winCount = 2;
-                    MainApp.gold = MainApp.gold + 10;
+                    win();
                 } else {
-                    //skeletonHealth = skeletonHealth - (50 + MainApp.dmgBuff);
+                    skeletonHealth = skeletonHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + skeletonHealth);
                     AnimateText(lblMessage, "You did 50 damage to the Skeleton!");
                     pause.play();
@@ -405,6 +406,16 @@ public class BattleSequence2 implements Initializable {
         pause.setCycleCount(Timeline.INDEFINITE);
         delay.setCycleCount(Timeline.INDEFINITE);
         UI.play();
+
+        battle = new MediaPlayer((new Media(getClass().getResource("/BattleMusic.mp3").toString())));
+        victory = new MediaPlayer((new Media(getClass().getResource("/WinMusic.mp3").toString())));
+
+        battle.setVolume(25);
+        victory.setVolume(25);
+
+        if(MainApp.sound == true){
+            battle.play();
+        }
 
         lblEnemyHealth.setText(""+skeletonHealth);
 

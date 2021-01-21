@@ -19,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -89,6 +91,8 @@ public class BattleSequence4 implements Initializable {
     @FXML
     private ImageView imgHealth;
 
+    MediaPlayer battle;
+    MediaPlayer victory;
 
     Image wizard = new Image(getClass().getResource("/WIZARD.png").toString());
 
@@ -201,6 +205,20 @@ public class BattleSequence4 implements Initializable {
         }
     }
 
+    void win(){
+        wizardHealth = 0;
+        lblEnemyHealth.setText("" + wizardHealth);
+        AnimateText(lblMessage, "You defeated the Zombie!");
+        MainApp.winCount = 1;
+        toggleOptions(false, false);
+        btnBack.setVisible(true);
+        MainApp.gold = MainApp.gold + 10;
+        if (MainApp.sound == true){
+            battle.stop();
+            victory.play();
+        }
+    }
+
     void toggleOptions(boolean tf, boolean all) {
 
         lblMove1.setVisible(all);
@@ -222,13 +240,7 @@ public class BattleSequence4 implements Initializable {
             smiteDmg = ThreadLocalRandom.current().nextInt(10, 15 + 1);
             wizardHealth = wizardHealth - (smiteDmg + MainApp.dmgBuff);
             if (wizardHealth <= 0) {
-                wizardHealth = 0;
-                lblEnemyHealth.setText("" + wizardHealth);
-                AnimateText(lblMessage, "You defeated the wizard!");
-                toggleOptions(false, false);
-                btnBack.setVisible(true);
-                MainApp.winCount = 4;
-                MainApp.gold = MainApp.gold + 10;
+                win();
             } else {
                 lblEnemyHealth.setText("" + wizardHealth);
                 AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the wizard!");
@@ -256,13 +268,7 @@ public class BattleSequence4 implements Initializable {
             spearDmg = ThreadLocalRandom.current().nextInt(10, 20 + 1);
             wizardHealth = wizardHealth - (spearDmg + MainApp.dmgBuff);
             if (wizardHealth <= 0) {
-                wizardHealth = 0;
-                lblEnemyHealth.setText("" + wizardHealth);
-                AnimateText(lblMessage, "You defeated the wizard!");
-                toggleOptions(false, false);
-                btnBack.setVisible(true);
-                MainApp.winCount = 4;
-                MainApp.gold = MainApp.gold + 10;
+                win();
             } else {
                 lblEnemyHealth.setText("" + wizardHealth);
                 AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the wizard!");
@@ -319,15 +325,9 @@ public class BattleSequence4 implements Initializable {
                 wizardHealth = wizardHealth - (50 + MainApp.dmgBuff);
                 lblEnemyHealth.setText("" + wizardHealth);
                 if (wizardHealth <= 0) {
-                    wizardHealth = 0;
-                    lblEnemyHealth.setText("" + wizardHealth);
-                    AnimateText(lblMessage, "You defeated the wizard!");
-                    toggleOptions(false, false);
-                    btnBack.setVisible(true);
-                    MainApp.winCount = 4;
-                    MainApp.gold = MainApp.gold + 10;
+                    win();
                 } else {
-                    //wizardHealth = wizardHealth - (50 + MainApp.dmgBuff);
+                    wizardHealth = wizardHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + wizardHealth);
                     AnimateText(lblMessage, "You did 50 damage to the wizard!");
                     pause.play();
@@ -405,6 +405,16 @@ public class BattleSequence4 implements Initializable {
         UI.play();
 
         lblEnemyHealth.setText(""+wizardHealth);
+
+        battle = new MediaPlayer((new Media(getClass().getResource("/BattleMusic.mp3").toString())));
+        victory = new MediaPlayer((new Media(getClass().getResource("/WinMusic.mp3").toString())));
+
+        battle.setVolume(25);
+        victory.setVolume(25);
+
+        if(MainApp.sound == true){
+            battle.play();
+        }
 
         if (MainApp.battleStage == 4) {
             imgEnemy.setImage(wizard);

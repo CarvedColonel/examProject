@@ -19,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -89,6 +91,8 @@ public class BattleSequence6 implements Initializable {
     @FXML
     private ImageView imgHealth;
 
+    MediaPlayer battle;
+    MediaPlayer victory;
 
     Image orc = new Image(getClass().getResource("/HIGHORC.png").toString());
 
@@ -221,13 +225,20 @@ public class BattleSequence6 implements Initializable {
             toggleOptions(false,false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
+        }
+    }
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Help");
-                alert.setHeaderText(null);
-                alert.setContentText("If you're struggling to beat this enemy, maybe visit the shop and buy some items to boost your stats!");
-                alert.showAndWait();
-
+    void win(){
+        orcHealth = 0;
+        lblEnemyHealth.setText("" + orcHealth);
+        AnimateText(lblMessage, "You defeated the Zombie!");
+        MainApp.winCount = 1;
+        toggleOptions(false, false);
+        btnBack.setVisible(true);
+        MainApp.gold = MainApp.gold + 10;
+        if (MainApp.sound == true){
+            battle.stop();
+            victory.play();
         }
     }
 
@@ -251,13 +262,7 @@ public class BattleSequence6 implements Initializable {
             smiteDmg = ThreadLocalRandom.current().nextInt(10, 15 + 1);
             orcHealth = orcHealth - (smiteDmg + MainApp.dmgBuff);
             if (orcHealth <= 0) {
-                orcHealth = 0;
-                lblEnemyHealth.setText("" + orcHealth);
-                AnimateText(lblMessage, "You defeated the orc!");
-                toggleOptions(false, false);
-                btnBack.setVisible(true);
-                MainApp.winCount = 6;
-                MainApp.gold = MainApp.gold + 10;
+                win();
             } else {
                 lblEnemyHealth.setText("" + orcHealth);
                 AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the orc!");
@@ -283,13 +288,7 @@ public class BattleSequence6 implements Initializable {
             spearDmg = ThreadLocalRandom.current().nextInt(10, 20 + 1);
             orcHealth = orcHealth - (spearDmg + MainApp.dmgBuff);
             if (orcHealth <= 0) {
-                orcHealth = 0;
-                lblEnemyHealth.setText("" + orcHealth);
-                AnimateText(lblMessage, "You defeated the orc!");
-                toggleOptions(false, false);
-                btnBack.setVisible(true);
-                MainApp.winCount = 6;
-                MainApp.gold = MainApp.gold + 10;
+                win();
             } else {
                 lblEnemyHealth.setText("" + orcHealth);
                 AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the orc!");
@@ -343,15 +342,9 @@ public class BattleSequence6 implements Initializable {
                 orcHealth = orcHealth - (50 + MainApp.dmgBuff);
                 lblEnemyHealth.setText("" + orcHealth);
                 if (orcHealth <= 0) {
-                    orcHealth = 0;
-                    lblEnemyHealth.setText("" + orcHealth);
-                    AnimateText(lblMessage, "You defeated the orc!");
-                    toggleOptions(false, false);
-                    btnBack.setVisible(true);
-                    MainApp.winCount = 6;
-                    MainApp.gold = MainApp.gold + 10;
+                    win();
                 } else {
-                    //orcHealth = orcHealth - (50 + MainApp.dmgBuff);
+                    orcHealth = orcHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + orcHealth);
                     AnimateText(lblMessage, "You did 50 damage to the orc!");
                     pause.play();
@@ -430,6 +423,16 @@ public class BattleSequence6 implements Initializable {
         UI.play();
 
         lblEnemyHealth.setText(""+orcHealth);
+
+        battle = new MediaPlayer((new Media(getClass().getResource("/BattleMusic.mp3").toString())));
+        victory = new MediaPlayer((new Media(getClass().getResource("/WinMusic.mp3").toString())));
+
+        battle.setVolume(25);
+        victory.setVolume(25);
+
+        if(MainApp.sound == true){
+            battle.play();
+        }
 
         if (MainApp.battleStage == 6) {
             imgEnemy.setImage(orc);
