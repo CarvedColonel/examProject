@@ -22,6 +22,8 @@ public class MainApp extends Application {
 
     public static int winCount = 0;
 
+    public static int lossCount = 0;
+
     @Override
     public void start(@SuppressWarnings("exports") Stage s) throws IOException {
         stage=s;

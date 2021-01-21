@@ -116,6 +116,8 @@ public class BattleSequence implements Initializable {
 
     void die(){
         if(health <= 0){
+            health = 0;
+            lblPlayerHealth.setText(""+health);
             toggleOptions(false,false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);

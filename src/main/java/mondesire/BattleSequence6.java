@@ -13,6 +13,7 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -206,7 +207,7 @@ public class BattleSequence6 implements Initializable {
 
         }else if (orcAttack == 4) {
 
-            AnimateText(lblMessage, "The High Orc used Missed his Attack!");
+            AnimateText(lblMessage, "The High Orc Missed his Attack!");
 
                 toggleOptions(true, false);
 
@@ -215,9 +216,18 @@ public class BattleSequence6 implements Initializable {
 
     void die(){
         if(health <= 0){
+            health = 0;
+            lblPlayerHealth.setText(""+health);
             toggleOptions(false,false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Help");
+                alert.setHeaderText(null);
+                alert.setContentText("If you're struggling to beat this enemy, maybe visit the shop and buy some items to boost your stats!");
+                alert.showAndWait();
+
         }
     }
 
