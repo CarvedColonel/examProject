@@ -13,6 +13,7 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -91,8 +92,8 @@ public class BattleSequence5 implements Initializable {
 
     Image wolf = new Image(getClass().getResource("/WOLF.png").toString());
 
-    Image staff = new Image(getClass().getResource("/staff.png").toString());
-    Image potion = new Image(getClass().getResource("/holywater.png").toString());
+    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
+    Image potion = new Image(getClass().getResource("/holyWater.png").toString());
     Image scroll = new Image(getClass().getResource("/healthScroll.png").toString());
 
 
@@ -167,7 +168,7 @@ public class BattleSequence5 implements Initializable {
         wolfAttack = ThreadLocalRandom.current().nextInt(1, 3 + 1);
         if (wolfAttack == 1) {
             AnimateText(lblMessage, "The wolf used Bark!");
-            int bark = ThreadLocalRandom.current().nextInt(10, 15 + 1);
+            int bark = ThreadLocalRandom.current().nextInt(5, 10 + 1);
             health = health - bark;
             pause.play();
             lblPlayerHealth.setText("" + health);
@@ -175,14 +176,14 @@ public class BattleSequence5 implements Initializable {
             die();
         } else if (wolfAttack == 2) {
             AnimateText(lblMessage, "The wolf used Sword Slash!");
-            int slash = ThreadLocalRandom.current().nextInt(20, 30 + 1);
+            int slash = ThreadLocalRandom.current().nextInt(25, 35 + 1);
             health = health - slash;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
             die();
         } else if (wolfAttack == 3) {
-            AnimateText(lblMessage, "The wolf used !");
-            int trick = ThreadLocalRandom.current().nextInt(0, 20 + 1);
+            AnimateText(lblMessage, "The wolf used Dash!");
+            int trick = ThreadLocalRandom.current().nextInt(15, 15 + 1);
             health = health - trick;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
@@ -200,6 +201,7 @@ public class BattleSequence5 implements Initializable {
             toggleOptions(false,false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
+
         }
     }
 
@@ -228,7 +230,8 @@ public class BattleSequence5 implements Initializable {
                 AnimateText(lblMessage, "You defeated the wolf!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
-                MainApp.winCount = 3;
+                MainApp.winCount = 5;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + wolfHealth);
                 AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the wolf!");
@@ -259,7 +262,8 @@ public class BattleSequence5 implements Initializable {
                 AnimateText(lblMessage, "You defeated the wolf!");
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
-                MainApp.winCount = 3;
+                MainApp.winCount = 5;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + wolfHealth);
                 AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the wolf!");
@@ -319,7 +323,8 @@ public class BattleSequence5 implements Initializable {
                     AnimateText(lblMessage, "You defeated the wolf!");
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
-                    MainApp.winCount = 3;
+                    MainApp.winCount = 5;
+                    MainApp.gold = MainApp.gold + 10;
                 } else {
                     //wolfHealth = wolfHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + wolfHealth);
