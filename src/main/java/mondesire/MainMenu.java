@@ -207,6 +207,8 @@ public class MainMenu implements Initializable {
 
         music.setVolume(25);
 
+        music.setCycleCount(MediaPlayer.INDEFINITE);
+
         if(MainApp.sound == true){
             music.play();
         }

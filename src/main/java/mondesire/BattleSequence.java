@@ -428,6 +428,9 @@ public class BattleSequence implements Initializable {
         //sets the music volume
         battle.setVolume(25);
         victory.setVolume(25);
+        //set how many times the song replays
+        battle.setCycleCount(MediaPlayer.INDEFINITE);
+        victory.setCycleCount(MediaPlayer.INDEFINITE);
         //if sound is on then play the music
         if (MainApp.sound == true) {
             battle.play();

@@ -126,6 +126,9 @@ public class BattleSequence2 implements Initializable {
     @FXML
     void clickBack(ActionEvent event) throws IOException {
         MainApp.setRoot("Gameplay", "Priest's Conquest");
+        if (MainApp.sound == true) {
+            victory.stop();
+        }
     }
 
 
@@ -191,6 +194,7 @@ public class BattleSequence2 implements Initializable {
             btnBack.setVisible(true);
             delay.stop();
             pauseTimer = 0;
+            win();
 
         }
     }
@@ -246,7 +250,7 @@ public class BattleSequence2 implements Initializable {
 
         skeletonHealth = 0;
         lblEnemyHealth.setText("" + skeletonHealth);
-        AnimateText(lblMessage, "You defeated the Zombie!");
+        AnimateText(lblMessage, "You defeated the Skeleton!");
         MainApp.winCount = 1;
         toggleOptions(false, false);
         btnBack.setVisible(true);
@@ -449,6 +453,9 @@ public class BattleSequence2 implements Initializable {
 
         battle = new MediaPlayer((new Media(getClass().getResource("/BattleMusic.mp3").toString())));
         victory = new MediaPlayer((new Media(getClass().getResource("/WinMusic.mp3").toString())));
+
+        battle.setCycleCount(MediaPlayer.INDEFINITE);
+        victory.setCycleCount(MediaPlayer.INDEFINITE);
 
         battle.setVolume(25);
         victory.setVolume(25);

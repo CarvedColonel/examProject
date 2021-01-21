@@ -124,6 +124,9 @@ public class BattleSequence5 implements Initializable {
     @FXML
     void clickBack(ActionEvent event) throws IOException {
         MainApp.setRoot("Gameplay", "Priest's Conquest");
+        if (MainApp.sound == true) {
+            victory.stop();
+        }
     }
 
 
@@ -209,7 +212,7 @@ public class BattleSequence5 implements Initializable {
     void win() {
         wolfHealth = 0;
         lblEnemyHealth.setText("" + wolfHealth);
-        AnimateText(lblMessage, "You defeated the Zombie!");
+        AnimateText(lblMessage, "You defeated the Wolf!");
         MainApp.winCount = 1;
         toggleOptions(false, false);
         btnBack.setVisible(true);
@@ -404,6 +407,9 @@ public class BattleSequence5 implements Initializable {
 
         battle = new MediaPlayer((new Media(getClass().getResource("/BattleMusic.mp3").toString())));
         victory = new MediaPlayer((new Media(getClass().getResource("/WinMusic.mp3").toString())));
+
+        battle.setCycleCount(MediaPlayer.INDEFINITE);
+        victory.setCycleCount(MediaPlayer.INDEFINITE);
 
         battle.setVolume(25);
         victory.setVolume(25);
