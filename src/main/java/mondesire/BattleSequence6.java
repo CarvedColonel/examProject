@@ -228,6 +228,10 @@ public class BattleSequence6 implements Initializable {
             toggleOptions(false, false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
+
+            if (MainApp.sound == true) {
+                battle.stop();
+            }
         }
     }
 
@@ -275,7 +279,7 @@ public class BattleSequence6 implements Initializable {
 
         } else if (bless = true) {
             animateLength = 3000;
-            AnimateText(lblMessage, "He didnt understand," + "\n" + " the joke went right through him");
+            AnimateText(lblMessage, "'this is no time for jokes'");
             pause.play();
             toggleOptions(false, false);
         }
@@ -300,9 +304,10 @@ public class BattleSequence6 implements Initializable {
             }
 
         } else if (bless = true) {
-            animateLength = 10000;
+            animateLength = 3000;
+            AnimateText(lblMessage, "Orc's can't be exorcised");
+            pause.play();
             toggleOptions(false, false);
-            delay.play();
         }
     }
 

@@ -206,6 +206,10 @@ public class BattleSequence5 implements Initializable {
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
 
+            if (MainApp.sound == true) {
+                battle.stop();
+            }
+
         }
     }
 
