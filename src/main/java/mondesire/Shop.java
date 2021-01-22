@@ -16,6 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -79,7 +81,7 @@ public class Shop implements Initializable {
     private Label lblCurrency;
     //Array for UI stuff
     Label text[] = new Label[6];
-
+    MediaPlayer player;
     //Animation for text using the typewriter effect more info on the gameplay scene
     public void animateText(Label lbl, String message) {
 
@@ -174,7 +176,9 @@ public class Shop implements Initializable {
 //Leaves the store
     @FXML
     void leave(MouseEvent event) throws IOException {
+        player.stop();
         MainApp.setRoot("Gameplay");
+
     }
 //when the user buys the item it sets the buff and updates their gold
     @FXML
@@ -241,6 +245,15 @@ public class Shop implements Initializable {
         lblShopText.setTextAlignment(TextAlignment.CENTER);
         //This makes sure that the game recognises there in the shop and puts them in the right location when they leave
         MainApp.shop = true;
+        //Music code
+        player = new MediaPlayer((new Media(getClass().getResource("/ShopMusic.mp3").toString())));
+        player.setVolume(0.05);
+        player.setCycleCount(MediaPlayer.INDEFINITE);
+        if (MainApp.sound == true) {
+            player.play();
+        } else if (MainApp.sound == false) {
+            player.stop();
+        }
     }
 
 }
