@@ -1,8 +1,8 @@
 package mondesire;
 /*
-Put header here
-
-
+Aidan Mason-Mondesire
+January 22nd 2021
+The Game Over screen when you beat the game
  */
 
 import javafx.animation.Animation;
