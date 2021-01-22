@@ -1,11 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal" fx:controller="mondesire.GameOver">
-    <children>
-        <Button layoutX="128.0" layoutY="107.0" onAction="#btnClickAction" text="Click Me!" />
-        <Label fx:id="lblOut" layoutX="53.0" layoutY="30.0" minHeight="16" minWidth="69" prefHeight="52.0" prefWidth="215.0" />
-    </children>
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.GameOver">
+   <children>
+      <ImageView fitHeight="244.0" fitWidth="244.0" layoutX="509.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../glow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="304.0" fitWidth="332.0" layoutX="467.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pedestal.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="557.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../priestCharacter.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="260.0" layoutY="34.0" text="Thank You!" textFill="WHITE">
+         <font>
+            <Font name="Lucida Sans Typewriter Bold" size="50.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="40.0" layoutY="125.0" prefHeight="312.0" prefWidth="472.0" text="22chars per line" textFill="WHITE">
+         <font>
+            <Font name="Lucida Sans Typewriter Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="381.0" layoutY="468.0" onMouseClicked="#clickExit" text="Exit" textFill="WHITE">
+         <font>
+            <Font name="Lucida Sans Typewriter Bold" size="25.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
