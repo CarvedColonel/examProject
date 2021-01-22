@@ -217,7 +217,7 @@ public class BattleSequence5 implements Initializable {
         wolfHealth = 0;
         lblEnemyHealth.setText("" + wolfHealth);
         AnimateText(lblMessage, "You defeated the Wolf!");
-        MainApp.winCount = 1;
+        MainApp.winCount = 5;
         toggleOptions(false, false);
         btnBack.setVisible(true);
         MainApp.gold = MainApp.gold + 10;

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="502.0" prefWidth="802.0" style="-fx-background-color: black;" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mondesire.GameOver">
+   <children>
+      <ImageView fitHeight="244.0" fitWidth="244.0" layoutX="499.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../glow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="304.0" fitWidth="332.0" layoutX="457.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pedestal.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="547.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../priestCharacter.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="250.0" layoutY="24.0" text="Thank You!" textFill="WHITE">
+         <font>
+            <Font name="Lucida Sans Typewriter Bold" size="50.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="30.0" layoutY="115.0" prefHeight="312.0" prefWidth="472.0" text="22chars per line" textFill="WHITE">
+         <font>
+            <Font name="Lucida Sans Typewriter Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="371.0" layoutY="458.0" onMouseClicked="#clickExit" text="Exit" textFill="WHITE">
+         <font>
+            <Font name="Lucida Sans Typewriter Bold" size="25.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

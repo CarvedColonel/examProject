@@ -227,7 +227,7 @@ public class BattleSequence4 implements Initializable {
         wizardHealth = 0;
         lblEnemyHealth.setText("" + wizardHealth);
         AnimateText(lblMessage, "You defeated the Wizard!");
-        MainApp.winCount = 1;
+        MainApp.winCount = 4;
         toggleOptions(false, false);
         btnBack.setVisible(true);
         MainApp.gold = MainApp.gold + 10;

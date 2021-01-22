@@ -254,7 +254,7 @@ public class BattleSequence3 implements Initializable {
         ghostHealth = 0;
         lblEnemyHealth.setText("" + ghostHealth);
         AnimateText(lblMessage, "You defeated the Ghost!");
-        MainApp.winCount = 1;
+        MainApp.winCount = 3;
         toggleOptions(false, false);
         btnBack.setVisible(true);
         MainApp.gold = MainApp.gold + 10;

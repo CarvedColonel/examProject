@@ -255,7 +255,7 @@ public class BattleSequence2 implements Initializable {
         skeletonHealth = 0;
         lblEnemyHealth.setText("" + skeletonHealth);
         AnimateText(lblMessage, "You defeated the Skeleton!");
-        MainApp.winCount = 1;
+        MainApp.winCount = 2;
         toggleOptions(false, false);
         btnBack.setVisible(true);
         MainApp.gold = MainApp.gold + 10;

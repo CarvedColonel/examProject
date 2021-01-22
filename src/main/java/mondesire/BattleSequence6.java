@@ -124,10 +124,16 @@ public class BattleSequence6 implements Initializable {
 
     @FXML
     void clickBack(ActionEvent event) throws IOException {
-        MainApp.setRoot("Gameplay", "Priest's Conquest");
+        if(MainApp.winCount == 6){
+            MainApp.setRoot("GameOver", "Priest's Conquest");
+        }else{
+            MainApp.setRoot("Gameplay", "Priest's Conquest");
+        }
+
         if (MainApp.sound == true) {
             victory.stop();
         }
+
     }
 
 
@@ -239,7 +245,7 @@ public class BattleSequence6 implements Initializable {
         orcHealth = 0;
         lblEnemyHealth.setText("" + orcHealth);
         AnimateText(lblMessage, "You defeated the High Orc!");
-        MainApp.winCount = 1;
+        MainApp.winCount = 6;
         toggleOptions(false, false);
         btnBack.setVisible(true);
         MainApp.gold = MainApp.gold + 10;
