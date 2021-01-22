@@ -651,7 +651,7 @@ public class Gameplay implements Initializable {
                 }
                 panEnemy1.setVisible(false);
                 //This offers the user the ability to save after each fight they win
-                if (MainApp.save == 0) {
+                if (MainApp.save == 0 && MainApp.shop == false) {
                     decision = 3;
                     interact();
                     animateText(lblLetter1, "Would you like to save?");
@@ -669,7 +669,7 @@ public class Gameplay implements Initializable {
                     panPriest.setLayoutY(365);
                 }
                 panEnemy2.setVisible(false);
-                if (MainApp.save == 0 || MainApp.save == 1) {
+                if (MainApp.save == 0  && MainApp.shop == false || MainApp.save == 1  && MainApp.shop == false) {
                     decision = 3;
                     interact();
                     animateText(lblLetter1, "Would you like to save?");

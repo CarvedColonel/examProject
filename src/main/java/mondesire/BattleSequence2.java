@@ -97,8 +97,8 @@ public class BattleSequence2 implements Initializable {
 
     Image skeleton = new Image(getClass().getResource("/SKELETON.png").toString());
 
-    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
-    Image potion = new Image(getClass().getResource("/holyWater.png").toString());
+    Image staff = new Image(getClass().getResource("/staff.png").toString());
+    Image potion = new Image(getClass().getResource("/holyWater2.png").toString());
     Image scroll = new Image(getClass().getResource("/healthScroll.png").toString());
 
 
@@ -128,6 +128,9 @@ public class BattleSequence2 implements Initializable {
         MainApp.setRoot("Gameplay", "Priest's Conquest");
         if (MainApp.sound == true) {
             victory.stop();
+            battle.stop();
+        }  else if (MainApp.sound == true && MainApp.winCount != 2) {
+            battle.stop();
         }
     }
 
@@ -377,8 +380,6 @@ public class BattleSequence2 implements Initializable {
                 if (skeletonHealth <= 0) {
                     win();
                 } else {
-                    skeletonHealth = skeletonHealth - (50 + MainApp.dmgBuff);
-                    lblEnemyHealth.setText("" + skeletonHealth);
                     AnimateText(lblMessage, "You did 50 damage to the Skeleton!");
                     pause.play();
                     toggleOptions(false, false);

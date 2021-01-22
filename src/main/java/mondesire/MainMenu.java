@@ -84,6 +84,7 @@ public class MainMenu implements Initializable {
             MainApp.dmgBuff = info.getDamageBuff();
             MainApp.holyWater = info.getHolyBuff();
             MainApp.healthBuff = info.getHealthBuff();
+            music.stop();
             MainApp.setRoot("Gameplay");
         }
     }
@@ -220,7 +221,7 @@ public class MainMenu implements Initializable {
 
         music = new MediaPlayer((new Media(getClass().getResource("/MenuMusic.mp3").toString())));
 
-        music.setVolume(25);
+        music.setVolume(0.25);
 
         music.setCycleCount(MediaPlayer.INDEFINITE);
 

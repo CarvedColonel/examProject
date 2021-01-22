@@ -96,8 +96,8 @@ public class BattleSequence6 implements Initializable {
 
     Image orc = new Image(getClass().getResource("/HIGHORC.png").toString());
 
-    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
-    Image potion = new Image(getClass().getResource("/holyWater.png").toString());
+    Image staff = new Image(getClass().getResource("/staff.png").toString());
+    Image potion = new Image(getClass().getResource("/holyWater2.png").toString());
     Image scroll = new Image(getClass().getResource("/healthScroll.png").toString());
 
 
@@ -132,6 +132,8 @@ public class BattleSequence6 implements Initializable {
 
         if (MainApp.sound == true) {
             victory.stop();
+        }  else if (MainApp.sound == true && MainApp.winCount != 1) {
+            battle.stop();
         }
 
     }

@@ -96,10 +96,9 @@ public class BattleSequence5 implements Initializable {
 
     Image wolf = new Image(getClass().getResource("/WOLF.png").toString());
 
-    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
-    Image potion = new Image(getClass().getResource("/holyWater.png").toString());
+    Image staff = new Image(getClass().getResource("/staff.png").toString());
+    Image potion = new Image(getClass().getResource("/holyWater2.png").toString());
     Image scroll = new Image(getClass().getResource("/healthScroll.png").toString());
-
 
     Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
     Timeline pause = new Timeline(new KeyFrame(Duration.millis(1000), ae -> pauseVoid()));
@@ -126,6 +125,8 @@ public class BattleSequence5 implements Initializable {
         MainApp.setRoot("Gameplay", "Priest's Conquest");
         if (MainApp.sound == true) {
             victory.stop();
+        }  else if (MainApp.sound == true && MainApp.winCount != 1) {
+            battle.stop();
         }
     }
 

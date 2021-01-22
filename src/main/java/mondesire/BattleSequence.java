@@ -134,6 +134,8 @@ public class BattleSequence implements Initializable {
         MainApp.setRoot("Gameplay", "Priest's Conquest");
         if (MainApp.sound == true) {
             victory.stop();
+        } else if (MainApp.sound == true && MainApp.winCount != 1) {
+            battle.stop();
         }
     }
 
