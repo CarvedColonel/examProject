@@ -242,4 +242,22 @@ public class Shop implements Initializable {
         //This makes sure that the game recognises there in the shop and puts them in the right location when they leave
         MainApp.shop = true;
     }
+    @FXML
+    void clickLoad(ActionEvent event) throws IOException {
+
+        spot = Integer.parseInt(txtLoad.getText());
+        if (spot > 6 || spot < 1 || txtLoad.getText().length() > 1) {
+
+        }else {
+            info.open("matt.raf", spot);
+            MainApp.user = info.getuserName();
+            MainApp.gold = info.getBitcoin();
+            MainApp.winCount = info.getWinCounter();
+            MainApp.save = info.getSaveCounter();
+            MainApp.dmgBuff = info.getDamageBuff();
+            MainApp.holyWater = info.getHolyBuff();
+            MainApp.healthBuff = info.getHealthBuff();
+            MainApp.setRoot("Gameplay");
+        }
+    }
 }
