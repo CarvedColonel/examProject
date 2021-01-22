@@ -87,14 +87,9 @@ public class BattleSequence implements Initializable {
     private Button btnBack;
 
 
-
-
-    Image wolf = new Image(getClass().getResource("/WOLF.png").toString());
-    Image skeleton = new Image(getClass().getResource("/SKELETON.png").toString());
     Image zombie = new Image(getClass().getResource("/ZOMBIE.png").toString());
-    Image wizard = new Image(getClass().getResource("/WIZARD.png").toString());
-    Image ghost = new Image(getClass().getResource("/GHOST.png").toString());
-    Image orc = new Image(getClass().getResource("/HIGHORC.png").toString());
+
+
 
     Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
     Timeline pause = new Timeline(new KeyFrame(Duration.millis(1000), ae -> pauseVoid()));
@@ -121,6 +116,8 @@ public class BattleSequence implements Initializable {
 
     void die(){
         if(health <= 0){
+            health = 0;
+            lblPlayerHealth.setText(""+health);
             toggleOptions(false,false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
@@ -211,6 +208,7 @@ public class BattleSequence implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 1;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + zombieHealth);
                 AnimateText(lblMessage, "You did " + smiteDmg + " damage to the Zombie!");
@@ -238,6 +236,7 @@ public class BattleSequence implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 1;
+                MainApp.gold = MainApp.gold + 10;
             }else{
                 lblEnemyHealth.setText("" + zombieHealth);
                 AnimateText(lblMessage, "You did " + spearDmg + " damage to the Zombie!");
@@ -281,6 +280,7 @@ public class BattleSequence implements Initializable {
                     MainApp.winCount = 1;
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
+                    MainApp.gold = MainApp.gold + 10;
                 }else{
                     zombieHealth = zombieHealth - 50;
                     lblEnemyHealth.setText("" + zombieHealth);
@@ -361,18 +361,6 @@ public class BattleSequence implements Initializable {
             imgEnemy.setImage(zombie);
             imageSize(238, 146, 1011, 305);
             AnimateText(lblMessage, "A Zombie has appeared! You will...");
-        }else if (MainApp.battleStage == 4) {
-            imgEnemy.setImage(wolf);
-            imageSize(143, 142, 1011, 420);
-            AnimateText(lblMessage, "A Wolf has appeared! You will...");
-        } else if (MainApp.battleStage == 5) {
-            imgEnemy.setImage(wizard);
-            imageSize(161, 124, 1011, 420);
-            AnimateText(lblMessage, "A Wizard has appeared! You will...");
-        } else if (MainApp.battleStage == 6) {
-            imgEnemy.setImage(orc);
-            imageSize(386, 343, 856, 195);
-            AnimateText(lblMessage, "The High Orc has appeared! You will...");
         }
 
 
