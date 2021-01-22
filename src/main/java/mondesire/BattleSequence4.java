@@ -1,8 +1,8 @@
 package mondesire;
 /*
-Put header here
-
-
+Aidan Mason-Mondesire
+January 18th 2021
+The fourth battle sequence of six where you fight the wizard
  */
 
 import javafx.animation.Animation;
@@ -19,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -89,11 +91,13 @@ public class BattleSequence4 implements Initializable {
     @FXML
     private ImageView imgHealth;
 
+    MediaPlayer battle;
+    MediaPlayer victory;
 
     Image wizard = new Image(getClass().getResource("/WIZARD.png").toString());
 
-    Image staff = new Image(getClass().getResource("/staff.png").toString());
-    Image potion = new Image(getClass().getResource("/holywater.png").toString());
+    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
+    Image potion = new Image(getClass().getResource("/holyWater.png").toString());
     Image scroll = new Image(getClass().getResource("/healthScroll.png").toString());
 
 
@@ -120,6 +124,9 @@ public class BattleSequence4 implements Initializable {
     @FXML
     void clickBack(ActionEvent event) throws IOException {
         MainApp.setRoot("Gameplay", "Priest's Conquest");
+        if (MainApp.sound == true) {
+            victory.stop();
+        }
     }
 
 
@@ -145,9 +152,9 @@ public class BattleSequence4 implements Initializable {
         lblMove3.setVisible(true);
         lblMove1.setText("JOKE");
         lblMove2.setText("EXORCISE");
-        if (MainApp.holyWater == true){
+        if (MainApp.holyWater == true) {
             lblMove3.setText("Holy Water");
-        }else {
+        } else {
             lblMove3.setText("[LOCKED]");
         }
     }
@@ -164,8 +171,11 @@ public class BattleSequence4 implements Initializable {
 
 
     void wizardAttack() {
+
         wizardAttack = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+
         if (wizardAttack == 1) {
+
             AnimateText(lblMessage, "The wizard used Fireball!");
             int fire = ThreadLocalRandom.current().nextInt(10, 25 + 1);
             health = health - fire;
@@ -173,31 +183,58 @@ public class BattleSequence4 implements Initializable {
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
             die();
+
         } else if (wizardAttack == 2) {
+
             AnimateText(lblMessage, "The wizard used Dark Magic!");
             int magic = ThreadLocalRandom.current().nextInt(10, 19 + 1);
             health = health - magic;
             lblPlayerHealth.setText("" + health);
             toggleOptions(true, false);
             die();
+
         } else if (wizardAttack == 3) {
+            //the wizard as well as the orc(final fight) have a healing move which will grant them extra health if used. they do not have a limit to using this move
             AnimateText(lblMessage, "The wizard used Healing Aura!");
             int heal = ThreadLocalRandom.current().nextInt(5, 15 + 1);
             lblPlayerHealth.setText("" + health);
             wizardHealth = wizardHealth + heal;
             lblEnemyHealth.setText("" + wizardHealth);
             toggleOptions(true, false);
+
         }
     }
 
-    void die(){
-        if(health <= 0){
+    void die() {
+
+        if (health <= 0) {
+
             health = 0;
-            lblPlayerHealth.setText(""+health);
-            toggleOptions(false,false);
+            lblPlayerHealth.setText("" + health);
+            toggleOptions(false, false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
 
+            if (MainApp.sound == true) {
+                battle.stop();
+            }
+
+        }
+    }
+
+    void win() {
+
+        wizardHealth = 0;
+        lblEnemyHealth.setText("" + wizardHealth);
+        AnimateText(lblMessage, "You defeated the Wizard!");
+        MainApp.winCount = 4;
+        toggleOptions(false, false);
+        btnBack.setVisible(true);
+        MainApp.gold = MainApp.gold + 10;
+
+        if (MainApp.sound == true) {
+            battle.stop();
+            victory.play();
         }
     }
 
@@ -219,19 +256,16 @@ public class BattleSequence4 implements Initializable {
         animateLength = 2000;
 
         if (fight == true) {
+
             smiteDmg = ThreadLocalRandom.current().nextInt(10, 15 + 1);
             wizardHealth = wizardHealth - (smiteDmg + MainApp.dmgBuff);
+
             if (wizardHealth <= 0) {
-                wizardHealth = 0;
-                lblEnemyHealth.setText("" + wizardHealth);
-                AnimateText(lblMessage, "You defeated the wizard!");
-                toggleOptions(false, false);
-                btnBack.setVisible(true);
-                MainApp.winCount = 4;
-                MainApp.gold = MainApp.gold + 10;
+                win();
             } else {
+
                 lblEnemyHealth.setText("" + wizardHealth);
-                AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the wizard!");
+                AnimateText(lblMessage, "You did " + (smiteDmg + MainApp.dmgBuff) + " damage to the wizard!");
                 pause.play();
                 toggleOptions(false, false);
             }
@@ -239,7 +273,7 @@ public class BattleSequence4 implements Initializable {
         } else if (bless = true) {
 
             animateLength = 3000;
-            AnimateText(lblMessage, "'This is no time for jokes'"+"\n"+"The wizard exclaims.");
+            AnimateText(lblMessage, "'This is no time for jokes'" + "\n" + "The wizard exclaims.");
             pause.play();
             toggleOptions(false, false);
 
@@ -256,16 +290,10 @@ public class BattleSequence4 implements Initializable {
             spearDmg = ThreadLocalRandom.current().nextInt(10, 20 + 1);
             wizardHealth = wizardHealth - (spearDmg + MainApp.dmgBuff);
             if (wizardHealth <= 0) {
-                wizardHealth = 0;
-                lblEnemyHealth.setText("" + wizardHealth);
-                AnimateText(lblMessage, "You defeated the wizard!");
-                toggleOptions(false, false);
-                btnBack.setVisible(true);
-                MainApp.winCount = 4;
-                MainApp.gold = MainApp.gold + 10;
+                win();
             } else {
                 lblEnemyHealth.setText("" + wizardHealth);
-                AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the wizard!");
+                AnimateText(lblMessage, "You did " + (spearDmg + MainApp.dmgBuff) + " damage to the wizard!");
                 pause.play();
                 toggleOptions(false, false);
             }
@@ -273,7 +301,7 @@ public class BattleSequence4 implements Initializable {
         } else if (bless = true) {
 
             animateLength = 3000;
-            AnimateText(lblMessage, "Exorcisms don't work"+"\n"+"on wizards");
+            AnimateText(lblMessage, "Exorcisms don't work" + "\n" + "on wizards");
             pause.play();
             toggleOptions(false, false);
 
@@ -290,17 +318,17 @@ public class BattleSequence4 implements Initializable {
 //if they chose to fight, then use the Pray move that heals you for 25 health, run the animations, and toggle the UI. if bless and they have it unlocked, do 50 damage
         if (fight == true) {
 
-            if(MainApp.healthBuff == true){
+            if (MainApp.healthBuff == true) {
                 maxHealth = 125;
-            }else{
+            } else {
                 maxHealth = 100;
             }
 
             if ((pray > 0) && ((health < maxHealth))) {
                 pray--;
                 health = health + 25;
-                if(MainApp.healthBuff == true){
-                    if(health > maxHealth){
+                if (MainApp.healthBuff == true) {
+                    if (health > maxHealth) {
                         health = maxHealth;
                     }
                 }
@@ -319,15 +347,9 @@ public class BattleSequence4 implements Initializable {
                 wizardHealth = wizardHealth - (50 + MainApp.dmgBuff);
                 lblEnemyHealth.setText("" + wizardHealth);
                 if (wizardHealth <= 0) {
-                    wizardHealth = 0;
-                    lblEnemyHealth.setText("" + wizardHealth);
-                    AnimateText(lblMessage, "You defeated the wizard!");
-                    toggleOptions(false, false);
-                    btnBack.setVisible(true);
-                    MainApp.winCount = 4;
-                    MainApp.gold = MainApp.gold + 10;
+                    win();
                 } else {
-                    //wizardHealth = wizardHealth - (50 + MainApp.dmgBuff);
+                    wizardHealth = wizardHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + wizardHealth);
                     AnimateText(lblMessage, "You did 50 damage to the wizard!");
                     pause.play();
@@ -404,7 +426,20 @@ public class BattleSequence4 implements Initializable {
         pause.setCycleCount(Timeline.INDEFINITE);
         UI.play();
 
-        lblEnemyHealth.setText(""+wizardHealth);
+        lblEnemyHealth.setText("" + wizardHealth);
+
+        battle = new MediaPlayer((new Media(getClass().getResource("/BattleMusic.mp3").toString())));
+        victory = new MediaPlayer((new Media(getClass().getResource("/WinMusic.mp3").toString())));
+
+        battle.setCycleCount(MediaPlayer.INDEFINITE);
+        victory.setCycleCount(MediaPlayer.INDEFINITE);
+
+        battle.setVolume(25);
+        victory.setVolume(25);
+
+        if (MainApp.sound == true) {
+            battle.play();
+        }
 
         if (MainApp.battleStage == 4) {
             imgEnemy.setImage(wizard);
@@ -412,15 +447,15 @@ public class BattleSequence4 implements Initializable {
             AnimateText(lblMessage, "A Wizard has appeared! You will...");
         }
 
-        if (MainApp.healthBuff == true){
+        if (MainApp.healthBuff == true) {
             health = 125;
             lblPlayerHealth.setText("" + health);
             imgHealth.setImage(scroll);
         }
-        if (MainApp.dmgBuff > 0){
+        if (MainApp.dmgBuff > 0) {
             imgStaff.setImage(staff);
         }
-        if (MainApp.holyWater == true){
+        if (MainApp.holyWater == true) {
             imgHoly.setImage(potion);
         }
     }
