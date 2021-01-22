@@ -8,18 +8,26 @@ public class username {
     private int bitcoin;
     private int winCounter;
 private int saveCounter;
-
-    private final int RECSIZE = 32;
+private int damageBuff;
+private  boolean holyWater;
+private boolean healthBuff;
+    private final int RECSIZE = 38;
 
     //UserName = 10 * 2 = 20
     //gold = 4
     //winCount = 4
     //saveCounter = 4
+    //damageBuff = 4
+    //holywater = 1
+    //healthbuff = 1
     public username() {
         userName = "          ";
         bitcoin = 0;
         winCounter = 0;
         saveCounter = 0;
+        damageBuff = 0;
+        holyWater = false;
+        healthBuff = false;
     }
 
     //All the sets setup the information for the file
@@ -57,6 +65,27 @@ private int saveCounter;
     public int getSaveCounter() {
         return saveCounter;
     }
+    public void setDamageBuff(int d) {
+        damageBuff = d;
+    }
+
+    public int getDamageBuff() {
+        return damageBuff;
+    }
+    public void setHolyBuff(boolean h) {
+        holyWater = h;
+    }
+
+    public boolean getHolyBuff() {
+        return holyWater;
+    }
+    public void setHealthBuff(boolean he) {
+        healthBuff = he;
+    }
+
+    public boolean getHealthBuff() {
+        return holyWater;
+    }
 
     // The save method writes everything down in the file
     public void save(String file, int record) {
@@ -67,6 +96,9 @@ private int saveCounter;
             recordfile.writeInt(bitcoin);
             recordfile.writeInt(winCounter);
             recordfile.writeInt(saveCounter);
+            recordfile.writeInt(damageBuff);
+            recordfile.writeBoolean(holyWater);
+            recordfile.writeBoolean(healthBuff);
             recordfile.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -86,6 +118,9 @@ private int saveCounter;
             bitcoin = recordFile.readInt();
             winCounter = recordFile.readInt();
             saveCounter = recordFile.readInt();
+            damageBuff = recordFile.readInt();
+            holyWater = recordFile.readBoolean();
+            healthBuff = recordFile.readBoolean();
             recordFile.close();
 
         } catch (IOException e) {

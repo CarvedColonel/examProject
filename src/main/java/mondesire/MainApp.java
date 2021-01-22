@@ -24,6 +24,7 @@ public class MainApp extends Application {
     public static int gold = 0;
     public static int winCount = 0;
     public static int save;
+    public static boolean shop;
     @Override
     public void start(@SuppressWarnings("exports") Stage s) throws IOException {
         stage=s;

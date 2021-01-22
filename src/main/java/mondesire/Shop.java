@@ -1,8 +1,8 @@
 package mondesire;
 /*
-Put header here
-
-
+Milan Hennessy
+2021-01-21
+Rpg game
  */
 
 import javafx.animation.*;
@@ -10,6 +10,7 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -24,7 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Shop<NFANode> implements Initializable {
+public class Shop implements Initializable {
 
     @FXML
     private ImageView imgShopKeeper;
@@ -76,8 +77,10 @@ public class Shop<NFANode> implements Initializable {
 
     @FXML
     private Label lblCurrency;
+    //Array for UI stuff
     Label text[] = new Label[6];
 
+    //Animation for text using the typewriter effect more info on the gameplay scene
     public void animateText(Label lbl, String message) {
 
         String content = message;
@@ -101,9 +104,19 @@ public class Shop<NFANode> implements Initializable {
         animation.play();
 
     }
-
+//Help button that uses a message box to tell the user how to use the shop and what it's for
+    @FXML
+    void clickHelp(MouseEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Help");
+        alert.setHeaderText(null);
+        alert.setContentText("Welcome!" + "\n" + "This is the shop where you can buy items to give you buffs." + "\n" + "If you have enough money you will be able to buy them.");
+        alert.showAndWait();
+    }
+//The buy button which allows the user to buy all there stuff
     @FXML
     void buy(MouseEvent event) {
+        //Clears UI and sets it
         lblShopText.setVisible(false);
         lblLeave.setVisible(false);
         lblBuy.setVisible(false);
@@ -112,11 +125,13 @@ public class Shop<NFANode> implements Initializable {
         imgHealthScroll.setVisible(true);
         lblBack.setVisible(true);
         for (Label visible : text) {
-        visible.setVisible(true);
+            visible.setVisible(true);
         }
+        //Plays a timer that creates a animation
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5), ae -> check()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+        //Makes sure if the player already has the item that they can't buy it again
         if (MainApp.dmgBuff == 10) {
             imgStaff.setVisible(false);
             lblPrice.setVisible(false);
@@ -135,6 +150,7 @@ public class Shop<NFANode> implements Initializable {
     }
 
     void check() {
+        //Small animation if you hover over the text more text will show up explaining what the item does
         if (imgStaff.isHover()) {
             lblInfo.setText("Damage Increased");
         } else if (imgHolyWater.isHover() == true) {
@@ -144,6 +160,7 @@ public class Shop<NFANode> implements Initializable {
         } else if (!imgStaff.isHover() || !imgHolyWater.isHover() || !imgHealthScroll.isHover()) {
             lblInfo.setText("");
         }
+        //Changes the price colour depending on if you can afford it or not
         if (MainApp.gold >= 10) {
             lblPrice.setTextFill(Color.LIMEGREEN);
             lblPrice2.setTextFill(Color.LIMEGREEN);
@@ -154,12 +171,12 @@ public class Shop<NFANode> implements Initializable {
             lblPrice3.setTextFill(Color.RED);
         }
     }
-
+//Leaves the store
     @FXML
     void leave(MouseEvent event) throws IOException {
         MainApp.setRoot("Gameplay");
     }
-
+//when the user buys the item it sets the buff and updates their gold
     @FXML
     void staff(MouseEvent event) {
         if (MainApp.gold >= 10) {
@@ -198,7 +215,9 @@ public class Shop<NFANode> implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //Animation for text
         animateText(lblShopText, "My name's Rick Harrison and this is my \n Pawn Shop");
+        //2 fade animations for the pictures to show up
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(3000));
         fade.setFromValue(0);
@@ -211,6 +230,7 @@ public class Shop<NFANode> implements Initializable {
         fade2.setToValue(10);
         fade2.setNode(imgHat);
         fade2.play();
+        //Updates currency as well as sets the ui
         lblCurrency.setText("" + MainApp.gold + " x");
         text[0] = lblItem1;
         text[1] = lblItem2;
@@ -219,5 +239,7 @@ public class Shop<NFANode> implements Initializable {
         text[4] = lblPrice2;
         text[5] = lblPrice3;
         lblShopText.setTextAlignment(TextAlignment.CENTER);
+        //This makes sure that the game recognises there in the shop and puts them in the right location when they leave
+        MainApp.shop = true;
     }
 }

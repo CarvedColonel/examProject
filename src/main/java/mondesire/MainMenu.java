@@ -67,18 +67,24 @@ public class MainMenu implements Initializable {
 
     boolean sound = MainApp.sound;
     username info = new username();
-
+    int spot;
     @FXML
     void clickLoad(ActionEvent event) throws IOException {
-        if (Integer.parseInt(txtLoad.getText()) == 1) {
-            info.open("matt.raf", 1);
-            MainApp.user = info.getuserName();
-            MainApp.gold = info.getBitcoin();
-            MainApp.winCount = info.getWinCounter();
-            MainApp.save = info.getSaveCounter();
-            MainApp.setRoot("Gameplay");
 
-        }
+            spot = Integer.parseInt(txtLoad.getText());
+            if (spot > 6 || spot < 1 || txtLoad.getText().length() > 1) {
+
+            }else {
+                info.open("matt.raf", spot);
+                MainApp.user = info.getuserName();
+                MainApp.gold = info.getBitcoin();
+                MainApp.winCount = info.getWinCounter();
+                MainApp.save = info.getSaveCounter();
+                MainApp.dmgBuff = info.getDamageBuff();
+                MainApp.holyWater = info.getHolyBuff();
+                MainApp.healthBuff = info.getHealthBuff();
+                MainApp.setRoot("Gameplay");
+            }
     }
 
 
@@ -188,6 +194,11 @@ public class MainMenu implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        txtLoad.textProperty().addListener((observable, oldValue, newValue) -> {
+            //This is for numbers
+            if (!newValue.matches("\\d*")) {
+                txtLoad.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
     }
 }
