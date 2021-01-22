@@ -13,6 +13,7 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -91,8 +92,8 @@ public class BattleSequence3 implements Initializable {
 
     Image ghost = new Image(getClass().getResource("/GHOST.png").toString());
 
-    Image staff = new Image(getClass().getResource("/staff.png").toString());
-    Image potion = new Image(getClass().getResource("/holywater.png").toString());
+    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
+    Image potion = new Image(getClass().getResource("/holyWater.png").toString());
     Image scroll = new Image(getClass().getResource("/healthScroll.png").toString());
 
 
@@ -166,7 +167,7 @@ public class BattleSequence3 implements Initializable {
         //timer to add comedic effect and pauses for the ghost joke code
         pauseTimer++;
         if(pauseTimer == 1){
-            AnimateText(lblMessage, "The ghost smiled as you exorcised him."+"\n"+"Happy that you've freed him from" +"\n"+ "this realm. He thanks you.");
+            AnimateText(lblMessage, "The ghost smiled as you exorcised him."+"\n"+"Happy that you've freed him from" +"\n"+ "this realm. He thanks you...");
             toggleOptions(false, false);
         }
         if(pauseTimer == 10){
@@ -208,9 +209,12 @@ public class BattleSequence3 implements Initializable {
 
     void die(){
         if(health <= 0){
+            health = 0;
+            lblPlayerHealth.setText(""+health);
             toggleOptions(false,false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
+
         }
     }
 
@@ -228,6 +232,8 @@ public class BattleSequence3 implements Initializable {
     @FXML
     void clickMove1(MouseEvent event) {
 
+        animateLength = 2000;
+
         if (fight == true) {
             smiteDmg = ThreadLocalRandom.current().nextInt(10, 14 + 1);
             ghostHealth = ghostHealth - (smiteDmg + MainApp.dmgBuff);
@@ -238,6 +244,7 @@ public class BattleSequence3 implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 3;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + ghostHealth);
                 AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the ghost!");
@@ -246,14 +253,18 @@ public class BattleSequence3 implements Initializable {
             }
 
         } else if (bless = true) {
-            animateLength = 2000;
+            animateLength = 3000;
+            AnimateText(lblMessage, "He didnt understand,"+"\n"+" the joke went right through him");
+            pause.play();
             toggleOptions(false, false);
-            delay.play();
         }
     }
 
     @FXML
     void clickMove2(MouseEvent event) {
+
+        animateLength = 2000;
+
 //if they chose to fight, then use the holy spear move that does 6-20 damage, run the animations, and toggle the UI. if they choose bless nothing (ghosts can't be exorcised)
         if (fight == true) {
             spearDmg = ThreadLocalRandom.current().nextInt(6, 20 + 1);
@@ -265,6 +276,7 @@ public class BattleSequence3 implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 3;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + ghostHealth);
                 AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the ghost!");
@@ -281,6 +293,9 @@ public class BattleSequence3 implements Initializable {
 
     @FXML
     void clickMove3(MouseEvent event) {
+
+        animateLength = 2000;
+
         System.out.println(MainApp.dmgBuff);
         int maxHealth;
 //if they chose to fight, then use the Pray move that heals you for 25 health, run the animations, and toggle the UI. if bless and they have it unlocked, do 50 damage
@@ -321,6 +336,7 @@ public class BattleSequence3 implements Initializable {
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
                     MainApp.winCount = 3;
+                    MainApp.gold = MainApp.gold + 10;
                 } else {
                     //ghostHealth = ghostHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + ghostHealth);
