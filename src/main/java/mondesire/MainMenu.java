@@ -18,6 +18,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class MainMenu implements Initializable {
@@ -64,10 +67,26 @@ public class MainMenu implements Initializable {
     @FXML
     private Button btnLoad;
 
-
-    boolean sound = MainApp.sound;
+    MediaPlayer music;
     username info = new username();
     int spot;
+    @FXML
+    void clickLoad(ActionEvent event) throws IOException {
+        spot = Integer.parseInt(txtLoad.getText());
+        if (spot > 6 || spot < 1 || txtLoad.getText().length() > 1) {
+
+        }else {
+            info.open("matt.raf", spot);
+            MainApp.user = info.getuserName();
+            MainApp.gold = info.getBitcoin();
+            MainApp.winCount = info.getWinCounter();
+            MainApp.save = info.getSaveCounter();
+            MainApp.dmgBuff = info.getDamageBuff();
+            MainApp.holyWater = info.getHolyBuff();
+            MainApp.healthBuff = info.getHealthBuff();
+            MainApp.setRoot("Gameplay");
+        }
+    }
 
 
 
@@ -83,6 +102,7 @@ public class MainMenu implements Initializable {
             alert.showAndWait();
         } else {
             MainApp.setRoot("Gameplay", "Priest's Conquest");
+            music.stop();
         }
 
     }
@@ -93,12 +113,15 @@ public class MainMenu implements Initializable {
         alert.setTitle("Help");
         alert.setHeaderText(null);
         alert.setContentText("Welcome!" + "\n" +
-                "GAMEPLAY: Use W, A, S, D, to move around the map. Reach the Skull Icon to start a battle. Go through the map clearing your way through the town" +
+                "GAMEPLAY: Use 'W', 'A', 'S', 'D', to move around the map. Use 'E' to interact with things around the map. Reach the Skull Icon to start a battle. Go through the map clearing your way through the town" +
                 " to liberate it of the devilish monsters that have come ransacking your village. Get through all 6 battles to beat the game!"
                 + " Look around for secrets or easter eggs as well, or maybe even visit the shopkeep near the north side of the town!" + "\n"
                 + "BATTLES: A turn based combat system where you can choose to fight, or attempt to bless the monster. Fighting are standard damage" +
                 " moves, bless moves are ones that aren't your typical moves, you can joke with the monster, or attempt an exorcism. But be weary" +
-                " because these moves won't always work, so sometimes it might not be worth taking the damage to try to reason with a monster.");
+                " because these moves won't always work, so sometimes it might not be worth taking the damage to try to reason with a monster."+"\n" +
+                "SHOP: You have three items in the shop to purchase. The damage staff, which boosts your attack by 10, the health scroll, which adds 25 to your max health, and " +
+                "the holy water, which is a one-time use potion that does 50 damage to your enemy. The shop is located near the top of the map next to the farm. Visit after you finish the " +
+                "first battle and see what you'd like!");
         alert.showAndWait();
     }
 
@@ -110,6 +133,9 @@ public class MainMenu implements Initializable {
             txtUser.setVisible(false);
             btnConfirm.setVisible(false);
             lblError.setVisible(false);
+            imgLoad.setVisible(false);
+            txtLoad.setVisible(false);
+            btnLoad.setVisible(false);
         } else {
         }
     }
@@ -127,6 +153,10 @@ public class MainMenu implements Initializable {
             btnConfirm.setVisible(false);
             imgPlay.setVisible(true);
             imgUser.setVisible(false);
+            imgLoad.setVisible(false);
+            txtLoad.setVisible(false);
+            btnLoad.setVisible(false);
+            lblError.setVisible(false);
             lblUsername.setText("" + MainApp.user);
         }
     }
@@ -139,21 +169,31 @@ public class MainMenu implements Initializable {
             imgUser.setVisible(true);
             txtUser.setVisible(true);
             btnConfirm.setVisible(true);
+            imgLoad.setVisible(true);
+            txtLoad.setVisible(true);
+            btnLoad.setVisible(true);
         } else {
             imgUser.setVisible(false);
             btnConfirm.setVisible(false);
             txtUser.setVisible(false);
+            imgLoad.setVisible(true);
+            txtLoad.setVisible(true);
+            btnLoad.setVisible(true);
         }
     }
 
     @FXML
     void clickSound(MouseEvent event) {
-        if (sound == true) {
+        if (MainApp.sound == true) {
             MainApp.sound = false;
             lblSound.setText("OFF");
-        } else if (sound == false) {
+            music.stop();
+            lblSound.setTextFill(Color.RED);
+        } else if (MainApp.sound == false) {
             MainApp.sound = true;
             lblSound.setText("ON");
+            music.play();
+            lblSound.setTextFill(Color.GREEN);
         }
     }
 
@@ -177,11 +217,23 @@ public class MainMenu implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        txtLoad.textProperty().addListener((observable, oldValue, newValue) -> {
-            //This is for numbers
-            if (!newValue.matches("\\d*")) {
-                txtLoad.setText(newValue.replaceAll("[^\\d]", ""));
-            }
-        });
+
+        music = new MediaPlayer((new Media(getClass().getResource("/MenuMusic.mp3").toString())));
+
+        music.setVolume(25);
+
+        music.setCycleCount(MediaPlayer.INDEFINITE);
+
+        if(MainApp.sound == true){
+            music.play();
+        }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Help");
+        alert.setHeaderText(null);
+        alert.setContentText("Welcome!" + "\n" +
+                "Please consult the help button if this is your first time playing and type your username into the text field to play! Otherwise if you're a returning" +
+                " player, type in your save slot and load your previous game!");
+        alert.showAndWait();
     }
 }
