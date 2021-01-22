@@ -13,6 +13,7 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -91,8 +92,8 @@ public class BattleSequence2 implements Initializable {
 
     Image skeleton = new Image(getClass().getResource("/SKELETON.png").toString());
 
-    Image staff = new Image(getClass().getResource("/staff.png").toString());
-    Image potion = new Image(getClass().getResource("/holywater.png").toString());
+    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
+    Image potion = new Image(getClass().getResource("/holyWater.png").toString());
     Image scroll = new Image(getClass().getResource("/healthScroll.png").toString());
 
 
@@ -207,6 +208,8 @@ public class BattleSequence2 implements Initializable {
 
     void die(){
         if(health <= 0){
+            health = 0;
+            lblPlayerHealth.setText(""+health);
             toggleOptions(false,false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
@@ -237,6 +240,7 @@ public class BattleSequence2 implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 2;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + skeletonHealth);
                 AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the Skeleton!");
@@ -265,6 +269,7 @@ public class BattleSequence2 implements Initializable {
                 toggleOptions(false, false);
                 btnBack.setVisible(true);
                 MainApp.winCount = 2;
+                MainApp.gold = MainApp.gold + 10;
             } else {
                 lblEnemyHealth.setText("" + skeletonHealth);
                 AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the Skeleton!");
@@ -321,6 +326,7 @@ public class BattleSequence2 implements Initializable {
                     toggleOptions(false, false);
                     btnBack.setVisible(true);
                     MainApp.winCount = 2;
+                    MainApp.gold = MainApp.gold + 10;
                 } else {
                     //skeletonHealth = skeletonHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + skeletonHealth);
