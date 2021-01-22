@@ -27,7 +27,7 @@ public class MainApp extends Application {
     @Override
     public void start(@SuppressWarnings("exports") Stage s) throws IOException {
         stage=s;
-        setRoot("MainMenu","Priest's Conquest | Menu");
+        setRoot("GameOver","Priest's Conquest | Menu");
     }
 
     static void setRoot(String fxml) throws IOException {

@@ -389,7 +389,6 @@ public class BattleSequence6 implements Initializable {
             }
         };
         animation.play();
-
     }
 
     void ui() {

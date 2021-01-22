@@ -142,6 +142,7 @@ public class MainMenu implements Initializable {
             imgLoad.setVisible(false);
             txtLoad.setVisible(false);
             btnLoad.setVisible(false);
+            lblError.setVisible(false);
             lblUsername.setText("" + MainApp.user);
         }
     }
