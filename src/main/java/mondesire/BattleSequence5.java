@@ -1,8 +1,8 @@
 package mondesire;
 /*
-Put header here
-
-
+Aidan Mason-Mondesire
+January 18th 2021
+The fifth battle sequence of six where you fight the wolf
  */
 
 import javafx.animation.Animation;
@@ -19,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -89,13 +91,14 @@ public class BattleSequence5 implements Initializable {
     @FXML
     private ImageView imgHealth;
 
+    MediaPlayer battle;
+    MediaPlayer victory;
 
     Image wolf = new Image(getClass().getResource("/WOLF.png").toString());
 
-    Image staff = new Image(getClass().getResource("/staff.png").toString());
-    Image potion = new Image(getClass().getResource("/holywater.png").toString());
+    Image staff = new Image(getClass().getResource("/staffBuff.png").toString());
+    Image potion = new Image(getClass().getResource("/holyWater.png").toString());
     Image scroll = new Image(getClass().getResource("/healthScroll.png").toString());
-
 
 
     Timeline UI = new Timeline(new KeyFrame(Duration.millis(5), ae -> ui()));
@@ -121,6 +124,9 @@ public class BattleSequence5 implements Initializable {
     @FXML
     void clickBack(ActionEvent event) throws IOException {
         MainApp.setRoot("Gameplay", "Priest's Conquest");
+        if (MainApp.sound == true) {
+            victory.stop();
+        }
     }
 
 
@@ -146,9 +152,9 @@ public class BattleSequence5 implements Initializable {
         lblMove3.setVisible(true);
         lblMove1.setText("JOKE");
         lblMove2.setText("EXORCISE");
-        if (MainApp.holyWater == true){
+        if (MainApp.holyWater == true) {
             lblMove3.setText("Holy Water");
-        }else {
+        } else {
             lblMove3.setText("[LOCKED]");
         }
     }
@@ -162,7 +168,6 @@ public class BattleSequence5 implements Initializable {
             pause.stop();
         }
     }
-
 
 
     void wolfAttack() {
@@ -193,16 +198,32 @@ public class BattleSequence5 implements Initializable {
     }
 
 
-
-
-    void die(){
-        if(health <= 0){
+    void die() {
+        if (health <= 0) {
             health = 0;
-            lblPlayerHealth.setText(""+health);
-            toggleOptions(false,false);
+            lblPlayerHealth.setText("" + health);
+            toggleOptions(false, false);
             AnimateText(lblMessage, "You Have Died! Returning to checkpoint.");
             btnBack.setVisible(true);
 
+            if (MainApp.sound == true) {
+                battle.stop();
+            }
+
+        }
+    }
+
+    void win() {
+        wolfHealth = 0;
+        lblEnemyHealth.setText("" + wolfHealth);
+        AnimateText(lblMessage, "You defeated the Wolf!");
+        MainApp.winCount = 5;
+        toggleOptions(false, false);
+        btnBack.setVisible(true);
+        MainApp.gold = MainApp.gold + 10;
+        if (MainApp.sound == true) {
+            battle.stop();
+            victory.play();
         }
     }
 
@@ -226,16 +247,10 @@ public class BattleSequence5 implements Initializable {
             smiteDmg = ThreadLocalRandom.current().nextInt(10, 15 + 1);
             wolfHealth = wolfHealth - (smiteDmg + MainApp.dmgBuff);
             if (wolfHealth <= 0) {
-                wolfHealth = 0;
-                lblEnemyHealth.setText("" + wolfHealth);
-                AnimateText(lblMessage, "You defeated the wolf!");
-                toggleOptions(false, false);
-                btnBack.setVisible(true);
-                MainApp.winCount = 5;
-                MainApp.gold = MainApp.gold + 10;
+                win();
             } else {
                 lblEnemyHealth.setText("" + wolfHealth);
-                AnimateText(lblMessage, "You did " + (smiteDmg+MainApp.dmgBuff) + " damage to the wolf!");
+                AnimateText(lblMessage, "You did " + (smiteDmg + MainApp.dmgBuff) + " damage to the wolf!");
                 pause.play();
                 toggleOptions(false, false);
             }
@@ -258,23 +273,17 @@ public class BattleSequence5 implements Initializable {
             spearDmg = ThreadLocalRandom.current().nextInt(10, 20 + 1);
             wolfHealth = wolfHealth - (spearDmg + MainApp.dmgBuff);
             if (wolfHealth <= 0) {
-                wolfHealth = 0;
-                lblEnemyHealth.setText("" + wolfHealth);
-                AnimateText(lblMessage, "You defeated the wolf!");
-                toggleOptions(false, false);
-                btnBack.setVisible(true);
-                MainApp.winCount = 5;
-                MainApp.gold = MainApp.gold + 10;
+                win();
             } else {
                 lblEnemyHealth.setText("" + wolfHealth);
-                AnimateText(lblMessage, "You did " + (spearDmg+MainApp.dmgBuff) + " damage to the wolf!");
+                AnimateText(lblMessage, "You did " + (spearDmg + MainApp.dmgBuff) + " damage to the wolf!");
                 pause.play();
                 toggleOptions(false, false);
             }
 
         } else if (bless = true) {
             animateLength = 3000;
-            AnimateText(lblMessage, "The wolf grabbed your crucifix"+"\n"+"thinking it was a stick...");
+            AnimateText(lblMessage, "The wolf grabbed your crucifix" + "\n" + "thinking it was a stick...");
             pause.play();
             toggleOptions(false, false);
         }
@@ -290,17 +299,17 @@ public class BattleSequence5 implements Initializable {
 //if they chose to fight, then use the Pray move that heals you for 25 health, run the animations, and toggle the UI. if bless and they have it unlocked, do 50 damage
         if (fight == true) {
 
-            if(MainApp.healthBuff == true){
+            if (MainApp.healthBuff == true) {
                 maxHealth = 125;
-            }else{
+            } else {
                 maxHealth = 100;
             }
 
             if ((pray > 0) && ((health < maxHealth))) {
                 pray--;
                 health = health + 25;
-                if(MainApp.healthBuff == true){
-                    if(health > maxHealth){
+                if (MainApp.healthBuff == true) {
+                    if (health > maxHealth) {
                         health = maxHealth;
                     }
                 }
@@ -319,15 +328,9 @@ public class BattleSequence5 implements Initializable {
                 wolfHealth = wolfHealth - (50 + MainApp.dmgBuff);
                 lblEnemyHealth.setText("" + wolfHealth);
                 if (wolfHealth <= 0) {
-                    wolfHealth = 0;
-                    lblEnemyHealth.setText("" + wolfHealth);
-                    AnimateText(lblMessage, "You defeated the wolf!");
-                    toggleOptions(false, false);
-                    btnBack.setVisible(true);
-                    MainApp.winCount = 5;
-                    MainApp.gold = MainApp.gold + 10;
+                    win();
                 } else {
-                    //wolfHealth = wolfHealth - (50 + MainApp.dmgBuff);
+                    wolfHealth = wolfHealth - (50 + MainApp.dmgBuff);
                     lblEnemyHealth.setText("" + wolfHealth);
                     AnimateText(lblMessage, "You did 50 damage to the wolf!");
                     pause.play();
@@ -404,7 +407,20 @@ public class BattleSequence5 implements Initializable {
         pause.setCycleCount(Timeline.INDEFINITE);
         UI.play();
 
-        lblEnemyHealth.setText(""+wolfHealth);
+        lblEnemyHealth.setText("" + wolfHealth);
+
+        battle = new MediaPlayer((new Media(getClass().getResource("/BattleMusic.mp3").toString())));
+        victory = new MediaPlayer((new Media(getClass().getResource("/WinMusic.mp3").toString())));
+
+        battle.setCycleCount(MediaPlayer.INDEFINITE);
+        victory.setCycleCount(MediaPlayer.INDEFINITE);
+
+        battle.setVolume(25);
+        victory.setVolume(25);
+
+        if (MainApp.sound == true) {
+            battle.play();
+        }
 
         if (MainApp.battleStage == 5) {
             imgEnemy.setImage(wolf);
@@ -412,15 +428,15 @@ public class BattleSequence5 implements Initializable {
             AnimateText(lblMessage, "A Wolf has appeared! You will...");
         }
 
-        if (MainApp.healthBuff == true){
+        if (MainApp.healthBuff == true) {
             health = 125;
             lblPlayerHealth.setText("" + health);
             imgHealth.setImage(scroll);
         }
-        if (MainApp.dmgBuff > 0){
+        if (MainApp.dmgBuff > 0) {
             imgStaff.setImage(staff);
         }
-        if (MainApp.holyWater == true){
+        if (MainApp.holyWater == true) {
             imgHoly.setImage(potion);
         }
     }
